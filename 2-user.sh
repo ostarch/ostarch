@@ -23,30 +23,43 @@ git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $HOME/powerleve
 ln -s "$HOME/zsh/.zshrc" $HOME/.zshrc
 
 PKGS=(
+'anydesk-bin'
 'autojump'
+'ausweisapp2'
 'awesome-terminal-fonts'
 'brave-bin' # Brave Browser
+'ckb-next-git'
+'cups-bjnp'
 'dxvk-bin' # DXVK DirectX to Vulcan
+'etcher-bin'
 'github-desktop-bin' # Github Desktop sync
-'lightly-git'
+# 'lightly-git'
 'mangohud' # Gaming FPS Counter
 'mangohud-common'
+'minecraft-launcher'
+'intellij-idea-ultimate-edition'
+'intellij-idea-ultimate-edition-jre'
 'nerd-fonts-fira-code'
-'nordic-darker-standard-buttons-theme'
-'nordic-darker-theme'
-'nordic-kde-git'
-'nordic-theme'
 'noto-fonts-emoji'
-'papirus-icon-theme'
 'ocs-url' # install packages from websites
+'phpstorm'
+'phpstorm-jre'
+'pycharm-professional'
+'rambox-bin'
+'rtl88x2bu-dkms-git'
 'sddm-nordic-theme-git'
-'snapper-gui-git'
+'timeshift'
 'ttf-droid'
 'ttf-hack'
 'ttf-meslo' # Nerdfont package
 'ttf-roboto'
+'ttf-ms-fonts'
+'typora'
+'ventoy-bin'
+'zenmap'
 'zoom' # video conferences
-'snap-pac'
+#'snapper-gui-git'
+#'snap-pac'
 )
 
 for PKG in "${PKGS[@]}"; do
@@ -54,9 +67,9 @@ for PKG in "${PKGS[@]}"; do
 done
 
 export PATH=$PATH:~/.local/bin
-cp -r $HOME/ArchTitus/dotfiles/* $HOME/.config/
+cp -r $HOME/ArchDave/dotfiles/* $HOME/.config/
 pip install konsave
-konsave -i $HOME/ArchTitus/kde.knsv
+konsave -i $HOME/ArchDave/kde.knsv
 sleep 1
 konsave -a kde
 

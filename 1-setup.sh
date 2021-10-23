@@ -33,7 +33,7 @@ echo "       Setup Language to US and set locale       "
 echo "-------------------------------------------------"
 sed -i 's/^#en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen
 locale-gen
-timedatectl --no-ask-password set-timezone America/Chicago
+timedatectl --no-ask-password set-timezone Europe/Berlin
 timedatectl --no-ask-password set-ntp 1
 localectl --no-ask-password set-locale LANG="en_US.UTF-8" LC_COLLATE="" LC_TIME="en_US.UTF-8"
 
@@ -59,6 +59,7 @@ PKGS=(
 'audiocd-kio' 
 'autoconf' # build
 'automake' # build
+'barrier'
 'base'
 'bash-completion'
 'bind'
@@ -67,6 +68,7 @@ PKGS=(
 'bluedevil'
 'bluez'
 'bluez-libs'
+'bluez-utils'
 'breeze'
 'breeze-gtk'
 'bridge-utils'
@@ -76,19 +78,25 @@ PKGS=(
 'code' # Visual Studio code
 'cronie'
 'cups'
+'cups-pdf'
 'dhcpcd'
 'dialog'
-'discover'
+'discord'
 'dmidecode'
 'dnsmasq'
 'dolphin'
+'dolphin-plugins'
 'dosfstools'
 'drkonqi'
 'edk2-ovmf'
 'efibootmgr' # EFI boot
 'egl-wayland'
+'evolution'
 'exfat-utils'
-'flex'
+'filelight'
+'firefox'
+'flameshot'
+'flex' # recognize lexical patterns in text
 'fuse2'
 'fuse3'
 'fuseiso'
@@ -96,28 +104,31 @@ PKGS=(
 'gcc'
 'gimp' # Photo editing
 'git'
-'gparted' # partition management
 'gptfdisk'
+'gradle'
 'groff'
 'grub'
 'grub-customizer'
 'gst-libav'
 'gst-plugins-good'
 'gst-plugins-ugly'
+'gutenprint'
+'gwenview'
 'haveged'
 'htop'
-'iptables-nft'
+#'iptables-nft'
 'jdk-openjdk' # Java 17
 'kactivitymanagerd'
 'kate'
-'kvantum-qt5'
 'kcalc'
 'kcharselect'
 'kcron'
 'kde-cli-tools'
 'kde-gtk-config'
+'kdeconnect'
 'kdecoration'
 'kdenetwork-filesharing'
+'kdenlive'
 'kdeplasma-addons'
 'kdesdk-thumbnailers'
 'kdialog'
@@ -127,15 +138,18 @@ PKGS=(
 'kgpg'
 'khotkeys'
 'kinfocenter'
-'kitty'
 'kmenuedit'
-'kmix'
+#'kmix'
+'kompare'
 'konsole'
+'krdc'
 'kscreen'
 'kscreenlocker'
 'ksshaskpass'
+'ksysguard'
 'ksystemlog'
 'ksystemstats'
+'ktorrent'
 'kwallet-pam'
 'kwalletmanager'
 'kwayland-integration'
@@ -144,24 +158,44 @@ PKGS=(
 'kwrite'
 'kwrited'
 'layer-shell-qt'
+'libappindicator-gtk3'
+'libindicator-gtk2'
+'libindicator-gtk3'
 'libguestfs'
 'libkscreen'
 'libksysguard'
 'libnewt'
+'libreoffice-still'
+'libreoffice-still-de'
 'libtool'
+'libvncserver'
 'linux'
 'linux-firmware'
 'linux-headers'
+'linux-lts'
+'linux-lts-headers'
 'lsof'
 'lutris'
 'lzop'
 'm4'
 'make'
-'milou'
+'man-db'
+'man-pages'
+'milou' # alternative to KRunner
 'nano'
+'ncdu'
 'neofetch'
+'neovim'
+'net-tools'
 'networkmanager'
+'networkmanager-openconnect'
+'networkmanager-openvpn'
+'networkmanager-vpnc'
+'nfs-utils'
+'nmap'
+'npm'
 'ntfs-3g'
+'obs-studio'
 'okular'
 'openbsd-netcat'
 'openssh'
@@ -169,7 +203,14 @@ PKGS=(
 'oxygen'
 'p7zip'
 'pacman-contrib'
+'partitionmanager'
 'patch'
+'pavucontrol'
+'php-cgi'
+'php7'
+'php7-apache'
+'php7-cgi'
+'php7-gd'
 'picom'
 'pkgconf'
 'plasma-browser-integration'
@@ -183,48 +224,73 @@ PKGS=(
 'plasma-systemmonitor'
 'plasma-thunderbolt'
 'plasma-vault'
+'plasma-wayland-session'
 'plasma-workspace'
 'plasma-workspace-wallpapers'
 'polkit-kde-agent'
 'powerdevil'
 'powerline-fonts'
+'powertop'
 'print-manager'
 'pulseaudio'
 'pulseaudio-alsa'
 'pulseaudio-bluetooth'
 'python-pip'
 'qemu'
+'qemu-arch-extra'
+'remmina'
 'rsync'
+'screen'
+'scrot'
 'sddm'
 'sddm-kcm'
-'snapper'
-'spectacle'
+'shellcheck'
+'simple-scan'
+'simplescreenrecorder'
+#'snapper'
+#'spectacle'
+'speedtest-cli'
 'steam'
+'stow'
 'sudo'
 'swtpm'
-'synergy'
 'systemsettings'
 'terminus-font'
+'tesseract'
+'tesseract-data-deu'
+'tesseract-data-eng'
 'texinfo'
+'thunderbird'
+'thunderbird-i18n-de'
+'thunderbird-i18n-en-us'
 'traceroute'
+'tree'
 'ufw'
 'unrar'
 'unzip'
 'usbutils'
 'vde2'
+'vi'
 'vim'
 'virt-manager'
 'virt-viewer'
+'vlc'
 'wget'
 'which'
+'wine'
 'wine-gecko'
 'wine-mono'
 'winetricks'
+'wireguard-tools'
+'wireless_tools'
+'wireshark-qt'
 'xdg-desktop-portal-kde'
 'xdg-user-dirs'
+'xdotool'
 'xorg'
 'xorg-server'
 'xorg-xinit'
+'xsel'
 'zeroconf-ioslave'
 'zip'
 'zsh'
@@ -256,25 +322,27 @@ esac
 
 # Graphics Drivers find and install
 if lspci | grep -E "NVIDIA|GeForce"; then
-    pacman -S nvidia --noconfirm --needed
+    pacman -S nvidia nvidia-settings --noconfirm --needed
 	nvidia-xconfig
-elif lspci | grep -E "Radeon"; then
+fi
+if lspci | grep -E "Radeon"; then
     pacman -S xf86-video-amdgpu --noconfirm --needed
-elif lspci | grep -E "Integrated Graphics Controller"; then
+fi
+if lspci | grep -E "Integrated Graphics Controller"; then
     pacman -S libva-intel-driver libvdpau-va-gl lib32-vulkan-intel vulkan-intel libva-intel-driver libva-utils --needed --noconfirm
 fi
 
 echo -e "\nDone!\n"
 if ! source install.conf; then
 	read -p "Please enter username:" username
-echo "username=$username" >> ${HOME}/ArchTitus/install.conf
+echo "username=$username" >> ${HOME}/ArchDave/install.conf
 fi
 if [ $(whoami) = "root"  ];
 then
-    useradd -m -G wheel,libvirt -s /bin/bash $username 
+	useradd -m -G wheel,libvirt -s /bin/bash $username
 	passwd $username
-	cp -R /root/ArchTitus /home/$username/
-    chown -R $username: /home/$username/ArchTitus
+	cp -R /root/ArchDave /home/$username/
+	chown -R $username: /home/$username/ArchDave
 else
 	echo "You are already a user proceed with aur installs"
 fi
