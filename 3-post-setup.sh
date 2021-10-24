@@ -20,8 +20,16 @@ echo -e "\nSetup SDDM Theme"
 
 sudo cat <<EOF > /etc/sddm.conf
 [Theme]
-Current=Nordic
+Current=breeze
 EOF
+
+sudo cat <<EOF >> /usr/share/sddm/scripts/Xsetup
+xrandr --setprovideroutputsource modesetting NVIDIA-0
+xrandr --auto
+/home/dave10/bin/xrandr_display
+EOF
+
+sudo cp "$HOME/ArchDave/nvidia.conf" "/etc/X11/xorg.conf.d/"
 
 # ------------------------------------------------------------------------
 
