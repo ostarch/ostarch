@@ -48,7 +48,7 @@ echo "--------------------------------------"
 echo -e "\nFormatting disk...\n$HR"
 echo "--------------------------------------"
 
-umount -R /mnt
+umount -R /mnt &>/dev/null
 # disk prep
 sgdisk -Z ${DISK} # zap all on disk
 #dd if=/dev/zero of=${DISK} bs=1M count=200 conv=fdatasync status=progress
