@@ -23,7 +23,6 @@ source "$HOME/.dotfiles/install.sh"
 PKGS=(
 'anydesk-bin'
 'autojump'
-'ausweisapp2'
 'awesome-terminal-fonts'
 'brave-bin' # Brave Browser
 'ckb-next-git'

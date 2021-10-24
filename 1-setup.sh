@@ -20,7 +20,10 @@ pacman -S --noconfirm reflector rsync
 iso=$(curl -4 ifconfig.co/country-iso)
 cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
 
-nc=$(grep -c ^processor /proc/cpuinfo)
+nc=$(expr $(expr $(grep -c ^processor /proc/cpuinfo) + 1) / 2)
+if [ "$nc" -eq "0" ]; then
+	nc=1
+fi
 echo "You have " $nc" cores."
 echo "-------------------------------------------------"
 echo "Changing the makeflags for "$nc" cores."
@@ -195,6 +198,7 @@ PKGS=(
 'nmap'
 'npm'
 'ntfs-3g'
+'ntp'
 'obs-studio'
 'okular'
 'openbsd-netcat'
