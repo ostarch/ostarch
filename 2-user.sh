@@ -37,7 +37,6 @@ PKGS=(
 'minecraft-launcher'
 'intellij-idea-ultimate-edition'
 'intellij-idea-ultimate-edition-jre'
-'konsave'
 'nerd-fonts-fira-code'
 'noto-fonts-emoji'
 'ocs-url' # install packages from websites
@@ -65,15 +64,7 @@ for PKG in "${PKGS[@]}"; do
     yay -S --noconfirm $PKG
 done
 
-mkdir -p "$HOME/.local/share/plasma"
-mkdir -p "$HOME/.local/share/konsole"
-mkdir -p "$HOME/.local/share/fonts"
-mkdir -p "$HOME/.local/share/color-schemes"
-mkdir -p "$HOME/.local/share/aurorae"
-mkdir -p "$HOME/.local/share/icons"
-konsave -i $HOME/ArchDave/arc-kde.knsv
-sleep 1
-konsave -a kde
+source $HOME/ArchDave/kde-import.sh
 
 cat <<EOF > ~/.config/plasma-localerc
 [Formats]
