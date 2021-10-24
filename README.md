@@ -18,6 +18,16 @@ cd ArchDave
 ./archdave.sh
 ```
 
+## After The First Boot
+
+Unfortunately after the first boot, the timezone resets and the KDE theme isn't loaded properly.
+To fix this, just run the following commands after you logged in to KDE.
+
+```
+cd ~/ArchDave
+./4-post-startup.sh
+```
+
 ### System Description
 This is completely automated arch install of the KDE desktop environment on arch using all the packages I use on a daily basis. 
 
