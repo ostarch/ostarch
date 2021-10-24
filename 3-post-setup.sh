@@ -46,16 +46,6 @@ sudo systemctl stop dhcpcd.service
 sudo systemctl enable NetworkManager.service
 
 
-echo "-------------------------------------------------"
-echo "       Setup Language to US and set locale       "
-echo "-------------------------------------------------"
-hwclock --systohc
-timedatectl --no-ask-password set-timezone Europe/Berlin
-timedatectl --no-ask-password set-ntp 1
-localectl --no-ask-password set-locale LANG="en_US.UTF-8" LC_COLLATE="C" LC_TIME="en_US.UTF-8"
-locale-gen
-
-
 echo "
 ###############################################################################
 # Cleaning

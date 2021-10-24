@@ -65,6 +65,7 @@ for PKG in "${PKGS[@]}"; do
 done
 
 source $HOME/ArchDave/kde-import.sh
+konsave -a arc-kde
 
 cat <<EOF > ~/.config/plasma-localerc
 [Formats]

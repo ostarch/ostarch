@@ -20,6 +20,7 @@ pacman -S --noconfirm pacman-contrib curl
 pacman -S --noconfirm reflector rsync
 iso=$(curl -4 ifconfig.co/country-iso)
 cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
+reflector -a 48 -c $iso -f 5 -l 20 --sort rate --save /etc/pacman.d/mirrorlist
 
 nc=$(expr $(expr $(grep -c ^processor /proc/cpuinfo) + 1) / 2)
 echo "You have " $nc" cores."
