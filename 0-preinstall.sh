@@ -17,7 +17,7 @@ pacman -S --noconfirm pacman-contrib terminus-font
 setfont ter-v22b
 sed -i 's/^#Para/Para/' /etc/pacman.conf
 pacman -S --noconfirm reflector rsync
-mv /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
+cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
 echo -e "-------------------------------------------------------------------------"
 echo -e "   █████╗ ██████╗  ██████╗██╗  ██╗████████╗██╗████████╗██╗   ██╗███████╗"
 echo -e "  ██╔══██╗██╔══██╗██╔════╝██║  ██║╚══██╔══╝██║╚══██╔══╝██║   ██║██╔════╝"
@@ -48,6 +48,7 @@ echo "--------------------------------------"
 echo -e "\nFormatting disk...\n$HR"
 echo "--------------------------------------"
 
+umount -R /mnt
 # disk prep
 sgdisk -Z ${DISK} # zap all on disk
 #dd if=/dev/zero of=${DISK} bs=1M count=200 conv=fdatasync status=progress
