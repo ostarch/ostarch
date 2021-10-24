@@ -65,6 +65,12 @@ for PKG in "${PKGS[@]}"; do
     yay -S --noconfirm $PKG
 done
 
+mkdir "$HOME/.local/share/plasma"
+mkdir "$HOME/.local/share/konsole"
+mkdir "$HOME/.local/share/fonts"
+mkdir "$HOME/.local/share/color-schemes"
+mkdir "$HOME/.local/share/aurorae"
+mkdir "$HOME/.local/share/icons"
 konsave -i $HOME/ArchDave/arc-kde.knsv
 sleep 1
 konsave -a kde
