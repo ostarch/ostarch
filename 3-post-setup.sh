@@ -12,9 +12,21 @@ echo -e "\nFINAL SETUP AND CONFIGURATION"
 
 # ------------------------------------------------------------------------
 
+
+echo "-------------------------------------------------"
+echo "       Setup Language to US and set locale       "
+echo "-------------------------------------------------"
+timedatectl --no-ask-password set-timezone Europe/Berlin
+timedatectl --no-ask-password set-ntp 1
+localectl --no-ask-password set-locale LANG="en_US.UTF-8" LC_COLLATE="C" LC_TIME="en_US.UTF-8"
+
+
 echo -e "\nEnabling Login Display Manager"
 
 sudo systemctl enable sddm.service
+
+echo -e "\nEnabling ckb-next Daemon"
+sudo systemctl enable ckb-next-daemon.service
 
 echo -e "\nSetup SDDM Theme"
 
@@ -29,7 +41,7 @@ xrandr --auto
 /home/dave10/bin/xrandr_display
 EOF
 
-sudo cp "$HOME/ArchDave/nvidia.conf" "/etc/X11/xorg.conf.d/"
+source "$HOME/ArchDave/setconsole.sh"
 
 # ------------------------------------------------------------------------
 

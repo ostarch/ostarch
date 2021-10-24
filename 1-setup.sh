@@ -21,24 +21,22 @@ iso=$(curl -4 ifconfig.co/country-iso)
 cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
 
 nc=$(expr $(expr $(grep -c ^processor /proc/cpuinfo) + 1) / 2)
-if [ "$nc" -eq "0" ]; then
-	nc=1
-fi
 echo "You have " $nc" cores."
 echo "-------------------------------------------------"
 echo "Changing the makeflags for "$nc" cores."
-sudo sed -i 's/#MAKEFLAGS="-j2"/MAKEFLAGS="-j$nc"/g' /etc/makepkg.conf
+sudo sed -i 's/#MAKEFLAGS="-j2"/MAKEFLAGS="-j'"$nc"'"/g' /etc/makepkg.conf
 echo "Changing the compression settings for "$nc" cores."
-sudo sed -i 's/COMPRESSXZ=(xz -c -z -)/COMPRESSXZ=(xz -c -T $nc -z -)/g' /etc/makepkg.conf
+sudo sed -i 's/COMPRESSXZ=(xz -c -z -)/COMPRESSXZ=(xz -c -T '"$nc"' -z -)/g' /etc/makepkg.conf
 
 echo "-------------------------------------------------"
 echo "       Setup Language to US and set locale       "
 echo "-------------------------------------------------"
 sed -i 's/^#en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen
+sed -i 's/^#de_DE.UTF-8 UTF-8/de_DE.UTF-8 UTF-8/' /etc/locale.gen
 locale-gen
 timedatectl --no-ask-password set-timezone Europe/Berlin
 timedatectl --no-ask-password set-ntp 1
-localectl --no-ask-password set-locale LANG="en_US.UTF-8" LC_COLLATE="" LC_TIME="en_US.UTF-8"
+localectl --no-ask-password set-locale LANG="en_US.UTF-8" LC_COLLATE="C" LC_TIME="en_US.UTF-8"
 
 # Set keymaps
 localectl --no-ask-password set-keymap us
@@ -119,6 +117,9 @@ PKGS=(
 'gwenview'
 'haveged'
 'htop'
+'hunspell'
+'hunspell-en_us'
+'hunspell-de'
 #'iptables-nft'
 'jdk-openjdk' # Java 17
 'kactivitymanagerd'
@@ -228,7 +229,6 @@ PKGS=(
 'plasma-systemmonitor'
 'plasma-thunderbolt'
 'plasma-vault'
-'plasma-wayland-session'
 'plasma-workspace'
 'plasma-workspace-wallpapers'
 'polkit-kde-agent'
@@ -326,19 +326,20 @@ esac
 
 # Graphics Drivers find and install
 if lspci | grep -E "NVIDIA|GeForce"; then
-    pacman -S nvidia nvidia-settings --noconfirm --needed
-	nvidia-xconfig
+	pacman -S nvidia nvidia-settings --noconfirm --needed
+	#nvidia-xconfig
+	cp "$HOME/ArchDave/nvidia.conf" "/etc/X11/xorg.conf.d/"
 fi
 if lspci | grep -E "Radeon"; then
-    pacman -S xf86-video-amdgpu --noconfirm --needed
+	pacman -S xf86-video-amdgpu --noconfirm --needed
 fi
 if lspci | grep -E "Integrated Graphics Controller"; then
-    pacman -S libva-intel-driver libvdpau-va-gl lib32-vulkan-intel vulkan-intel libva-intel-driver libva-utils --needed --noconfirm
+	pacman -S libva-intel-driver libvdpau-va-gl lib32-vulkan-intel vulkan-intel libva-intel-driver libva-utils --needed --noconfirm
 fi
 
 echo -e "\nDone!\n"
-if ! source install.conf; then
-	read -p "Please enter username:" username
+if ! source install.conf &>/dev/null; then
+	read -p "Please enter username: " username
 echo "username=$username" >> ${HOME}/ArchDave/install.conf
 fi
 if [ $(whoami) = "root"  ];

@@ -22,6 +22,7 @@ source "$HOME/.dotfiles/install.sh"
 
 PKGS=(
 'anydesk-bin'
+'arc-kde'
 'autojump'
 'awesome-terminal-fonts'
 'brave-bin' # Brave Browser
@@ -30,9 +31,9 @@ PKGS=(
 'dxvk-bin' # DXVK DirectX to Vulcan
 'etcher-bin'
 'github-desktop-bin' # Github Desktop sync
-# 'lightly-git'
-'mangohud' # Gaming FPS Counter
-'mangohud-common'
+#'lightly-git'
+#'mangohud' # Gaming FPS Counter
+#'mangohud-common'
 'minecraft-launcher'
 'intellij-idea-ultimate-edition'
 'intellij-idea-ultimate-edition-jre'
@@ -67,6 +68,14 @@ done
 konsave -i $HOME/ArchDave/arc-kde.knsv
 sleep 1
 konsave -a kde
+
+cat <<EOF > ~/.config/plasma-localerc
+[Formats]
+LANG=en_US.UTF-8
+LC_COLLATE=C
+LC_MEASUREMENT=en_DE.UTF-8
+useDetailed=true
+EOF
 
 echo -e "\nDone!\n"
 exit
