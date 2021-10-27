@@ -18,4 +18,4 @@ source "$SCRIPT_DIR/functions/locale.sh"
 
 echo -e "\nFINAL CONFIGURATION"
 konsave -r arc-kde
-source "$SCRIPT_DIR/kde-import.sh"
+source "$SCRIPT_DIR/functions/kde-import.sh"

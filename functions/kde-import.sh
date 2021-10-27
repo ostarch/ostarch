@@ -19,7 +19,3 @@ pip install konsave
 konsave -i "$SCRIPT_DIR/../arc-kde.knsv"
 sleep 1
 konsave -a arc-kde
-# Will hopefully fix the bug where the theme couldn't load properly
-konsave -r arc-kde
-konsave -i "$SCRIPT_DIR/../arc-kde.knsv"
-konsave -a arc-kde
