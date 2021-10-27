@@ -7,15 +7,23 @@
 #  ██║  ██║██║  ██║╚██████╗██║  ██║██████╔╝██║  ██║ ╚████╔╝ ███████╗
 #  ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚═════╝ ╚═╝  ╚═╝  ╚═══╝  ╚══════╝
 #--------------------------------------------------------------------
-SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
-if [ $(whoami) = "root"  ]; then
-  echo "Don't run this as root!"
-  exit
+#Add ILoveCandy
+if ! grep -q ILoveCandy "/etc/pacman.conf"; then
+  sudo sed -i 's/^# Misc options/# Misc options\nILoveCandy/' pacman.conf
 fi
+#Add parallel downloading
+sudo sed -i 's/^#Para/Para/' /etc/pacman.conf
 
-source "$SCRIPT_DIR/functions/locale.sh"
+#Add color
+sudo sed -i 's/^#Color/Color/' /etc/pacman.conf
 
-echo -e "\nFINAL CONFIGURATION"
-konsave -r arc-kde
-source "$SCRIPT_DIR/kde-import.sh"
+#Checks the available space
+sudo sed -i 's/^#CheckSpace/CheckSpace/' /etc/pacman.conf
+
+#Add parallel downloading
+sudo sed -i 's/^#VerbosePkgLists/VerbosePkgLists/' /etc/pacman.conf
+
+#Enable multilib
+sudo sed -i "/\[multilib\]/,/Include/"'s/^#//' /etc/pacman.conf
+

@@ -7,6 +7,7 @@
 #  ██║  ██║██║  ██║╚██████╗██║  ██║██████╔╝██║  ██║ ╚████╔╝ ███████╗
 #  ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚═════╝ ╚═╝  ╚═╝  ╚═══╝  ╚══════╝
 #--------------------------------------------------------------------
+SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
 echo -e "\nFINAL SETUP AND CONFIGURATION"
 
@@ -27,12 +28,10 @@ Current=breeze
 EOF
 
 sudo cat <<EOF >> /usr/share/sddm/scripts/Xsetup
-xrandr --setprovideroutputsource modesetting NVIDIA-0
-xrandr --auto
 /home/dave10/bin/xrandr_display
 EOF
 
-source "$HOME/ArchDave/setconsole.sh"
+source "$SCRIPT_DIR/setconsole.sh"
 
 # ------------------------------------------------------------------------
 

@@ -7,18 +7,23 @@
 #  ██║  ██║██║  ██║╚██████╗██║  ██║██████╔╝██║  ██║ ╚████╔╝ ███████╗
 #  ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚═════╝ ╚═╝  ╚═╝  ╚═══╝  ╚══════╝
 #--------------------------------------------------------------------
+SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+
+# You can solve users running this script as root with this and then doing the same for the next for statement. However I will leave this up to you.
+if [ $(whoami) = "root"  ]; then
+  echo "Don't run this as root!"
+  exit
+fi
+git clone "https://github.com/d4ve10/dotfiles.git" "$HOME/.dotfiles"
+source "$HOME/.dotfiles/install.sh"
 
 echo -e "\nINSTALLING AUR SOFTWARE\n"
-# You can solve users running this script as root with this and then doing the same for the next for statement. However I will leave this up to you.
-
 echo "CLONING: YAY"
 cd ~
 git clone "https://aur.archlinux.org/yay.git"
 cd ${HOME}/yay
 makepkg -si --noconfirm
 cd ~
-git clone "https://github.com/d4ve10/dotfiles.git" "$HOME/.dotfiles"
-source "$HOME/.dotfiles/install.sh"
 
 PKGS=(
 'anydesk-bin'
@@ -64,8 +69,7 @@ for PKG in "${PKGS[@]}"; do
     yay -S --noconfirm $PKG
 done
 
-source $HOME/ArchDave/kde-import.sh
-konsave -a arc-kde
+source $SCRIPT_DIR/functions/kde-import.sh
 
 cat <<EOF > ~/.config/plasma-localerc
 [Formats]

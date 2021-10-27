@@ -7,15 +7,12 @@
 #  ██║  ██║██║  ██║╚██████╗██║  ██║██████╔╝██║  ██║ ╚████╔╝ ███████╗
 #  ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚═════╝ ╚═╝  ╚═╝  ╚═══╝  ╚══════╝
 #--------------------------------------------------------------------
-SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
-if [ $(whoami) = "root"  ]; then
-  echo "Don't run this as root!"
-  exit
-fi
-
-source "$SCRIPT_DIR/functions/locale.sh"
-
-echo -e "\nFINAL CONFIGURATION"
-konsave -r arc-kde
-source "$SCRIPT_DIR/kde-import.sh"
+iso=$(curl -4 ifconfig.co/country-iso)
+echo -e "--------------------------------------------------------------------"
+echo -e "-Setting up $iso mirrors for faster downloads"
+echo -e "--------------------------------------------------------------------"
+sudo pacman -S --noconfirm --needed pacman-contrib curl
+sudo pacman -S --noconfirm --needed reflector rsync
+sudo cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
+sudo reflector -a 48 -c $iso -f 5 -l 20 --sort rate --save /etc/pacman.d/mirrorlist
