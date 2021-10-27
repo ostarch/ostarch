@@ -17,14 +17,20 @@ fi
 git clone "https://github.com/d4ve10/dotfiles.git" "$HOME/.dotfiles"
 source "$HOME/.dotfiles/install.sh"
 
-echo -e "\nINSTALLING AUR SOFTWARE\n"
-echo "CLONING: YAY"
+
+echo "--------------------------------"
+echo "          CLONING: YAY          "
+echo "--------------------------------"
+
 cd ~
 git clone "https://aur.archlinux.org/yay.git"
 cd ${HOME}/yay
 makepkg -si --noconfirm
 cd ~
 
+echo "-------------------------------------------"
+echo "          INSTALLING AUR SOFTWARE          "
+echo "-------------------------------------------"
 PKGS=(
 'anydesk-bin'
 'arc-kde'

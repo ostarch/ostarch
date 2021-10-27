@@ -10,9 +10,9 @@
 SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 BASENAME="$( basename $SCRIPT_DIR)"
 
-echo "--------------------------------------"
-echo "--          Network Setup           --"
-echo "--------------------------------------"
+echo "-------------------------------------"
+echo "            Network Setup            "
+echo "-------------------------------------"
 pacman -S networkmanager dhclient --noconfirm --needed
 systemctl enable --now NetworkManager
 

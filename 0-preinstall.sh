@@ -12,24 +12,16 @@ hwclock --systohc
 timedatectl set-ntp true
 pacman -S --noconfirm --needed pacman-contrib terminus-font
 setfont ter-v22b
-echo -e "--------------------------------------------------------------------"
-echo -e "   █████╗ ██████╗  ██████╗██╗  ██╗██████╗  █████╗ ██╗   ██╗███████╗"
-echo -e "  ██╔══██╗██╔══██╗██╔════╝██║  ██║██╔══██╗██╔══██╗██║   ██║██╔════╝"
-echo -e "  ███████║██████╔╝██║     ███████║██║  ██║███████║██║   ██║█████╗  "
-echo -e "  ██╔══██║██╔══██╗██║     ██╔══██║██║  ██║██╔══██║╚██╗ ██╔╝██╔══╝  "
-echo -e "  ██║  ██║██║  ██║╚██████╗██║  ██║██████╔╝██║  ██║ ╚████╔╝ ███████╗"
-echo -e "  ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚═════╝ ╚═╝  ╚═╝  ╚═══╝  ╚══════╝"
 source "$SCRIPT_DIR/functions/mirrors.sh"
-
 mkdir /mnt
 
 
 echo -e "\nInstalling prereqs...\n$HR"
 pacman -S --noconfirm --needed gptfdisk btrfs-progs
 
-echo "-------------------------------------------------"
-echo "-------select your disk to format----------------"
-echo "-------------------------------------------------"
+echo "------------------------------------------------"
+echo "           Select your disk to format           "
+echo "------------------------------------------------"
 lsblk
 echo "Please enter disk to work on: (example /dev/sda)"
 read DISK
