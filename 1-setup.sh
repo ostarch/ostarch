@@ -18,7 +18,6 @@ echo "Setting up mirrors for optimal download          "
 echo "-------------------------------------------------"
 pacman -S --noconfirm pacman-contrib curl
 pacman -S --noconfirm reflector rsync
-iso=$(curl -4 ifconfig.co/country-iso)
 cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
 reflector -a 48 -c $iso -f 5 -l 20 --sort rate --save /etc/pacman.d/mirrorlist
 
@@ -26,9 +25,12 @@ nc=$(expr $(expr $(grep -c ^processor /proc/cpuinfo) + 1) / 2)
 echo "You have " $nc" cores."
 echo "-------------------------------------------------"
 echo "Changing the makeflags for "$nc" cores."
-sudo sed -i 's/#MAKEFLAGS="-j2"/MAKEFLAGS="-j'"$nc"'"/g' /etc/makepkg.conf
-echo "Changing the compression settings for "$nc" cores."
-sudo sed -i 's/COMPRESSXZ=(xz -c -z -)/COMPRESSXZ=(xz -c -T '"$nc"' -z -)/g' /etc/makepkg.conf
+TOTALMEM=$(cat /proc/meminfo | grep -i 'memtotal' | grep -o '[[:digit:]]*')
+if [[  $TOTALMEM -gt 8000000 ]]; then
+	sudo sed -i 's/#MAKEFLAGS="-j2"/MAKEFLAGS="-j'"$nc"'"/g' /etc/makepkg.conf
+	echo "Changing the compression settings for "$nc" cores."
+	sudo sed -i 's/COMPRESSXZ=(xz -c -z -)/COMPRESSXZ=(xz -c -T '"$nc"' -z -)/g' /etc/makepkg.conf
+fi
 
 echo "-------------------------------------------------"
 echo "       Setup Language to US and set locale       "
@@ -39,7 +41,7 @@ locale-gen
 hwclock --systohc
 timedatectl --no-ask-password set-timezone Europe/Berlin
 timedatectl --no-ask-password set-ntp 1
-localectl --no-ask-password set-locale LANG="en_US.UTF-8" LC_COLLATE="C" LC_TIME="en_US.UTF-8"
+localectl --no-ask-password set-locale LANG="en_US.UTF-8" LC_TIME="en_US.UTF-8"
 
 # Set keymaps
 localectl --no-ask-password set-keymap us
@@ -57,6 +59,15 @@ pacman -Sy --noconfirm
 echo -e "\nInstalling Base System\n"
 
 PKGS=(
+'mesa' # Essential Xorg First
+'xorg'
+'xorg-server'
+'xorg-apps'
+'xorg-drivers'
+'xorg-xkill'
+'xorg-xinit'
+'xterm'
+'plasma-desktop' # KDE Load second
 'alsa-plugins' # audio plugins
 'alsa-utils' # audio utils
 'ark' # compression
@@ -83,16 +94,11 @@ PKGS=(
 'cronie'
 'cups'
 'cups-pdf'
-'dhcpcd'
 'dialog'
 'discord'
-'dmidecode'
-'dnsmasq'
 'dolphin'
 'dolphin-plugins'
 'dosfstools'
-'drkonqi'
-'edk2-ovmf'
 'efibootmgr' # EFI boot
 'egl-wayland'
 'evolution'
@@ -110,7 +116,6 @@ PKGS=(
 'git'
 'gptfdisk'
 'gradle'
-'groff'
 'grub'
 'grub-customizer'
 'gst-libav'
@@ -125,52 +130,20 @@ PKGS=(
 'hunspell-de'
 #'iptables-nft'
 'jdk-openjdk' # Java 17
-'kactivitymanagerd'
 'kate'
-'kcalc'
-'kcharselect'
-'kcron'
-'kde-cli-tools'
 'kde-gtk-config'
 'kdeconnect'
-'kdecoration'
-'kdenetwork-filesharing'
+'konsole'
 'kdenlive'
-'kdeplasma-addons'
-'kdesdk-thumbnailers'
-'kdialog'
-'keychain'
-'kfind'
-'kgamma5'
-'kgpg'
-'khotkeys'
-'kinfocenter'
-'kmenuedit'
-#'kmix'
 'kompare'
 'konsole'
 'krdc'
-'kscreen'
-'kscreenlocker'
-'ksshaskpass'
 'ksysguard'
-'ksystemlog'
-'ksystemstats'
 'ktorrent'
-'kwallet-pam'
-'kwalletmanager'
-'kwayland-integration'
-'kwayland-server'
-'kwin'
-'kwrite'
-'kwrited'
 'layer-shell-qt'
 'libappindicator-gtk3'
 'libindicator-gtk2'
 'libindicator-gtk3'
-'libguestfs'
-'libkscreen'
-'libksysguard'
 'libnewt'
 'libreoffice-still'
 'libreoffice-still-de'
@@ -221,21 +194,6 @@ PKGS=(
 'php7-gd'
 'picom'
 'pkgconf'
-'plasma-browser-integration'
-'plasma-desktop'
-'plasma-disks'
-'plasma-firewall'
-'plasma-integration'
-'plasma-nm'
-'plasma-pa'
-'plasma-sdk'
-'plasma-systemmonitor'
-'plasma-thunderbolt'
-'plasma-vault'
-'plasma-workspace'
-'plasma-workspace-wallpapers'
-'polkit-kde-agent'
-'powerdevil'
 'powerline-fonts'
 'powertop'
 'print-manager'
@@ -276,7 +234,6 @@ PKGS=(
 'unrar'
 'unzip'
 'usbutils'
-'vde2'
 'vi'
 'vim'
 'virt-manager'
@@ -294,9 +251,6 @@ PKGS=(
 'xdg-desktop-portal-kde'
 'xdg-user-dirs'
 'xdotool'
-'xorg'
-'xorg-server'
-'xorg-xinit'
 'xsel'
 'zeroconf-ioslave'
 'zip'
@@ -351,6 +305,8 @@ then
 	passwd $username
 	cp -R /root/ArchDave /home/$username/
 	chown -R $username: /home/$username/ArchDave
+	read -p "Please name your machine:" nameofmachine
+	echo $nameofmachine > /etc/hostname
 else
 	echo "You are already a user proceed with aur installs"
 fi
