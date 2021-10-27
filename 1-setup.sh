@@ -40,8 +40,6 @@ sed -i 's/^# %wheel ALL=(ALL) NOPASSWD: ALL/%wheel ALL=(ALL) NOPASSWD: ALL/' /et
 
 source "$SCRIPT_DIR/functions/pacman.sh"
 
-pacman -Sy --noconfirm
-
 echo -e "\nInstalling Base System\n"
 
 PKGS=(

@@ -10,7 +10,7 @@
 
 #Add ILoveCandy
 if ! grep -q ILoveCandy "/etc/pacman.conf"; then
-  sudo sed -i 's/^# Misc options/# Misc options\nILoveCandy/' pacman.conf
+  sudo sed -i 's/^# Misc options/# Misc options\nILoveCandy/' /etc/pacman.conf
 fi
 #Add parallel downloading
 sudo sed -i 's/^#Para/Para/' /etc/pacman.conf
@@ -27,3 +27,4 @@ sudo sed -i 's/^#VerbosePkgLists/VerbosePkgLists/' /etc/pacman.conf
 #Enable multilib
 sudo sed -i "/\[multilib\]/,/Include/"'s/^#//' /etc/pacman.conf
 
+sudo pacman -Sy --noconfirm

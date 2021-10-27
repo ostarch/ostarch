@@ -20,13 +20,12 @@ echo -e "  ██╔══██║██╔══██╗██║     ██�
 echo -e "  ██║  ██║██║  ██║╚██████╗██║  ██║██████╔╝██║  ██║ ╚████╔╝ ███████╗"
 echo -e "  ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚═════╝ ╚═╝  ╚═╝  ╚═══╝  ╚══════╝"
 source "$SCRIPT_DIR/functions/mirrors.sh"
-source "$SCRIPT_DIR/functions/pacman.sh"
 
 mkdir /mnt
 
 
 echo -e "\nInstalling prereqs...\n$HR"
-pacman -S --noconfirm gptfdisk btrfs-progs
+pacman -S --noconfirm --needed gptfdisk btrfs-progs
 
 echo "-------------------------------------------------"
 echo "-------select your disk to format----------------"
