@@ -11,7 +11,7 @@ Download ArchISO from <https://archlinux.org/download/> and put on a USB drive w
 
 From initial Prompt type the following commands:
 
-```
+```bash
 pacman -Sy git
 git clone https://github.com/d4ve10/ArchDave
 cd ArchDave
@@ -23,7 +23,7 @@ cd ArchDave
 Unfortunately after the first boot, the timezone resets and the KDE theme isn't loaded properly.
 To fix this, just run the following commands after you logged in to KDE.
 
-```
+```bash
 cd ~/ArchDave
 ./4-post-startup.sh
 ```
