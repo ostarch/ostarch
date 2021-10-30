@@ -41,6 +41,7 @@ PKGS=(
 'dxvk-bin' # DXVK DirectX to Vulcan
 'etcher-bin'
 'github-desktop-bin' # Github Desktop sync
+'konsave'
 #'lightly-git'
 #'mangohud' # Gaming FPS Counter
 #'mangohud-common'

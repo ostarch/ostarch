@@ -13,9 +13,7 @@ if [ $(whoami) = "root"  ]; then
   exit
 fi
 SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
-export PATH=$PATH:~/.local/bin
 
-pip install konsave
 konsave -i "$SCRIPT_DIR/../arc-kde.knsv"
 sleep 1
 konsave -a arc-kde
