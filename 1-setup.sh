@@ -20,7 +20,7 @@ source "$SCRIPT_DIR/functions/mirrors.sh"
 
 nc="$(grep -c ^processor /proc/cpuinfo)"
 nc2=$(expr $(expr $(grep -c ^processor /proc/cpuinfo) + 1) / 2)
-echo "You have " $nc" cores."
+echo "You have "$nc" cores."
 echo "-------------------------------------------------"
 echo "Changing the makeflags for "$nc" cores."
 TOTALMEM=$(cat /proc/meminfo | grep -i 'memtotal' | grep -o '[[:digit:]]*')
