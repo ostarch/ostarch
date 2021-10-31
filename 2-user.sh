@@ -43,6 +43,7 @@ PKGS=(
 'github-desktop-bin' # Github Desktop sync
 'konsave'
 #'lightly-git'
+#'lightlyshaders-git'
 #'mangohud' # Gaming FPS Counter
 #'mangohud-common'
 'minecraft-launcher'

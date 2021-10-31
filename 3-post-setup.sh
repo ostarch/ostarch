@@ -15,23 +15,24 @@ echo "          FINAL SETUP AND CONFIGURATION          "
 echo "-------------------------------------------------"
 
 
+grub-mkconfig -o /boot/grub/grub.cfg
+
 # ------------------------------------------------------------------------
 
 echo -e "\nEnabling Login Display Manager"
 
-sudo systemctl enable sddm.service
+systemctl enable sddm.service
 
 echo -e "\nEnabling ckb-next Daemon"
-sudo systemctl enable ckb-next-daemon.service
+systemctl enable ckb-next-daemon.service
 
 echo -e "\nSetup SDDM Theme"
-
-sudo cat <<EOF > /etc/sddm.conf
+cat <<EOF > /etc/sddm.conf
 [Theme]
 Current=breeze
 EOF
 
-sudo cat <<EOF >> /usr/share/sddm/scripts/Xsetup
+cat <<EOF >> /usr/share/sddm/scripts/Xsetup
 /home/dave10/bin/xrandr_display
 EOF
 
@@ -42,12 +43,12 @@ source "$SCRIPT_DIR/setconsole.sh"
 echo -e "\nEnabling essential services"
 
 systemctl enable cups.service
-sudo ntpd -qg
-sudo systemctl enable ntpd.service
-sudo systemctl disable dhcpcd.service
-sudo systemctl stop dhcpcd.service
-sudo systemctl enable NetworkManager.service
-sudo systemctl enable bluetooth
+ntpd -qg
+systemctl enable ntpd.service
+systemctl disable dhcpcd.service
+systemctl stop dhcpcd.service
+systemctl enable NetworkManager.service
+systemctl enable bluetooth
 echo "
 ###############################################################################
 # Cleaning

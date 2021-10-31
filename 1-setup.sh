@@ -83,6 +83,7 @@ PKGS=(
 'dolphin'
 'dolphin-plugins'
 'dosfstools'
+'dtc'
 'efibootmgr' # EFI boot
 'egl-wayland'
 'evolution'
@@ -147,6 +148,7 @@ PKGS=(
 'kwallet-pam'
 'layer-shell-qt'
 'libappindicator-gtk3'
+'libdvdcss'
 'libindicator-gtk2'
 'libindicator-gtk3'
 'libnewt'
@@ -206,6 +208,7 @@ PKGS=(
 'plasma-pa'
 'plasma-thunderbolt'
 'plasma-vault'
+'powerdevil'
 'powerline-fonts'
 'powertop'
 'print-manager'
