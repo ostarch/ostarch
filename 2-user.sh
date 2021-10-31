@@ -64,7 +64,6 @@ PKGS=(
 'ttf-ms-fonts'
 'typora'
 'ventoy-bin'
-'zenmap'
 'zoom' # video conferences
 #'snapper-gui-git'
 #'snap-pac'
