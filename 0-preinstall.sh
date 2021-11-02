@@ -13,6 +13,7 @@ timedatectl set-ntp true
 pacman -S --noconfirm --needed pacman-contrib terminus-font
 setfont ter-v22b
 source "$SCRIPT_DIR/functions/mirrors.sh"
+source "$SCRIPT_DIR/functions/pacman.sh"
 mkdir /mnt
 
 
