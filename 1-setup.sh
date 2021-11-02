@@ -323,7 +323,7 @@ then
 	passwd $username
 	cp -R "/root/$BASENAME" /home/$username/
 	chown -R $username: /home/$username/$BASENAME
-	read -p "Please name your machine:" nameofmachine
+	read -p "Please name your machine: " nameofmachine
 	echo $nameofmachine > /etc/hostname
 else
 	echo "You are already a user proceed with aur installs"
