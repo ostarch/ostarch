@@ -303,7 +303,7 @@ esac
 if lspci | grep -E "NVIDIA|GeForce"; then
 	pacman -S nvidia nvidia-settings --noconfirm --needed
 	nvidia-xconfig
-	#cp "$HOME/ArchDave/nvidia.conf" "/etc/X11/xorg.conf.d/"
+	#cp "$SCRIPT_DIR/nvidia.conf" "/etc/X11/xorg.conf.d/"
 fi
 if lspci | grep -E "Radeon"; then
 	pacman -S xf86-video-amdgpu --noconfirm --needed
