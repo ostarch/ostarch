@@ -11,10 +11,10 @@ SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
 hwclock --systohc
 timedatectl set-ntp true
-pacman -S --noconfirm --needed pacman-contrib terminus-font
+pacman -S --noconfirm --needed terminus-font
 setfont ter-v22b
-source "$SCRIPT_DIR/functions/mirrors.sh"
 source "$SCRIPT_DIR/functions/pacman.sh"
+source "$SCRIPT_DIR/functions/mirrors.sh"
 mkdir /mnt
 
 
