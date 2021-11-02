@@ -43,7 +43,7 @@ cat <<EOF >> /usr/share/sddm/scripts/Xsetup
 /home/dave10/bin/xrandr_display
 EOF
 
-source "$SCRIPT_DIR/setconsole.sh"
+source "$SCRIPT_DIR/functions/setconsole.sh"
 
 # ------------------------------------------------------------------------
 
