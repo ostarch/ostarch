@@ -7,6 +7,8 @@
 #  ██║  ██║██║  ██║╚██████╗██║  ██║██████╔╝██║  ██║ ╚████╔╝ ███████╗
 #  ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚═════╝ ╚═╝  ╚═╝  ╚═══╝  ╚══════╝
 #--------------------------------------------------------------------
+SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+source $SCRIPT_DIR/../install.conf &>/dev/null
 
 if [ "$SKIP_MIRRORS" = true ]; then
   return
@@ -26,4 +28,4 @@ echo -e "--------------------------------------------------------------------"
 echo -e "            Setting up $iso mirrors for faster downloads            "
 echo -e "--------------------------------------------------------------------"
 sudo reflector -a 48 -c $iso -f 5 -l 20 --sort rate --save /etc/pacman.d/mirrorlist \
-  && SKIP_MIRRORS=true
+  && echo "SKIP_MIRRORS=true" >> $SCRIPT_DIR/../install.conf
