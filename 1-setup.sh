@@ -25,9 +25,9 @@ echo "-------------------------------------------------"
 echo "Changing the makeflags for "$nc" cores."
 TOTALMEM=$(cat /proc/meminfo | grep -i 'memtotal' | grep -o '[[:digit:]]*')
 if [[  $TOTALMEM -gt 8000000 ]]; then
-	sudo sed -i 's/#MAKEFLAGS="-j2"/MAKEFLAGS="-j'"$nc2"'"/g' /etc/makepkg.conf
+	sed -i 's/#MAKEFLAGS="-j2"/MAKEFLAGS="-j'"$nc2"'"/g' /etc/makepkg.conf
 	echo "Changing the compression settings for "$nc" cores."
-	sudo sed -i 's/COMPRESSXZ=(xz -c -z -)/COMPRESSXZ=(xz -c -T '"$nc2"' -z -)/g' /etc/makepkg.conf
+	sed -i 's/COMPRESSXZ=(xz -c -z -)/COMPRESSXZ=(xz -c -T '"$nc2"' -z -)/g' /etc/makepkg.conf
 fi
 
 source "$SCRIPT_DIR/functions/locale.sh"
