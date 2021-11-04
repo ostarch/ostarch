@@ -27,5 +27,5 @@ echo -e "  ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═�
 echo -e "--------------------------------------------------------------------"
 echo -e "            Setting up $iso mirrors for faster downloads            "
 echo -e "--------------------------------------------------------------------"
-sudo reflector -a 48 -c $iso -f 5 -l 20 --sort rate --save /etc/pacman.d/mirrorlist \
+sudo reflector -c "$iso" -l 15 -p "https,http" --sort rate --save /etc/pacman.d/mirrorlist \
   && echo "SKIP_MIRRORS=true" >> $CURRENT_DIR/../install.conf
