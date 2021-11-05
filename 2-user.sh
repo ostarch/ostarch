@@ -31,47 +31,8 @@ cd ~
 echo "-------------------------------------------"
 echo "          INSTALLING AUR SOFTWARE          "
 echo "-------------------------------------------"
-PKGS=(
-'anydesk-bin'
-'arc-kde'
-'autojump'
-'brave-bin' # Brave Browser
-'ckb-next-git'
-'cups-bjnp'
-'dxvk-bin' # DXVK DirectX to Vulcan
-'etcher-bin'
-'github-desktop-bin' # Github Desktop sync
-'konsave'
-#'lightly-git'
-#'lightlyshaders-git'
-#'mangohud' # Gaming FPS Counter
-#'mangohud-common'
-'minecraft-launcher'
-'intellij-idea-ultimate-edition'
-'intellij-idea-ultimate-edition-jre'
-'ocs-url' # install packages from websites
-'phpstorm'
-'phpstorm-jre'
-'pycharm-professional'
-'rambox-bin'
-'rtl88x2bu-dkms-git'
-#'sddm-nordic-theme-git'
-'timeshift'
-'ttf-droid'
-'ttf-hack'
-'ttf-meslo' # Nerdfont package
-'ttf-roboto'
-'ttf-ms-fonts'
-'typora'
-'ventoy-bin'
-'zoom' # video conferences
-#'snapper-gui-git'
-#'snap-pac'
-)
 
-for PKG in "${PKGS[@]}"; do
-    yay -S --noconfirm $PKG
-done
+sed -e "/^#/d" -e "s/ #.*//" -e 's/ //g' ${SCRIPT_DIR}/packages/aur.txt | yay -S --needed --noconfirm -
 
 source $SCRIPT_DIR/functions/kde-import.sh
 
