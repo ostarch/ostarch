@@ -32,7 +32,7 @@ echo "-------------------------------------------"
 echo "          INSTALLING AUR SOFTWARE          "
 echo "-------------------------------------------"
 
-sed -e "/^#/d" -e "s/ #.*//" -e 's/ //g' ${SCRIPT_DIR}/packages/aur.txt | yay -S --needed --noconfirm -
+sed -e "/^#/d" -e "s/ #.*//" -e 's/ //g' ${SCRIPT_DIR}/packages/aur-minimal.txt | yay -S --needed --noconfirm -
 
 source $SCRIPT_DIR/functions/kde-import.sh
 
