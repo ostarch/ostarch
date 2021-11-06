@@ -24,6 +24,7 @@ else
     grub-install --efi-directory=/boot ${DISK}
 fi
 
+source "${SCRIPT_DIR}/functions/grub.sh"
 grub-mkconfig -o /boot/grub/grub.cfg
 
 # ------------------------------------------------------------------------
