@@ -44,11 +44,6 @@ mount -t btrfs "$ROOT_PARTITION" /mnt
 ls /mnt | xargs btrfs subvolume delete
 btrfs subvolume create /mnt/@
 umount /mnt
-;;
-*)
-source "$SCRIPT_DIR/functions/exit.sh"
-;;
-esac
 
 # mount target
 mount -t btrfs -o subvol=@ -L ROOT /mnt
