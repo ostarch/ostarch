@@ -18,11 +18,18 @@ echo "-------------------------------------------------"
 echo "--------------------------------------"
 echo "-- GRUB Bootloader Installation     --"
 echo "--------------------------------------"
-if [[ ! -d "/sys/firmware/efi" ]]; then
-    grub-install --boot-directory=/boot ${DISK}
-else
-    grub-install --efi-directory=/boot ${DISK}
-fi
+installGrub() {
+  if [[ ! -d "/sys/firmware/efi" ]]; then
+      grub-install --boot-directory=/boot ${DISK}
+  else
+      grub-install --efi-directory=/boot ${DISK}
+  fi
+}
+until installGrub
+do
+  echo "Grub installation failed, retrying..."
+  sleep 3
+done
 
 source "${SCRIPT_DIR}/functions/grub.sh"
 grub-mkconfig -o /boot/grub/grub.cfg
