@@ -7,19 +7,7 @@
 #  ██║  ██║██║  ██║╚██████╗██║  ██║██████╔╝██║  ██║ ╚████╔╝ ███████╗
 #  ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚═════╝ ╚═╝  ╚═╝  ╚═══╝  ╚══════╝
 #--------------------------------------------------------------------
-CURRENT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
-items=$(lsblk -dplnx size -o NAME,SIZE -e 7,11 | tac)
-options=()
-IFS_ORIG=$IFS
-IFS=$'\n'
-for item in ${items}
-do
-  options+=("${item}" "")
-done
-IFS=$IFS_ORIG
-result=$(whiptail --title "Select your disk" --menu "" 0 0 0 "${options[@]}" 3>&1 1>&2 2>&3)
-if [ ! "$?" = "0" ]; then
-  source "${CURRENT_DIR}/../exit.sh"
-fi
-DISK=${result%%\ *}
+umount -R /mnt &>/dev/null
+
+exit ${1:-1}

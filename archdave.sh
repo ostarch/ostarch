@@ -7,3 +7,4 @@ arch-chroot /mnt /root/$BASENAME/1-setup.sh
 source /mnt/root/$BASENAME/install.conf
 arch-chroot /mnt /usr/bin/runuser -u $username -- /home/$username/$BASENAME/2-user.sh
 arch-chroot /mnt /root/$BASENAME/3-post-setup.sh
+bash $SCRIPT_DIR/functions/exit.sh 0

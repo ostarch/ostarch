@@ -7,13 +7,14 @@
 #  ██║  ██║██║  ██║╚██████╗██║  ██║██████╔╝██║  ██║ ╚████╔╝ ███████╗
 #  ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚═════╝ ╚═╝  ╚═╝  ╚═══╝  ╚══════╝
 #--------------------------------------------------------------------
+CURRENT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
 if [ -z "$DISK" ]; then
-  source "${BASH_SOURCE%/*}/select-disk.sh"
+  source "${CURRENT_DIR}/select-disk.sh"
 fi
 
 displayWarning() {
-  whiptail --title "$1" --yesno "Selected device : "$2"\n\nAll data will be erased ! \n\nContinue ?" --defaultno 0 0 3>&1 1>&2 2>&3
+  whiptail --title "$1" --yesno "Selected device: "$2"\n\nALL DATA WILL BE ERASED!\n\nContinue?" --defaultno 0 0 3>&1 1>&2 2>&3
   return "$?"
 }
 

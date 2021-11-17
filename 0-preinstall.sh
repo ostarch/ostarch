@@ -15,12 +15,12 @@ pacman -S --noconfirm --needed terminus-font
 setfont ter-v22b
 source "$SCRIPT_DIR/functions/pacman.sh"
 source "$SCRIPT_DIR/functions/mirrors.sh"
-mkdir /mnt
 
 
 echo -e "\nInstalling prereqs...\n$HR"
 pacman -S --noconfirm --needed gptfdisk btrfs-progs grub
 
+mkdir /mnt &>/dev/null
 umount -R /mnt &>/dev/null
 
 source "$SCRIPT_DIR/functions/partitioning/select-disk.sh"
@@ -29,6 +29,10 @@ echo "--------------------------------------"
 echo -e "\nFormatting disk...\n$HR"
 echo "--------------------------------------"
 source "$SCRIPT_DIR/functions/partitioning/partition-disk.sh"
+
+if [[ -z "$BOOT_PARTITION" ]] || [[ -z "$ROOT_PARTITION" ]]; then
+    source "$SCRIPT_DIR/functions/partitioning/select-partitions.sh"
+fi
 
 # make filesystems
 echo -e "\nCreating Filesystems...\n$HR"
@@ -42,10 +46,7 @@ btrfs subvolume create /mnt/@
 umount /mnt
 ;;
 *)
-echo "Rebooting in 3 Seconds ..." && sleep 1
-echo "Rebooting in 2 Seconds ..." && sleep 1
-echo "Rebooting in 1 Second ..." && sleep 1
-reboot now
+source "$SCRIPT_DIR/functions/exit.sh"
 ;;
 esac
 
@@ -57,10 +58,7 @@ mount -t vfat -L BOOT /mnt/boot/
 
 if ! grep -qs '/mnt' /proc/mounts; then
     echo "Drive is not mounted can not continue"
-    echo "Rebooting in 3 Seconds ..." && sleep 1
-    echo "Rebooting in 2 Seconds ..." && sleep 1
-    echo "Rebooting in 1 Second ..." && sleep 1
-    reboot now
+    source "$SCRIPT_DIR/functions/exit.sh"
 fi
 
 echo "--------------------------------------"
