@@ -39,6 +39,8 @@ case ${result} in
       sgdisk -n 2::+200M --typecode=2:ef00 --change-name=2:'BOOT' ${DISK} # partition 2 (Boot Partition)
       sgdisk -n 3::-0 --typecode=3:8300 --change-name=3:'ROOT' ${DISK} # partition 3 (Root), default start, remaining
       sgdisk -A 1:set:2 ${DISK}
+      BOOT_PARTITION_NUM=2
+      ROOT_PARTITION_NUM=3
     fi
   ;;
   "Auto Partitions (dos)")
@@ -56,6 +58,8 @@ case ${result} in
       # create partitions
       sgdisk -n 1::+200M --typecode=2:ef00 --change-name=1:'BOOT' ${DISK} # partition 1 (Boot Partition)
       sgdisk -n 2::-0 --typecode=3:8300 --change-name=2:'ROOT' ${DISK} # partition 2 (Root), default start, remaining
+      BOOT_PARTITION_NUM=1
+      ROOT_PARTITION_NUM=2
     fi
   ;;
   "Edit Partitions (cfdisk)")
@@ -65,3 +69,11 @@ case ${result} in
     cgdisk ${DISK}
   ;;
 esac
+
+if [[ ${DISK} =~ "nvme" ]]; then
+  BOOT_PARTITION="${DISK}p${BOOT_PARTITION_NUM}"
+  ROOT_PARTITION="${DISK}p${ROOT_PARTITION_NUM}"
+else
+  BOOT_PARTITION="${DISK}${BOOT_PARTITION_NUM}"
+  ROOT_PARTITION="${DISK}${ROOT_PARTITION_NUM}"
+fi

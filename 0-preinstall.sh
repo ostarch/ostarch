@@ -32,15 +32,11 @@ source "$SCRIPT_DIR/functions/partitioning/partition-disk.sh"
 
 # make filesystems
 echo -e "\nCreating Filesystems...\n$HR"
-if [[ ${DISK} =~ "nvme" ]]; then
-mkfs.vfat -F32 -n "BOOT" "${DISK}p2"
-mkfs.btrfs -L "ROOT" "${DISK}p3" -f
-mount -t btrfs "${DISK}p3" /mnt
-else
-mkfs.vfat -F32 -n "BOOT" "${DISK}2"
-mkfs.btrfs -L "ROOT" "${DISK}3" -f
-mount -t btrfs "${DISK}3" /mnt
-fi
+
+mkfs.vfat -F32 -n "BOOT" "$BOOT_PARTITION"
+mkfs.btrfs -L "ROOT" "$ROOT_PARTITION" -f
+mount -t btrfs "$ROOT_PARTITION" /mnt
+
 ls /mnt | xargs btrfs subvolume delete
 btrfs subvolume create /mnt/@
 umount /mnt
