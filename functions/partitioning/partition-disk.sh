@@ -30,6 +30,11 @@ showOptions() {
   options+=("Edit Partitions (cgdisk)" "")
 
   result=$(whiptail --title "Disk Partitions" --menu "" 0 0 0 "${options[@]}" 3>&1 1>&2 2>&3)
+  if [ ! "$?" = "0" ]; then
+    source "${CURRENT_DIR}/select-disk.sh"
+    export DISK=$DISK
+    return 1
+  fi
   case ${result} in
     "Auto Partitions (gpt)")
       if (displayWarning "Auto Partitions (gpt)" "$DISK"); then
