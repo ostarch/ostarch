@@ -21,25 +21,14 @@ mkdir /mnt
 echo -e "\nInstalling prereqs...\n$HR"
 pacman -S --noconfirm --needed gptfdisk btrfs-progs grub
 
-echo "------------------------------------------------"
-echo "           Select your disk to format           "
-echo "------------------------------------------------"
-lsblk
-echo "Please enter disk to work on: (example /dev/sda)"
-read DISK
-echo "THIS WILL FORMAT AND DELETE ALL DATA ON THE DISK"
-read -p "are you sure you want to continue (Y/N):" formatdisk
-case $formatdisk in
-
-y|Y|yes|Yes|YES)
-echo "--------------------------------------"
-echo -e "\nFormatting disk...\n$HR"
-echo "--------------------------------------"
-
 umount -R /mnt &>/dev/null
 
 source "$SCRIPT_DIR/functions/partitioning/select-disk.sh"
-source "$SCRIPT_DIR/functions/partitioning/disk-partitions.sh"
+
+echo "--------------------------------------"
+echo -e "\nFormatting disk...\n$HR"
+echo "--------------------------------------"
+source "$SCRIPT_DIR/functions/partitioning/partition-disk.sh"
 
 # make filesystems
 echo -e "\nCreating Filesystems...\n$HR"
