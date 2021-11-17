@@ -15,62 +15,35 @@ pacman -S --noconfirm --needed terminus-font
 setfont ter-v22b
 source "$SCRIPT_DIR/functions/pacman.sh"
 source "$SCRIPT_DIR/functions/mirrors.sh"
-mkdir /mnt
 
 
 echo -e "\nInstalling prereqs...\n$HR"
 pacman -S --noconfirm --needed gptfdisk btrfs-progs grub
 
-echo "------------------------------------------------"
-echo "           Select your disk to format           "
-echo "------------------------------------------------"
-lsblk
-echo "Please enter disk to work on: (example /dev/sda)"
-read DISK
-echo "THIS WILL FORMAT AND DELETE ALL DATA ON THE DISK"
-read -p "are you sure you want to continue (Y/N):" formatdisk
-case $formatdisk in
+mkdir /mnt &>/dev/null
+umount -R /mnt &>/dev/null
 
-y|Y|yes|Yes|YES)
+source "$SCRIPT_DIR/functions/partitioning/select-disk.sh"
+
 echo "--------------------------------------"
 echo -e "\nFormatting disk...\n$HR"
 echo "--------------------------------------"
+source "$SCRIPT_DIR/functions/partitioning/partition-disk.sh"
 
-umount -R /mnt &>/dev/null
-# disk prep
-sgdisk -Z ${DISK} # zap all on disk
-sgdisk -a 2048 -o ${DISK} # new gpt disk 2048 alignment
-
-# create partitions
-sgdisk -n 1::+1M --typecode=1:ef02 --change-name=1:'BIOSBOOT' ${DISK} # partition 1 (BIOS Boot Partition)
-sgdisk -n 2::+200M --typecode=2:ef00 --change-name=2:'BOOT' ${DISK} # partition 2 (Boot Partition)
-sgdisk -n 3::-0 --typecode=3:8300 --change-name=3:'ROOT' ${DISK} # partition 3 (Root), default start, remaining
-if [[ ! -d "/sys/firmware/efi" ]]; then
-    sgdisk -A 1:set:2 ${DISK}
+if [[ -z "$BOOT_PARTITION" ]] || [[ -z "$ROOT_PARTITION" ]]; then
+    source "$SCRIPT_DIR/functions/partitioning/select-partitions.sh"
 fi
 
 # make filesystems
 echo -e "\nCreating Filesystems...\n$HR"
-if [[ ${DISK} =~ "nvme" ]]; then
-mkfs.vfat -F32 -n "BOOT" "${DISK}p2"
-mkfs.btrfs -L "ROOT" "${DISK}p3" -f
-mount -t btrfs "${DISK}p3" /mnt
-else
-mkfs.vfat -F32 -n "BOOT" "${DISK}2"
-mkfs.btrfs -L "ROOT" "${DISK}3" -f
-mount -t btrfs "${DISK}3" /mnt
-fi
+
+mkfs.vfat -F32 -n "BOOT" "$BOOT_PARTITION"
+mkfs.btrfs -L "ROOT" "$ROOT_PARTITION" -f
+mount -t btrfs "$ROOT_PARTITION" /mnt
+
 ls /mnt | xargs btrfs subvolume delete
 btrfs subvolume create /mnt/@
 umount /mnt
-;;
-*)
-echo "Rebooting in 3 Seconds ..." && sleep 1
-echo "Rebooting in 2 Seconds ..." && sleep 1
-echo "Rebooting in 1 Second ..." && sleep 1
-reboot now
-;;
-esac
 
 # mount target
 mount -t btrfs -o subvol=@ -L ROOT /mnt
@@ -80,10 +53,7 @@ mount -t vfat -L BOOT /mnt/boot/
 
 if ! grep -qs '/mnt' /proc/mounts; then
     echo "Drive is not mounted can not continue"
-    echo "Rebooting in 3 Seconds ..." && sleep 1
-    echo "Rebooting in 2 Seconds ..." && sleep 1
-    echo "Rebooting in 1 Second ..." && sleep 1
-    reboot now
+    source "$SCRIPT_DIR/functions/exit.sh"
 fi
 
 echo "--------------------------------------"
