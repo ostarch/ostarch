@@ -29,9 +29,9 @@ showOptions() {
   if [ ! "$?" = "0" ]; then
     source "${CURRENT_DIR}/../exit.sh"
   fi
+  source "${CURRENT_DIR}/select-disk.sh" || return 1
   case ${partitionOption} in
     "Auto Partitions (gpt)")
-      source "${CURRENT_DIR}/select-disk.sh" || return 1
       if (displayWarning "Auto Partitions (gpt)" "$DISK"); then
         sgdisk -Z ${DISK} # zap all on disk
         sgdisk -a 2048 -o ${DISK} # new gpt disk 2048 alignment
@@ -48,7 +48,6 @@ showOptions() {
       fi
     ;;
     "Auto Partitions (gpt,efi)")
-      source "${CURRENT_DIR}/select-disk.sh" || return 1
       if (displayWarning "Auto Partitions (gpt,efi)" "$DISK"); then
         sgdisk -Z ${DISK} # zap all on disk
         sgdisk -a 2048 -o ${DISK} # new gpt disk 2048 alignment
@@ -63,11 +62,9 @@ showOptions() {
       fi
     ;;
     "Edit Partitions (cfdisk)")
-      source "${CURRENT_DIR}/select-disk.sh" || return 1
       cfdisk ${DISK}
     ;;
     "Edit Partitions (cgdisk)")
-      source "${CURRENT_DIR}/select-disk.sh" || return 1
       cgdisk ${DISK}
     ;;
     "Select Partitions")

@@ -10,7 +10,7 @@
 CURRENT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
 if [ -z "$DISK" ]; then
-  source "${CURRENT_DIR}/select-disk.sh"
+  source "${CURRENT_DIR}/select-disk.sh" || source "${CURRENT_DIR}/../exit.sh"
 fi
 
 items=$(lsblk -pln -o NAME,SIZE -e 7,11 "$DISK")
