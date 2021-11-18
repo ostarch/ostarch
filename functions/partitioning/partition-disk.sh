@@ -9,10 +9,6 @@
 #--------------------------------------------------------------------
 CURRENT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
-if [ -z "$DISK" ]; then
-  source "${CURRENT_DIR}/select-disk.sh"
-fi
-
 displayWarning() {
   whiptail --title "$1" --yesno "Selected device: "$2"\n\nALL DATA WILL BE ERASED!\n\nContinue?" --defaultno 0 0 3>&1 1>&2 2>&3
   return "$?"
@@ -27,15 +23,15 @@ showOptions() {
   fi
   options+=("Edit Partitions (cfdisk)" "")
   options+=("Edit Partitions (cgdisk)" "")
+  options+=("Select Partitions" "")
 
-  result=$(whiptail --title "Disk Partitions" --menu "" 0 0 0 "${options[@]}" 3>&1 1>&2 2>&3)
+  partitionOption=$(whiptail --title "Disk Partitions" --menu "" 0 0 0 "${options[@]}" 3>&1 1>&2 2>&3)
   if [ ! "$?" = "0" ]; then
-    source "${CURRENT_DIR}/select-disk.sh"
-    export DISK=$DISK
-    return 1
+    source "${CURRENT_DIR}/../exit.sh"
   fi
-  case ${result} in
+  case ${partitionOption} in
     "Auto Partitions (gpt)")
+      source "${CURRENT_DIR}/select-disk.sh" || return 1
       if (displayWarning "Auto Partitions (gpt)" "$DISK"); then
         sgdisk -Z ${DISK} # zap all on disk
         sgdisk -a 2048 -o ${DISK} # new gpt disk 2048 alignment
@@ -52,6 +48,7 @@ showOptions() {
       fi
     ;;
     "Auto Partitions (gpt,efi)")
+      source "${CURRENT_DIR}/select-disk.sh" || return 1
       if (displayWarning "Auto Partitions (gpt,efi)" "$DISK"); then
         sgdisk -Z ${DISK} # zap all on disk
         sgdisk -a 2048 -o ${DISK} # new gpt disk 2048 alignment
@@ -66,10 +63,15 @@ showOptions() {
       fi
     ;;
     "Edit Partitions (cfdisk)")
+      source "${CURRENT_DIR}/select-disk.sh" || return 1
       cfdisk ${DISK}
     ;;
     "Edit Partitions (cgdisk)")
+      source "${CURRENT_DIR}/select-disk.sh" || return 1
       cgdisk ${DISK}
+    ;;
+    "Select Partitions")
+      return 0
     ;;
   esac
 

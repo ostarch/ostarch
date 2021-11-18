@@ -18,8 +18,8 @@ do
   options+=("${item}" "")
 done
 IFS=$IFS_ORIG
-result=$(whiptail --title "Select your disk" --menu "" 0 0 0 "${options[@]}" 3>&1 1>&2 2>&3)
+result=$(whiptail --title "Select your disk" --cancel-button "Back" --menu "" 0 0 0 "${options[@]}" 3>&1 1>&2 2>&3)
 if [ ! "$?" = "0" ]; then
-  source "${CURRENT_DIR}/../exit.sh"
+  return 1
 fi
 DISK=${result%%\ *}

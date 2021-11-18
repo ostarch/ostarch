@@ -23,8 +23,6 @@ pacman -S --noconfirm --needed gptfdisk btrfs-progs grub
 mkdir /mnt &>/dev/null
 umount -R /mnt &>/dev/null
 
-source "$SCRIPT_DIR/functions/partitioning/select-disk.sh"
-
 echo "--------------------------------------"
 echo -e "\nFormatting disk...\n$HR"
 echo "--------------------------------------"
