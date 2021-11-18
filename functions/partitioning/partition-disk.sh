@@ -22,7 +22,6 @@ showOptions() {
   options=()
   if [[ ! -d "/sys/firmware/efi" ]]; then
     options+=("Auto Partitions (gpt)" "")
-    options+=("Auto Partitions (dos)" "")
   else
     options+=("Auto Partitions (gpt,efi)" "")
   fi
@@ -48,15 +47,6 @@ showOptions() {
         sgdisk -A 1:set:2 ${DISK}
         BOOT_PARTITION_NUM=2
         ROOT_PARTITION_NUM=3
-      else
-        return 1
-      fi
-    ;;
-    "Auto Partitions (dos)")
-      if (displayWarning "Auto Partitions (dos)" "$DISK"); then
-        parted ${device} mklabel msdos
-
-        # TODO: create partitions
       else
         return 1
       fi
