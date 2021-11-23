@@ -8,7 +8,7 @@
 #  ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚═════╝ ╚═╝  ╚═╝  ╚═══╝  ╚══════╝
 #--------------------------------------------------------------------
 CURRENT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
-BASENAME="$( basename $CURRENT_DIR)"
+TITLE="$(basename $( cd -- "${CURRENT_DIR}/../" &> /dev/null && pwd ) )"
 
 for f in $(find "${CURRENT_DIR}/partitioning/" -type f); do source $f; done
 
@@ -27,7 +27,7 @@ mainmenu() {
 	options=()
 	options+=("Disk Partitions" "")
 	options+=("Select Partitions and Install" "")
-	sel=$(whiptail --backtitle "$BASENAME" --title "Main Menu" --menu "" --cancel-button "Exit" 0 0 0 "${options[@]}" 3>&1 1>&2 2>&3)
+	sel=$(whiptail --backtitle "$TITLE" --title "Main Menu" --menu "" --cancel-button "Exit" 0 0 0 "${options[@]}" 3>&1 1>&2 2>&3)
 	if [ ! "$?" = "0" ]; then
 		return 1
 	fi

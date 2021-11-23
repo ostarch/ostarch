@@ -24,8 +24,8 @@ mkdir /mnt &>/dev/null
 umount -R /mnt &>/dev/null
 
 source "$SCRIPT_DIR/dialogs/mainmenu.sh"
+
 if [[ -z "$BOOT_PARTITION" ]] || [[ -z "$ROOT_PARTITION" ]]; then
-    echo -e "\nNo partitions selected. Exiting..."
     exit 1
 fi
 

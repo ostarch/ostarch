@@ -25,7 +25,7 @@ partitionDiskMenu() {
   options+=("Edit Partitions (cfdisk)" "")
   options+=("Edit Partitions (cgdisk)" "")
 
-  partitionOption=$(whiptail --title "Disk Partitions" --cancel-button "Back" --menu "" 0 0 0 "${options[@]}" 3>&1 1>&2 2>&3)
+  partitionOption=$(whiptail --backtitle "$TITLE" --title "Disk Partitions" --cancel-button "Back" --menu "" 0 0 0 "${options[@]}" 3>&1 1>&2 2>&3)
   if [ ! "$?" = "0" ]; then
     return 1
   fi

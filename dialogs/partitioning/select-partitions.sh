@@ -32,13 +32,13 @@ selectPartitionMenu() {
   done
   IFS=$IFS_ORIG
 
-  result=$(whiptail --title "Select Partitions" --menu "Select boot device:" 0 0 0 "${options[@]}" 3>&1 1>&2 2>&3)
+  result=$(whiptail --backtitle "$TITLE" --title "Select Partitions" --menu "Select boot device:" 0 0 0 "${options[@]}" 3>&1 1>&2 2>&3)
   if [ ! "$?" = "0" ]; then
     return 1
   fi
   BOOT_PARTITION=${result%%\ *}
 
-  result=$(whiptail --title "Select Partitions" --menu "Select root device:" 0 0 0 "${options[@]}" 3>&1 1>&2 2>&3)
+  result=$(whiptail --backtitle "$TITLE" --title "Select Partitions" --menu "Select root device:" 0 0 0 "${options[@]}" 3>&1 1>&2 2>&3)
   if [ ! "$?" = "0" ]; then
     return 1
   fi
