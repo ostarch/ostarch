@@ -8,13 +8,14 @@
 #  ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚═════╝ ╚═╝  ╚═╝  ╚═══╝  ╚══════╝
 #--------------------------------------------------------------------
 CURRENT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+source "${CURRENT_DIR}/select-disk.sh"
 
 displayWarning() {
   whiptail --title "$1" --yesno "Selected device: "$2"\n\nALL DATA WILL BE ERASED!\n\nContinue?" --defaultno 0 0 3>&1 1>&2 2>&3
   return "$?"
 }
 
-showOptions() {
+partitionDiskMenu() {
   options=()
   if [[ ! -d "/sys/firmware/efi" ]]; then
     options+=("Auto Partitions (gpt)" "")
@@ -23,13 +24,15 @@ showOptions() {
   fi
   options+=("Edit Partitions (cfdisk)" "")
   options+=("Edit Partitions (cgdisk)" "")
-  options+=("Select Partitions" "")
 
-  partitionOption=$(whiptail --title "Disk Partitions" --menu "" 0 0 0 "${options[@]}" 3>&1 1>&2 2>&3)
+  partitionOption=$(whiptail --title "Disk Partitions" --cancel-button "Back" --menu "" 0 0 0 "${options[@]}" 3>&1 1>&2 2>&3)
   if [ ! "$?" = "0" ]; then
-    source "${CURRENT_DIR}/../exit.sh"
+    return 1
   fi
-  source "${CURRENT_DIR}/select-disk.sh" || return 1
+  selectDiskMenu
+  if [ ! "$?" = "0" ]; then
+    return 0
+  fi
   case ${partitionOption} in
     "Auto Partitions (gpt)")
       if (displayWarning "Auto Partitions (gpt)" "$DISK"); then
@@ -43,8 +46,6 @@ showOptions() {
         sgdisk -A 1:set:2 ${DISK}
         BOOT_PARTITION_NUM=2
         ROOT_PARTITION_NUM=3
-      else
-        return 1
       fi
     ;;
     "Auto Partitions (gpt,efi)")
@@ -57,21 +58,19 @@ showOptions() {
         sgdisk -n 2::-0 --typecode=3:8300 --change-name=2:'ROOT' ${DISK} # partition 2 (Root), default start, remaining
         BOOT_PARTITION_NUM=1
         ROOT_PARTITION_NUM=2
-      else
-        return 1
       fi
     ;;
     "Edit Partitions (cfdisk)")
       cfdisk ${DISK}
+      menu selectPartitionMenu "$DISK"
+      return "$?"
     ;;
     "Edit Partitions (cgdisk)")
       cgdisk ${DISK}
-    ;;
-    "Select Partitions")
-      return 0
+      menu selectPartitionMenu "$DISK"
+      return "$?"
     ;;
   esac
-
 
   if [[ ! -z "$BOOT_PARTITION_NUM" ]] && [[ ! -z "$ROOT_PARTITION_NUM" ]]; then
     if [[ ${DISK} =~ "nvme" ]]; then
@@ -81,6 +80,6 @@ showOptions() {
       export BOOT_PARTITION="${DISK}${BOOT_PARTITION_NUM}"
       export ROOT_PARTITION="${DISK}${ROOT_PARTITION_NUM}"
     fi
+    return 1
   fi
 }
-until showOptions; do : ; done
