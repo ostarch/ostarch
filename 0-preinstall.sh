@@ -23,13 +23,10 @@ pacman -S --noconfirm --needed gptfdisk btrfs-progs grub
 mkdir /mnt &>/dev/null
 umount -R /mnt &>/dev/null
 
-echo "--------------------------------------"
-echo -e "\nFormatting disk...\n$HR"
-echo "--------------------------------------"
-source "$SCRIPT_DIR/functions/partitioning/partition-disk.sh"
+source "$SCRIPT_DIR/dialogs/mainmenu.sh"
 
 if [[ -z "$BOOT_PARTITION" ]] || [[ -z "$ROOT_PARTITION" ]]; then
-    source "$SCRIPT_DIR/functions/partitioning/select-partitions.sh"
+    exit 1
 fi
 
 # make filesystems
