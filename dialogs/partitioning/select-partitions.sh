@@ -44,5 +44,15 @@ selectPartitionMenu() {
   fi
   ROOT_PARTITION=${result%%\ *}
 
-  return 2
+
+  msg="Selected devices:\n\n"
+	msg=${msg}"boot: "${BOOT_PARTITION}"\n"
+	msg=${msg}"root: "${ROOT_PARTITION}"\n\n"
+  msg=${msg}"Continue?"
+  if (whiptail --backtitle "$TITLE" --title "Install" --yesno "$msg" --defaultno 0 0); then
+    menu formatPartitionsMenu
+    return "$?"
+  else
+    return 1
+  fi
 }

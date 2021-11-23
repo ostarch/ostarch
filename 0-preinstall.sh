@@ -18,7 +18,7 @@ source "$SCRIPT_DIR/functions/mirrors.sh"
 
 
 echo -e "\nInstalling prereqs...\n$HR"
-pacman -S --noconfirm --needed gptfdisk btrfs-progs grub
+pacman -S --noconfirm --needed gptfdisk grub btrfs-progs xfsprogs dosfstools e2fsprogs
 
 mkdir /mnt &>/dev/null
 umount -R /mnt &>/dev/null
@@ -26,28 +26,18 @@ umount -R /mnt &>/dev/null
 source "$SCRIPT_DIR/dialogs/mainmenu.sh"
 
 if [[ -z "$BOOT_PARTITION" ]] || [[ -z "$ROOT_PARTITION" ]]; then
-    exit 1
+    source "$SCRIPT_DIR/functions/exit.sh"
 fi
 
-# make filesystems
-echo -e "\nCreating Filesystems...\n$HR"
-
-mkfs.vfat -F32 -n "BOOT" "$BOOT_PARTITION"
-mkfs.btrfs -L "ROOT" "$ROOT_PARTITION" -f
-mount -t btrfs "$ROOT_PARTITION" /mnt
-
-ls /mnt | xargs btrfs subvolume delete
-btrfs subvolume create /mnt/@
-umount /mnt
 
 # mount target
-mount -t btrfs -o subvol=@ -L ROOT /mnt
+mount "$ROOT_PARTITION" /mnt
 mkdir /mnt/boot
 mkdir /mnt/boot/efi
-mount -t vfat -L BOOT /mnt/boot/
+mount "$BOOT_PARTITION" /mnt/boot/
 
 if ! grep -qs '/mnt' /proc/mounts; then
-    echo "Drive is not mounted can not continue"
+    echo "Drive is not mounted, can not continue"
     source "$SCRIPT_DIR/functions/exit.sh"
 fi
 
@@ -58,7 +48,7 @@ pacstrap /mnt base base-devel linux linux-firmware vim nano sudo archlinux-keyri
 genfstab -U /mnt >> /mnt/etc/fstab
 echo "keyserver hkp://keyserver.ubuntu.com" >> /mnt/etc/pacman.d/gnupg/gpg.conf
 echo "DISK=$DISK" >> "$SCRIPT_DIR/install.conf"
-cp -R ${SCRIPT_DIR} /mnt/root
+cp -R "${SCRIPT_DIR}" /mnt/root
 cp /etc/pacman.d/mirrorlist /mnt/etc/pacman.d/mirrorlist
 echo "--------------------------------------"
 echo "-- Check for low memory systems <8G --"

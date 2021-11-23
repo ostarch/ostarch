@@ -41,7 +41,6 @@ mainmenu() {
 			exitcode="$?"
 		;;
 	esac
-	echo $exitcode
 	if [ "$exitcode" = "2" ]; then
 		return 1
 	fi

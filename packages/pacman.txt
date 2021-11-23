@@ -224,6 +224,7 @@ wireshark-qt
 xdg-desktop-portal-kde
 xdg-user-dirs
 xdotool
+xfsprogs
 xsel
 zeroconf-ioslave
 zip
