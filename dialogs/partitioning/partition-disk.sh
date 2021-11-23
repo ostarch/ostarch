@@ -54,8 +54,8 @@ partitionDiskMenu() {
         sgdisk -a 2048 -o ${DISK} # new gpt disk 2048 alignment
 
         # create partitions
-        sgdisk -n 1::+200M --typecode=2:ef00 --change-name=1:'BOOT' ${DISK} # partition 1 (Boot Partition)
-        sgdisk -n 2::-0 --typecode=3:8300 --change-name=2:'ROOT' ${DISK} # partition 2 (Root), default start, remaining
+        sgdisk -n 1::+200M --typecode=1:ef00 --change-name=1:'BOOT' ${DISK} # partition 1 (Boot Partition)
+        sgdisk -n 2::-0 --typecode=2:8300 --change-name=2:'ROOT' ${DISK} # partition 2 (Root), default start, remaining
         BOOT_PARTITION_NUM=1
         ROOT_PARTITION_NUM=2
       fi
@@ -80,6 +80,7 @@ partitionDiskMenu() {
       export BOOT_PARTITION="${DISK}${BOOT_PARTITION_NUM}"
       export ROOT_PARTITION="${DISK}${ROOT_PARTITION_NUM}"
     fi
-    return 1
+    menu formatPartitionsMenu
+    return "$?"
   fi
 }
