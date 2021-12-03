@@ -50,7 +50,7 @@ Current=breeze
 EOF
 
 cat <<EOF >> /usr/share/sddm/scripts/Xsetup
-/home/dave10/bin/xrandr_display
+/home/$username/bin/xrandr_display
 EOF
 
 source "$SCRIPT_DIR/functions/setconsole.sh"

@@ -67,7 +67,7 @@ if lspci | grep -E "NVIDIA|GeForce"; then
 	nvidia-xconfig
 	#cp "$SCRIPT_DIR/nvidia.conf" "/etc/X11/xorg.conf.d/"
 fi
-if lspci | grep -E "Radeon"; then
+if lspci | grep -E "Radeon|AMD"; then
 	pacman -S xf86-video-amdgpu --noconfirm --needed
 fi
 if lspci | grep -E "Integrated Graphics Controller"; then
