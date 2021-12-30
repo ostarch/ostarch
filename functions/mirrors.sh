@@ -15,7 +15,7 @@ if [ "$SKIP_MIRRORS" = true ]; then
 fi
 sudo pacman -S --noconfirm --needed curl
 iso=$(curl -4 ifconfig.co/country-iso)
-sudo pacman -S --noconfirm --needed pacman-contrib rsync reflector
+sudo pacman -S --noconfirm --needed pacman-contrib rsync reflector python
 sudo cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
 echo -e "--------------------------------------------------------------------"
 echo -e "   █████╗ ██████╗  ██████╗██╗  ██╗██████╗  █████╗ ██╗   ██╗███████╗"

@@ -1,0 +1,3 @@
+lib32-libcanberra # Steam Remote Play
+libva # Steam Remote Play Hardware decoding
+lib32-libva # Steam Remote Play Hardware decoding

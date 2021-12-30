@@ -40,10 +40,7 @@ sed -i 's/^# %wheel ALL=(ALL) NOPASSWD: ALL/%wheel ALL=(ALL) NOPASSWD: ALL/' /et
 
 source "$SCRIPT_DIR/functions/pacman.sh"
 
-echo -e "\nInstalling Base System\n"
-
-sed -e "/^#/d" -e "s/ #.*//" -e 's/ //g' ${SCRIPT_DIR}/packages/pacman.txt | pacman -S --needed --noconfirm -
-
+echo -e "\nInstalling Graphic Drivers\n"
 #
 # determine processor type and install microcode
 # 
@@ -63,8 +60,9 @@ esac
 
 # Graphics Drivers find and install
 if lspci | grep -E "NVIDIA|GeForce"; then
-	pacman -S nvidia nvidia-settings --noconfirm --needed
+	pacman -S nvidia nvidia-settings nvidia-utils lib32-nvidia-utils vulkan-icd-loader lib32-vulkan-icd-loader lib32-opencl-nvidia --noconfirm --needed
 	nvidia-xconfig
+	echo "options nvidia_drm modeset=1" > /usr/lib/modprobe.d/nvidia-drm.conf
 	#cp "$SCRIPT_DIR/nvidia.conf" "/etc/X11/xorg.conf.d/"
 fi
 if lspci | grep -E "Radeon|AMD"; then
@@ -72,6 +70,17 @@ if lspci | grep -E "Radeon|AMD"; then
 fi
 if lspci | grep -E "Integrated Graphics Controller"; then
 	pacman -S libva-intel-driver libvdpau-va-gl lib32-vulkan-intel vulkan-intel libva-intel-driver libva-utils --needed --noconfirm
+fi
+
+
+echo -e "\nInstalling Base System\n"
+sed -e "/^#/d" -e "s/ #.*//" -e 's/ //g' ${SCRIPT_DIR}/packages/pacman.txt | pacman -S --needed --noconfirm -
+
+echo -e "\nInstalling Gaming Drivers\n"
+sed -e "/^#/d" -e "s/ #.*//" -e 's/ //g' ${SCRIPT_DIR}/packages/pacman-gaming.txt | pacman -S --needed --noconfirm -
+
+if lspci | grep -E "NVIDIA|GeForce"; then
+	pacman -S nvidia-lts --noconfirm --needed
 fi
 
 echo -e "\nDone!\n"
