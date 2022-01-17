@@ -42,7 +42,7 @@ dtc
 efibootmgr # EFI boot
 egl-wayland
 evolution
-exfat-utils
+exfatprogs
 extra-cmake-modules
 filelight
 firefox
@@ -140,7 +140,7 @@ ntfs-3g
 ntp
 obs-studio
 okular
-openbsd-netcat
+gnu-netcat
 openssh
 os-prober
 oxygen
