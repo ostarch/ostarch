@@ -1,3 +1,6 @@
+CURRENT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+for f in $(find "${CURRENT_DIR}/" -type f ! -name "mainmenu.sh" ! -name "menu.sh"); do source $f; done
+
 menu() {
 	$@
 	exitcode="$?"
