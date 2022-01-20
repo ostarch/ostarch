@@ -19,6 +19,8 @@ formatPartitionsMenu() {
 	options+=("Mount and Install" "")
 	result=$(whiptail --backtitle "${TITLE}" --title "Format and Install" --menu "" 0 0 0 "${options[@]}" 3>&1 1>&2 2>&3)
   if [ ! "$?" = "0" ]; then
+    unset BOOT_PARTITION
+    unset ROOT_PARTITION
     return 1
   fi
   case "$result" in

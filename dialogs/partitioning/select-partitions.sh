@@ -53,6 +53,8 @@ selectPartitionMenu() {
     menu formatPartitionsMenu
     return "$?"
   else
+    unset BOOT_PARTITION
+    unset ROOT_PARTITION
     return 1
   fi
 }
