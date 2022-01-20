@@ -8,16 +8,15 @@
 #  ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚═════╝ ╚═╝  ╚═╝  ╚═══╝  ╚══════╝
 #--------------------------------------------------------------------
 SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+BASENAME="$( basename $SCRIPT_DIR)"
 
 source "${SCRIPT_DIR}/install.conf"
 
-echo "-------------------------------------------------"
-echo "          FINAL SETUP AND CONFIGURATION          "
-echo "-------------------------------------------------"
-
-echo "--------------------------------------"
-echo "-- GRUB Bootloader Installation     --"
-echo "--------------------------------------"
+echo -ne "
+-------------------------------------------------------------------------
+                    GRUB Bootloader Installation
+-------------------------------------------------------------------------
+"
 installGrub() {
   if [[ ! -d "/sys/firmware/efi" ]]; then
       grub-install --boot-directory=/boot ${DISK}
@@ -32,18 +31,28 @@ do
 done
 
 source "${SCRIPT_DIR}/functions/grub.sh"
-grub-mkconfig -o /boot/grub/grub.cfg
 
 # ------------------------------------------------------------------------
 
-echo -e "\nEnabling Login Display Manager"
-
+echo -ne "
+-------------------------------------------------------------------------
+                    Enabling Login Display Manager
+-------------------------------------------------------------------------
+"
 systemctl enable sddm.service
 
-echo -e "\nEnabling ckb-next Daemon"
+echo -ne "
+-------------------------------------------------------------------------
+                    Enabling ckb-next Daemon
+-------------------------------------------------------------------------
+"
 systemctl enable ckb-next-daemon.service
 
-echo -e "\nSetup SDDM Theme"
+echo -ne "
+-------------------------------------------------------------------------
+                    Setting up SDDM Theme
+-------------------------------------------------------------------------
+"
 cat <<EOF > /etc/sddm.conf
 [Theme]
 Current=breeze
@@ -55,9 +64,11 @@ EOF
 
 source "$SCRIPT_DIR/functions/setconsole.sh"
 
-# ------------------------------------------------------------------------
-
-echo -e "\nEnabling essential services"
+echo -ne "
+-------------------------------------------------------------------------
+                    Enabling Essential Services
+-------------------------------------------------------------------------
+"
 
 systemctl enable cups.service
 ntpd -qg
@@ -66,20 +77,29 @@ systemctl disable dhcpcd.service
 systemctl stop dhcpcd.service
 systemctl enable NetworkManager.service
 systemctl enable bluetooth
-echo "
-###############################################################################
-# Cleaning
-###############################################################################
+echo -ne "
+-------------------------------------------------------------------------
+                    Cleaning 
+-------------------------------------------------------------------------
 "
 # Remove no password sudo rights
 sed -i 's/^%wheel ALL=(ALL) NOPASSWD: ALL/# %wheel ALL=(ALL) NOPASSWD: ALL/' /etc/sudoers
 # Add sudo rights
 sed -i 's/^# %wheel ALL=(ALL) ALL/%wheel ALL=(ALL) ALL/' /etc/sudoers
 
+rm -r /root/"$BASENAME"
+
 # Replace in the same state
 cd $pwd
-echo "
-###############################################################################
-# Done - Please Eject Install Media and Reboot
-###############################################################################
+echo -ne "
+--------------------------------------------------------------------
+   █████╗ ██████╗  ██████╗██╗  ██╗██████╗  █████╗ ██╗   ██╗███████╗
+  ██╔══██╗██╔══██╗██╔════╝██║  ██║██╔══██╗██╔══██╗██║   ██║██╔════
+  ███████║██████╔╝██║     ███████║██║  ██║███████║██║   ██║█████╗  
+  ██╔══██║██╔══██╗██║     ██╔══██║██║  ██║██╔══██║╚██╗ ██╔╝██╔══╝ 
+  ██║  ██║██║  ██║╚██████╗██║  ██║██████╔╝██║  ██║ ╚████╔╝ ███████╗
+  ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚═════╝ ╚═╝  ╚═╝  ╚═══╝  ╚══════╝
+--------------------------------------------------------------------
+                Done - Please Eject Install Media and Reboot
+--------------------------------------------------------------------
 "

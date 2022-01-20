@@ -14,23 +14,27 @@ if [ $(whoami) = "root"  ]; then
   echo "Don't run this as root!"
   exit
 fi
-git clone "https://github.com/d4ve10/dotfiles.git" "$HOME/.dotfiles"
-source "$HOME/.dotfiles/install.sh"
+git clone "https://github.com/d4ve10/dotfiles.git" ~/.dotfiles
+source ~/.dotfiles/install.sh
 
 
-echo "--------------------------------"
-echo "          CLONING: YAY          "
-echo "--------------------------------"
+echo -ne "
+-------------------------------------------------------------------------
+                             Installing YAY
+-------------------------------------------------------------------------
+"
 
 cd ~
 git clone "https://aur.archlinux.org/yay.git"
-cd ${HOME}/yay
+cd ~/yay
 makepkg -si --noconfirm
 cd ~
 
-echo "-------------------------------------------"
-echo "          INSTALLING AUR SOFTWARE          "
-echo "-------------------------------------------"
+echo -ne "
+-------------------------------------------------------------------------
+                         Installing AUR Packages
+-------------------------------------------------------------------------
+"
 
 sed -e "/^#/d" -e "s/ #.*//" -e 's/ //g' ${SCRIPT_DIR}/packages/aur-minimal.txt | yay -S --needed --noconfirm -
 
@@ -44,5 +48,9 @@ LC_MEASUREMENT=en_DE.UTF-8
 useDetailed=true
 EOF
 
-echo -e "\nDone!\n"
+echo -ne "
+-------------------------------------------------------------------------
+                    System ready for 3-post-setup.sh
+-------------------------------------------------------------------------
+"
 exit

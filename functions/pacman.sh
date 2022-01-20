@@ -13,7 +13,7 @@ if ! grep -q ILoveCandy "/etc/pacman.conf"; then
   sudo sed -i 's/^# Misc options/# Misc options\nILoveCandy/' /etc/pacman.conf
 fi
 #Add parallel downloading
-sudo sed -i 's/^#Para/Para/' /etc/pacman.conf
+sudo sed -i 's/^#ParallelDownloads/ParallelDownloads/' /etc/pacman.conf
 
 #Add color
 sudo sed -i 's/^#Color/Color/' /etc/pacman.conf

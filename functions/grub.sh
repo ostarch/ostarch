@@ -22,3 +22,4 @@ if ! grep -q "GRUB_DISABLE_OS_PROBER=false" /etc/default/grub; then
   echo "GRUB_DISABLE_OS_PROBER=false" | sudo tee -a /etc/default/grub > /dev/null
 fi
 sudo sed -i 's/#GRUB_DISABLE_OS_PROBER=false/GRUB_DISABLE_OS_PROBER=false/' /etc/default/grub
+sudo grub-mkconfig -o /boot/grub/grub.cfg

@@ -16,6 +16,10 @@ fi
 
 source "$SCRIPT_DIR/functions/locale.sh"
 
-echo -e "\nFINAL CONFIGURATION"
+echo -ne "
+-------------------------------------------------------------------------
+                           Final Configuration
+-------------------------------------------------------------------------
+"
 konsave -r arc-kde
 source "$SCRIPT_DIR/functions/kde-import.sh"
