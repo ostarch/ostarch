@@ -7,8 +7,12 @@
 #  ██║  ██║██║  ██║╚██████╗██║  ██║██████╔╝██║  ██║ ╚████╔╝ ███████╗
 #  ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚═════╝ ╚═╝  ╚═╝  ╚═══╝  ╚══════╝
 #--------------------------------------------------------------------
+CURRENT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
-configurationMenu() {
-  menuFlow setHostnameMenu setKeyboardLayoutMenu setLocaleMenu setTimeZoneMenu
-  return "$?"
+setHostnameMenu() {
+  hostname=$(whiptail --backtitle "${TITLE}" --title "Set Computer Name" --inputbox "" 0 0 "archlinux" 3>&1 1>&2 2>&3)
+  if [ ! "$?" = "0" ]; then
+    return 1
+  fi
+  echo "HOSTNAME=$hostname" >> "${CURRENT_DIR}/../../install.conf"
 }
