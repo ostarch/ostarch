@@ -10,18 +10,8 @@
 CURRENT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 TITLE="$(basename $( cd -- "${CURRENT_DIR}/../" &> /dev/null && pwd ) )"
 
-for f in $(find "${CURRENT_DIR}/partitioning/" -type f); do source $f; done
-
-
-menu() {
-	$@
-	exitcode="$?"
-	if [ "$exitcode" = "0" ]; then
-    menu $1
-		exitcode="$?"
-	fi
-	return "$exitcode"
-}
+source "${CURRENT_DIR}/menu.sh"
+for f in $(find "${CURRENT_DIR}/" -type f ! -name "mainmenu.sh"); do source $f; done
 
 mainmenu() {
 	options=()

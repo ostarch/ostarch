@@ -7,16 +7,36 @@
 #  ██║  ██║██║  ██║╚██████╗██║  ██║██████╔╝██║  ██║ ╚████╔╝ ███████╗
 #  ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚═════╝ ╚═╝  ╚═╝  ╚═══╝  ╚══════╝
 #--------------------------------------------------------------------
+CURRENT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
+if [ "$(id -u)" != "0" ]; then
+  echo "This script must be run as root" 1>&2
+  exit 1
+fi
+
+source "${CURRENT_DIR}/../install.conf"
+if [ -z "$TIMEZONE" ] || [ -z "$LOCALE" ]; then
+  source "${CURRENT_DIR}/../dialogs/menu.sh"
+  menuFlow setLocaleMenu setTimeZoneMenu
+  if [ ! "$?" = "0" ]; then
+    exit 1
+  else
+    CURRENT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+    source "${CURRENT_DIR}/../install.conf"
+  fi
+fi
 echo -ne "
 -------------------------------------------------------------------------
-                   Setup Language to US and set locale  
+                     Changing Locale to ${LOCALE}
+                 Changing Timezone to ${TIMEZONE}
 -------------------------------------------------------------------------
 "
-sudo sed -i 's/^#en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen
-sudo sed -i 's/^#de_DE.UTF-8 UTF-8/de_DE.UTF-8 UTF-8/' /etc/locale.gen
-sudo locale-gen
-sudo hwclock --systohc
-sudo timedatectl --no-ask-password set-timezone Europe/Berlin
-sudo timedatectl --no-ask-password set-ntp 1
-sudo localectl --no-ask-password set-locale LANG="en_US.UTF-8" LC_COLLATE="C" LC_TIME="en_US.UTF-8"
+echo "LANG=${LOCALE}.UTF-8" > /etc/locale.conf
+echo "LC_COLLATE=C" >> /etc/locale.conf
+sed -i '/#'$LOCALE'.UTF-8/s/^#//g' /etc/locale.gen
+timedatectl set-ntp 1
+if [ -f "/usr/share/zoneinfo/${TIMEZONE}" ]; then
+  ln -sf "/usr/share/zoneinfo/${TIMEZONE}" /etc/localtime
+fi
+hwclock --systohc
+locale-gen
