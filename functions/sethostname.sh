@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 #--------------------------------------------------------------------
 #   █████╗ ██████╗  ██████╗██╗  ██╗██████╗  █████╗ ██╗   ██╗███████╗
 #  ██╔══██╗██╔══██╗██╔════╝██║  ██║██╔══██╗██╔══██╗██║   ██║██╔════╝
@@ -9,20 +9,20 @@
 #--------------------------------------------------------------------
 CURRENT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
-setHostnameMenu() {
-  hostname=$(whiptail --backtitle "${TITLE}" --title "Set Computer Name" --inputbox "" 0 0 "archlinux" 3>&1 1>&2 2>&3)
+source "${CURRENT_DIR}/../install.conf" &>/dev/null
+if [ -z "$HOSTNAME" ]; then
+  source "${CURRENT_DIR}/../dialogs/menu.sh"
+  menuFlow setHostnameMenu
   if [ ! "$?" = "0" ]; then
-    return 1
+    exit 1
+  else
+    CURRENT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+    source "${CURRENT_DIR}/../install.conf"
   fi
-  if [[ ! "$hostname" =~ [a-zA-Z0-9][a-zA-Z0-9-_]{1,62}(?<!-)$ ]]; then
-    whiptail --backtitle "${TITLE}" --title "Set Computer Name" --msgbox "Invalid Hostname\nOnly letters, numbers, underscore and hyphen are allowed, minimal of two characters" 0 0
-    setHostnameMenu
-    return "$?"
-  fi
-  if [ "$hostname" = "localhost" ]; then
-    whiptail --backtitle "${TITLE}" --title "Set Computer Name" --msgbox "localhost is not allowed as hostname" 0 0
-    setHostnameMenu
-    return "$?"
-  fi
-  echo "HOSTNAME=$hostname" >> "${CURRENT_DIR}/../../install.conf"
-}
+fi
+echo -ne "
+-------------------------------------------------------------------------
+                          Setting Hostname to ${HOSTNAME}
+-------------------------------------------------------------------------
+"
+sudo echo "$HOSTNAME" > /etc/hostname

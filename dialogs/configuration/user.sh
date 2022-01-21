@@ -9,20 +9,38 @@
 #--------------------------------------------------------------------
 CURRENT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
-setHostnameMenu() {
-  hostname=$(whiptail --backtitle "${TITLE}" --title "Set Computer Name" --inputbox "" 0 0 "archlinux" 3>&1 1>&2 2>&3)
+addUserMenu() {
+  user=$(whiptail --backtitle "${TITLE}" --title "Add User" --inputbox "Enter the username" 8 40 3>&1 1>&2 2>&3)
   if [ ! "$?" = "0" ]; then
     return 1
   fi
-  if [[ ! "$hostname" =~ [a-zA-Z0-9][a-zA-Z0-9-_]{1,62}(?<!-)$ ]]; then
-    whiptail --backtitle "${TITLE}" --title "Set Computer Name" --msgbox "Invalid Hostname\nOnly letters, numbers, underscore and hyphen are allowed, minimal of two characters" 0 0
-    setHostnameMenu
+  if [[ ! "$user" =~ [a-z_][a-z0-9_-]*[$]?$ ]]; then
+    whiptail --backtitle "${TITLE}" --title "Add User" --msgbox "Only lowercase letters, numbers, underscore and hyphen are allowed" 8 40
+    addUserMenu
     return "$?"
   fi
-  if [ "$hostname" = "localhost" ]; then
-    whiptail --backtitle "${TITLE}" --title "Set Computer Name" --msgbox "localhost is not allowed as hostname" 0 0
-    setHostnameMenu
+  if [ "$user" = "root" ]; then
+    whiptail --backtitle "${TITLE}" --title "Add User" --msgbox "root is not allowed as username" 8 40
+    addUserMenu
     return "$?"
   fi
-  echo "HOSTNAME=$hostname" >> "${CURRENT_DIR}/../../install.conf"
+  echo "USERNAME=$user" >> "${CURRENT_DIR}/../../install.conf"
+}
+
+setUserPasswordMenu() {
+  password=$(whiptail --backtitle "${TITLE}" --title "Set User Password" --passwordbox "Enter your password" 8 40 3>&1 1>&2 2>&3)
+  if [ ! "$?" = "0" ]; then
+    return 1
+  fi
+  passwordRepeat=$(whiptail --backtitle "${TITLE}" --title "Set User Password" --passwordbox "Repeat your password" 8 40 3>&1 1>&2 2>&3)
+  if [ ! "$?" = "0" ]; then
+    return 1
+  fi
+  if [ "$password" != "$passwordRepeat" ]; then
+    whiptail --backtitle "${TITLE}" --title "Set User Password" --msgbox "Passwords do not match" 0 0
+    setUserPassword
+    return "$?"
+  fi
+  encrpytedPassword=$(echo "$password" | openssl passwd -6 -stdin)
+  echo "PASSWORD=$encrpytedPassword" >> "${CURRENT_DIR}/../../install.conf"
 }

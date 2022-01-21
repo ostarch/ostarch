@@ -94,17 +94,10 @@ if lspci | grep -E "NVIDIA|GeForce"; then
 	pacman -S nvidia-lts --noconfirm --needed
 fi
 
-read -p "Please enter username: " username
-until (useradd -m -N -G wheel,libvirt -s /bin/bash "$username"); do
-	read -p "Please enter username: " username
-done
-until (passwd "$username"); do : ; done
-grpck
-echo "username=$username" >> "$SCRIPT_DIR/install.conf"
-cp -R "/root/$BASENAME" /home/$username/
-chown -R $username: /home/$username/$BASENAME
-read -p "Please name your machine: " nameofmachine
-echo "$nameofmachine" > /etc/hostname
+source "$SCRIPT_DIR/functions/adduser.sh"
+source "$SCRIPT_DIR/functions/sethostname.sh"
+cp -R "/root/$BASENAME" "/home/$USERNAME/$BASENAME"
+chown -R $USERNAME: "/home/$USERNAME/$BASENAME"
 echo -ne "
 -------------------------------------------------------------------------
                     System ready for 2-user.sh

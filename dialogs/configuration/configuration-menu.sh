@@ -9,6 +9,6 @@
 #--------------------------------------------------------------------
 
 configurationMenu() {
-  menuFlow setHostnameMenu setKeyboardLayoutMenu setLocaleMenu setTimeZoneMenu
+  menuFlow setHostnameMenu setKeyboardLayoutMenu setLocaleMenu setTimeZoneMenu addUserMenu setUserPasswordMenu setHostnameMenu
   return "$?"
 }
