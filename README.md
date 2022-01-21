@@ -20,7 +20,7 @@ cd ArchDave
 
 ## After The First Boot
 
-Unfortunately after the first boot, the timezone resets and the KDE theme isn't loaded properly.
+Unfortunately after the first boot, the KDE theme isn't loaded properly.
 To fix this, just run the following commands after you logged in to KDE.
 
 ```bash
