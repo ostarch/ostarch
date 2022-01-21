@@ -27,5 +27,8 @@ echo -ne "
 "
 sudo useradd -m -N -G wheel -s /bin/bash "$USERNAME"
 sudo usermod -p "$PASSWORD" "$USERNAME"
+if [ "$?" = "0" ]; then
+  sed -i '/^PASSWORD=/d' "${CURRENT_DIR}/../install.conf"
+fi
 sudo usermod -aG libvirt "$USERNAME"
 sudo grpck

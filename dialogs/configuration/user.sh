@@ -37,10 +37,15 @@ setUserPasswordMenu() {
     return 1
   fi
   if [ "$password" != "$passwordRepeat" ]; then
-    whiptail --backtitle "${TITLE}" --title "Set User Password" --msgbox "Passwords do not match" 0 0
+    whiptail --backtitle "${TITLE}" --title "Set User Password" --msgbox "Passwords do not match" 8 40
+    setUserPasswordMenu
+    return "$?"
+  fi
+  if [ "$password" = "" ]; then
+    whiptail --backtitle "${TITLE}" --title "Set User Password" --msgbox "Password cannot be empty" 8 40
     setUserPasswordMenu
     return "$?"
   fi
   encrpytedPassword=$(echo "$password" | openssl passwd -6 -stdin)
-  echo "PASSWORD="${encrpytedPassword//$/\\$}"" >> "${CURRENT_DIR}/../../install.conf"
+  echo "PASSWORD=${encrpytedPassword//$/\\$}" >> "${CURRENT_DIR}/../../install.conf"
 }

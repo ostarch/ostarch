@@ -68,8 +68,6 @@ cat <<EOF >> /usr/share/sddm/scripts/Xsetup
 /home/$username/bin/xrandr_display
 EOF
 
-source "$SCRIPT_DIR/functions/setconsole.sh"
-
 echo -ne "
 -------------------------------------------------------------------------
                     Enabling Essential Services

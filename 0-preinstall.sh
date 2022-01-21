@@ -9,10 +9,8 @@
 #--------------------------------------------------------------------
 SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
-setfont ter-v22b
-hwclock --systohc
-timedatectl set-ntp true
 pacman -S --noconfirm --needed terminus-font
+setfont ter-v22b
 source "$SCRIPT_DIR/functions/pacman.sh"
 source "$SCRIPT_DIR/functions/mirrors.sh"
 

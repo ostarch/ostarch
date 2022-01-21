@@ -21,7 +21,7 @@ systemctl enable --now NetworkManager
 source "$SCRIPT_DIR/functions/mirrors.sh"
 
 nc="$(grep -c ^processor /proc/cpuinfo)"
-nc2=$(expr $(expr $(grep -c ^processor /proc/cpuinfo) + 1) / 2)
+nc2=$(expr $(expr $(grep -c ^processor /proc/cpuinfo) + 1) / 2) # half of the number of cores
 echo -ne "
 -------------------------------------------------------------------------
                           You have "$nc" cores.
@@ -36,9 +36,6 @@ if [[  $TOTALMEM -gt 8000000 ]]; then
 fi
 
 source "$SCRIPT_DIR/functions/locale.sh"
-
-# Set keymaps
-localectl --no-ask-password set-keymap us
 
 # Add sudo no password rights
 sed -i 's/^# %wheel ALL=(ALL) NOPASSWD: ALL/%wheel ALL=(ALL) NOPASSWD: ALL/' /etc/sudoers
@@ -96,6 +93,8 @@ fi
 
 source "$SCRIPT_DIR/functions/adduser.sh"
 source "$SCRIPT_DIR/functions/sethostname.sh"
+source "$SCRIPT_DIR/functions/keyboard-layout.sh"
+
 cp -R "/root/$BASENAME" "/home/$USERNAME/$BASENAME"
 chown -R $USERNAME: "/home/$USERNAME/$BASENAME"
 echo -ne "
