@@ -14,7 +14,7 @@ setHostnameMenu() {
   if [ ! "$?" = "0" ]; then
     return 1
   fi
-  if [[ ! "$hostname" =~ [a-zA-Z0-9][a-zA-Z0-9-_]{1,62}(?<!-)$ ]]; then
+  if [[ ! "$hostname" =~ ^[a-zA-Z0-9][a-zA-Z0-9_-]{1,62}$ || "${hostname: -1}" == "-" ]]; then
     whiptail --backtitle "${TITLE}" --title "Set Computer Name" --msgbox "Invalid Hostname\nOnly letters, numbers, underscore and hyphen are allowed, minimal of two characters" 0 0
     setHostnameMenu
     return "$?"

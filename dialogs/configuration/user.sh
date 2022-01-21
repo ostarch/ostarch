@@ -14,7 +14,7 @@ addUserMenu() {
   if [ ! "$?" = "0" ]; then
     return 1
   fi
-  if [[ ! "$user" =~ [a-z_][a-z0-9_-]*[$]?$ ]]; then
+  if [[ ! "$user" =~ ^[a-z_][a-z0-9_-]*[$]?$ ]]; then
     whiptail --backtitle "${TITLE}" --title "Add User" --msgbox "Only lowercase letters, numbers, underscore and hyphen are allowed" 8 40
     addUserMenu
     return "$?"
