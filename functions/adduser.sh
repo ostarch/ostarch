@@ -25,6 +25,7 @@ echo -ne "
                      Adding User ${USERNAME}
 -------------------------------------------------------------------------
 "
-sudo useradd -m -N -G wheel,libvirt -s /bin/bash "$USERNAME"
+sudo useradd -m -N -G wheel -s /bin/bash "$USERNAME"
 sudo usermod -p "$PASSWORD" "$USERNAME"
+sudo usermod -aG libvirt "$USERNAME"
 sudo grpck
