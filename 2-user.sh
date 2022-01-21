@@ -15,7 +15,7 @@ if [ $(whoami) = "root"  ]; then
   exit
 fi
 git clone "https://github.com/d4ve10/dotfiles.git" ~/.dotfiles
-source ~/.dotfiles/install.sh
+source ~/.dotfiles/install.sh minimal
 
 
 echo -ne "
