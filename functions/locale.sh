@@ -30,6 +30,7 @@ echo "LANG=${LOCALE}.UTF-8" | sudo tee /etc/locale.conf > /dev/null
 echo "LC_COLLATE=C" | sudo tee -a /etc/locale.conf > /dev/null
 sudo sed -i '/#'$LOCALE'.UTF-8/s/^#//g' /etc/locale.gen
 sudo timedatectl set-ntp 1
+sudo systemctl enable systemd-timesyncd.service
 if [ -f "/usr/share/zoneinfo/${TIMEZONE}" ]; then
   sudo ln -sf "/usr/share/zoneinfo/${TIMEZONE}" /etc/localtime
 fi
