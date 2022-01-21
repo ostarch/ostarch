@@ -127,7 +127,6 @@ man-db
 man-pages
 milou # alternative to KRunner
 nano
-ncdu
 neofetch
 neovim
 net-tools
@@ -139,7 +138,6 @@ nfs-utils
 nmap
 npm
 ntfs-3g
-ntp
 obs-studio
 okular
 gnu-netcat
