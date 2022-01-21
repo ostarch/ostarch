@@ -42,5 +42,5 @@ setUserPasswordMenu() {
     return "$?"
   fi
   encrpytedPassword=$(echo "$password" | openssl passwd -6 -stdin)
-  echo "PASSWORD=$encrpytedPassword" >> "${CURRENT_DIR}/../../install.conf"
+  echo "PASSWORD="${encrpytedPassword//$/\\$}"" >> "${CURRENT_DIR}/../../install.conf"
 }
