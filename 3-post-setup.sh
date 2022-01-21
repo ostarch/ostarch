@@ -17,6 +17,7 @@ echo -ne "
                     GRUB Bootloader Installation
 -------------------------------------------------------------------------
 "
+errors=0
 installGrub() {
   if [[ ! -d "/sys/firmware/efi" ]]; then
       grub-install --boot-directory=/boot ${DISK}
@@ -26,8 +27,13 @@ installGrub() {
 }
 until installGrub
 do
+  if [[ $errors -ge 3 ]]; then
+    echo "Grub installation failed"
+    exit 1
+  fi
   echo "Grub installation failed, retrying..."
   sleep 3
+  errors=$((errors+1))
 done
 
 source "${SCRIPT_DIR}/functions/grub.sh"
