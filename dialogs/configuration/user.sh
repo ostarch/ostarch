@@ -38,7 +38,7 @@ setUserPasswordMenu() {
   fi
   if [ "$password" != "$passwordRepeat" ]; then
     whiptail --backtitle "${TITLE}" --title "Set User Password" --msgbox "Passwords do not match" 0 0
-    setUserPassword
+    setUserPasswordMenu
     return "$?"
   fi
   encrpytedPassword=$(echo "$password" | openssl passwd -6 -stdin)
