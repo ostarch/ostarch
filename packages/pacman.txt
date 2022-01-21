@@ -13,6 +13,7 @@ ark # compression
 audiocd-kio # CD/DVD Audio
 autoconf # build
 automake # build
+awesome-terminal-fonts
 barrier
 base
 bash-completion
@@ -126,7 +127,6 @@ man-db
 man-pages
 milou # alternative to KRunner
 nano
-ncdu
 neofetch
 neovim
 net-tools
@@ -138,7 +138,6 @@ nfs-utils
 nmap
 npm
 ntfs-3g
-ntp
 obs-studio
 okular
 gnu-netcat
@@ -204,6 +203,9 @@ thunderbird-i18n-de
 thunderbird-i18n-en-us
 traceroute
 tree
+ttf-droid
+ttf-hack
+ttf-roboto
 ufw
 unrar
 unzip

@@ -20,7 +20,7 @@ cd ArchDave
 
 ## After The First Boot
 
-Unfortunately after the first boot, the timezone resets and the KDE theme isn't loaded properly.
+Unfortunately after the first boot, the KDE theme isn't loaded properly.
 To fix this, just run the following commands after you logged in to KDE.
 
 ```bash
@@ -36,6 +36,11 @@ This is completely automated arch install of the KDE desktop environment on arch
 __[Arch Linux Installation Guide](https://github.com/rickellis/Arch-Linux-Install-Guide)__
 
 ### No Wifi
+
+You can check if the WiFi is blocked by running `rfkill list`.
+If it says **Soft blocked: yes**, then run `rfkill unblock wifi`
+
+After unblocking the WiFi, you can connect to it. Go through these 5 steps:
 
 1. Run `iwctl`
 

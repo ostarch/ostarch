@@ -10,9 +10,9 @@
 CURRENT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
 source "${CURRENT_DIR}/../install.conf" &>/dev/null
-if [ -z "$TIMEZONE" ] || [ -z "$LOCALE" ]; then
+if [ -z "$USERNAME" ] || [ -z "$PASSWORD" ]; then
   source "${CURRENT_DIR}/../dialogs/menu.sh"
-  menuFlow setLocaleMenu setTimeZoneMenu
+  menuFlow addUserMenu setUserPasswordMenu
   if [ ! "$?" = "0" ]; then
     exit 1
   else
@@ -22,17 +22,13 @@ if [ -z "$TIMEZONE" ] || [ -z "$LOCALE" ]; then
 fi
 echo -ne "
 -------------------------------------------------------------------------
-                     Changing Locale to ${LOCALE}
-                 Changing Timezone to ${TIMEZONE}
+                     Adding User ${USERNAME}
 -------------------------------------------------------------------------
 "
-echo "LANG=${LOCALE}.UTF-8" | sudo tee /etc/locale.conf > /dev/null
-echo "LC_COLLATE=C" | sudo tee -a /etc/locale.conf > /dev/null
-sudo sed -i '/#'$LOCALE'.UTF-8/s/^#//g' /etc/locale.gen
-sudo timedatectl set-ntp 1
-sudo systemctl enable systemd-timesyncd.service
-if [ -f "/usr/share/zoneinfo/${TIMEZONE}" ]; then
-  sudo ln -sf "/usr/share/zoneinfo/${TIMEZONE}" /etc/localtime
+sudo useradd -m -N -G wheel -s /bin/bash "$USERNAME"
+sudo usermod -p "$PASSWORD" "$USERNAME"
+if [ "$?" = "0" ]; then
+  sed -i '/^PASSWORD=/d' "${CURRENT_DIR}/../install.conf"
 fi
-sudo hwclock --systohc --utc
-sudo locale-gen
+sudo usermod -aG libvirt "$USERNAME"
+sudo grpck

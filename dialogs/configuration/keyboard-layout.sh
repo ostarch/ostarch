@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 #--------------------------------------------------------------------
 #   █████╗ ██████╗  ██████╗██╗  ██╗██████╗  █████╗ ██╗   ██╗███████╗
 #  ██╔══██╗██╔══██╗██╔════╝██║  ██║██╔══██╗██╔══██╗██║   ██║██╔════╝
@@ -9,30 +9,35 @@
 #--------------------------------------------------------------------
 CURRENT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
-source "${CURRENT_DIR}/../install.conf" &>/dev/null
-if [ -z "$TIMEZONE" ] || [ -z "$LOCALE" ]; then
-  source "${CURRENT_DIR}/../dialogs/menu.sh"
-  menuFlow setLocaleMenu setTimeZoneMenu
+setKeyboardLayoutMenu() {
+  options=()
+  keymaps=$(localectl list-keymaps)
+	for keymap in $keymaps; do
+	 options+=("$keymap" "")
+	done
+  result=$(whiptail --backtitle "${TITLE}" --title "Set Keyboard Layout" --menu "" --cancel-button "Back" --default-item "us" 0 0 0 "${options[@]}" 3>&1 1>&2 2>&3)
   if [ ! "$?" = "0" ]; then
-    exit 1
-  else
-    CURRENT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
-    source "${CURRENT_DIR}/../install.conf"
+    return 1
   fi
-fi
-echo -ne "
--------------------------------------------------------------------------
-                     Changing Locale to ${LOCALE}
-                 Changing Timezone to ${TIMEZONE}
--------------------------------------------------------------------------
-"
-echo "LANG=${LOCALE}.UTF-8" | sudo tee /etc/locale.conf > /dev/null
-echo "LC_COLLATE=C" | sudo tee -a /etc/locale.conf > /dev/null
-sudo sed -i '/#'$LOCALE'.UTF-8/s/^#//g' /etc/locale.gen
-sudo timedatectl set-ntp 1
-sudo systemctl enable systemd-timesyncd.service
-if [ -f "/usr/share/zoneinfo/${TIMEZONE}" ]; then
-  sudo ln -sf "/usr/share/zoneinfo/${TIMEZONE}" /etc/localtime
-fi
-sudo hwclock --systohc --utc
-sudo locale-gen
+  loadkeys "$result"
+  echo "KEYMAP=$result" >> "${CURRENT_DIR}/../../install.conf"
+}
+
+
+# Not used
+setKeyboardLayoutMenuXKB() {
+  layouts=$(sed '/! layout/,/^$/!d' < /usr/share/X11/xkb/rules/evdev.lst)
+  options=()
+  while read -r line; do
+    letters=$(echo "$line" | awk '{ print $1; }')
+    description=$(echo "$line" | awk '{for (i=2; i<NF; i++) printf $i " "; print $NF}')
+    if [[ "$letters" == "!" || "$letters" == "custom" ]]; then
+      continue
+    fi
+    options+=("$letters" "$description")
+  done < <(echo "$layouts")
+  result=$(whiptail --backtitle "${TITLE}" --title "Set Keyboard Layout" --menu "" --cancel-button "Back" 0 0 0 "${options[@]}" 3>&1 1>&2 2>&3)
+  if [ "$?" = "0" ]; then
+    echo $result
+  fi
+}

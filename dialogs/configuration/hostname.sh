@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 #--------------------------------------------------------------------
 #   █████╗ ██████╗  ██████╗██╗  ██╗██████╗  █████╗ ██╗   ██╗███████╗
 #  ██╔══██╗██╔══██╗██╔════╝██║  ██║██╔══██╗██╔══██╗██║   ██║██╔════╝
@@ -9,30 +9,20 @@
 #--------------------------------------------------------------------
 CURRENT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
-source "${CURRENT_DIR}/../install.conf" &>/dev/null
-if [ -z "$TIMEZONE" ] || [ -z "$LOCALE" ]; then
-  source "${CURRENT_DIR}/../dialogs/menu.sh"
-  menuFlow setLocaleMenu setTimeZoneMenu
+setHostnameMenu() {
+  hostname=$(whiptail --backtitle "${TITLE}" --title "Set Computer Name" --inputbox "Enter your hostname" 8 40 "archlinux" 3>&1 1>&2 2>&3)
   if [ ! "$?" = "0" ]; then
-    exit 1
-  else
-    CURRENT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
-    source "${CURRENT_DIR}/../install.conf"
+    return 1
   fi
-fi
-echo -ne "
--------------------------------------------------------------------------
-                     Changing Locale to ${LOCALE}
-                 Changing Timezone to ${TIMEZONE}
--------------------------------------------------------------------------
-"
-echo "LANG=${LOCALE}.UTF-8" | sudo tee /etc/locale.conf > /dev/null
-echo "LC_COLLATE=C" | sudo tee -a /etc/locale.conf > /dev/null
-sudo sed -i '/#'$LOCALE'.UTF-8/s/^#//g' /etc/locale.gen
-sudo timedatectl set-ntp 1
-sudo systemctl enable systemd-timesyncd.service
-if [ -f "/usr/share/zoneinfo/${TIMEZONE}" ]; then
-  sudo ln -sf "/usr/share/zoneinfo/${TIMEZONE}" /etc/localtime
-fi
-sudo hwclock --systohc --utc
-sudo locale-gen
+  if [[ ! "$hostname" =~ ^[a-zA-Z0-9][a-zA-Z0-9_-]{1,62}$ || "${hostname: -1}" == "-" ]]; then
+    whiptail --backtitle "${TITLE}" --title "Set Computer Name" --msgbox "Invalid Hostname\nOnly letters, numbers, underscore and hyphen are allowed, minimal of two characters" 8 40
+    setHostnameMenu
+    return "$?"
+  fi
+  if [ "$hostname" = "localhost" ]; then
+    whiptail --backtitle "${TITLE}" --title "Set Computer Name" --msgbox "localhost is not allowed as hostname" 8 40
+    setHostnameMenu
+    return "$?"
+  fi
+  echo "HOSTNAME=$hostname" >> "${CURRENT_DIR}/../../install.conf"
+}
