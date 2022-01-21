@@ -25,4 +25,4 @@ echo -ne "
                           Setting Hostname to ${HOSTNAME}
 -------------------------------------------------------------------------
 "
-sudo echo "$HOSTNAME" > /etc/hostname
+echo "$HOSTNAME" | sudo tee /etc/hostname > /dev/null

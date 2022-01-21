@@ -42,16 +42,8 @@ sed -e "/^#/d" -e "s/ #.*//" -e 's/ //g' ${SCRIPT_DIR}/packages/aur-minimal.txt 
 
 source $SCRIPT_DIR/functions/kde-import.sh
 
-cat <<EOF > ~/.config/plasma-localerc
-[Formats]
-LANG=$LOCALE.UTF-8
-LC_COLLATE=C
-useDetailed=true
-EOF
-
 echo -ne "
 -------------------------------------------------------------------------
                     System ready for 3-post-setup.sh
 -------------------------------------------------------------------------
 "
-exit

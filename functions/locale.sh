@@ -26,8 +26,8 @@ echo -ne "
                  Changing Timezone to ${TIMEZONE}
 -------------------------------------------------------------------------
 "
-sudo echo "LANG=${LOCALE}.UTF-8" > /etc/locale.conf
-sudo echo "LC_COLLATE=C" >> /etc/locale.conf
+echo "LANG=${LOCALE}.UTF-8" | sudo tee /etc/locale.conf > /dev/null
+echo "LC_COLLATE=C" | sudo tee -a /etc/locale.conf > /dev/null
 sudo sed -i '/#'$LOCALE'.UTF-8/s/^#//g' /etc/locale.gen
 sudo timedatectl set-ntp 1
 if [ -f "/usr/share/zoneinfo/${TIMEZONE}" ]; then

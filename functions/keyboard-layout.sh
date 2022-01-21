@@ -26,4 +26,3 @@ echo -ne "
 -------------------------------------------------------------------------
 "
 sudo localectl set-keymap "${KEYMAP}"
-sudo echo "KEYMAP=${KEYMAP}" > /etc/vconsole.conf
