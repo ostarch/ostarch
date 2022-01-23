@@ -18,20 +18,20 @@ echo -ne "
 pacman -S networkmanager dhclient --noconfirm --needed
 systemctl enable --now NetworkManager
 
-source "$SCRIPT_DIR/functions/mirrors.sh"
+$SCRIPT_DIR/functions/mirrors.sh
 
-source "$SCRIPT_DIR/functions/makeflags.sh"
+$SCRIPT_DIR/functions/makeflags.sh
 
-source "$SCRIPT_DIR/functions/locale.sh"
+$SCRIPT_DIR/functions/locale.sh
 
 # Add sudo no password rights
 sed -i 's/^# %wheel ALL=(ALL) NOPASSWD: ALL/%wheel ALL=(ALL) NOPASSWD: ALL/' /etc/sudoers
 
-source "$SCRIPT_DIR/functions/pacman.sh"
+$SCRIPT_DIR/functions/pacman.sh
 
 
-source "$SCRIPT_DIR/functions/install/microcode.sh"
-source "$SCRIPT_DIR/functions/install/graphics-drivers.sh"
+$SCRIPT_DIR/functions/install/microcode.sh
+$SCRIPT_DIR/functions/install/graphics-drivers.sh
 
 echo -ne "
 -------------------------------------------------------------------------
@@ -48,9 +48,10 @@ echo -ne "
 $SCRIPT_DIR/functions/install/install-packages.sh pacman-gaming
 
 source "$SCRIPT_DIR/functions/adduser.sh"
-source "$SCRIPT_DIR/functions/sethostname.sh"
-source "$SCRIPT_DIR/functions/keyboard-layout.sh"
-source "$SCRIPT_DIR/functions/shutdown-timeout.sh"
+
+$SCRIPT_DIR/functions/sethostname.sh
+$SCRIPT_DIR/functions/keyboard-layout.sh
+$SCRIPT_DIR/functions/shutdown-timeout.sh
 
 cp -R "/root/$BASENAME" "/home/$USERNAME/$BASENAME"
 chown -R $USERNAME: "/home/$USERNAME/$BASENAME"

@@ -14,12 +14,11 @@ if [ $(whoami) = "root"  ]; then
   exit
 fi
 
-source "$SCRIPT_DIR/functions/locale.sh"
+$SCRIPT_DIR/functions/locale.sh
 
 echo -ne "
 -------------------------------------------------------------------------
                            Final Configuration
 -------------------------------------------------------------------------
 "
-konsave -r arc-kde
-source "$SCRIPT_DIR/functions/kde-import.sh"
+$SCRIPT_DIR/functions/kde-import.sh

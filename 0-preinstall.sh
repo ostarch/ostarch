@@ -11,8 +11,8 @@ SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
 pacman -S --noconfirm --needed terminus-font
 setfont ter-v22b
-source "$SCRIPT_DIR/functions/pacman.sh"
-source "$SCRIPT_DIR/functions/mirrors.sh"
+$SCRIPT_DIR/functions/pacman.sh
+$SCRIPT_DIR/functions/mirrors.sh
 
 
 echo -ne "
@@ -28,7 +28,7 @@ umount -R /mnt &>/dev/null
 source "$SCRIPT_DIR/dialogs/mainmenu.sh"
 
 if [[ -z "$BOOT_PARTITION" ]] || [[ -z "$ROOT_PARTITION" ]]; then
-    source "$SCRIPT_DIR/functions/exit.sh"
+    $SCRIPT_DIR/functions/exit.sh
 fi
 
 
@@ -40,7 +40,7 @@ mount "$BOOT_PARTITION" /mnt/boot/
 
 if ! grep -qs '/mnt' /proc/mounts; then
     echo "Drive is not mounted, can not continue"
-    source "$SCRIPT_DIR/functions/exit.sh"
+    $SCRIPT_DIR/functions/exit.sh
 fi
 echo -ne "
 -------------------------------------------------------------------------

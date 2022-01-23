@@ -10,7 +10,7 @@
 SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 BASENAME="$( basename $SCRIPT_DIR)"
 
-source "${SCRIPT_DIR}/install.conf"
+source $SCRIPT_DIR/install.conf
 
 echo -ne "
 -------------------------------------------------------------------------
@@ -36,7 +36,7 @@ do
   errors=$((errors+1))
 done
 
-source "${SCRIPT_DIR}/functions/grub.sh"
+$SCRIPT_DIR/functions/grub.sh
 
 # ------------------------------------------------------------------------
 
@@ -65,7 +65,7 @@ Current=breeze
 EOF
 
 cat <<EOF >> /usr/share/sddm/scripts/Xsetup
-/home/$username/bin/xrandr_display
+/home/$USERNAME/bin/xrandr_display
 EOF
 
 echo -ne "

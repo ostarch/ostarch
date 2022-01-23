@@ -7,13 +7,14 @@
 #  ██║  ██║██║  ██║╚██████╗██║  ██║██████╔╝██║  ██║ ╚████╔╝ ███████╗
 #  ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚═════╝ ╚═╝  ╚═╝  ╚═══╝  ╚══════╝
 #--------------------------------------------------------------------
+CURRENT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
 if [ $(whoami) = "root"  ]; then
   echo "Don't run this as root!"
   exit
 fi
-SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
-konsave -i "$SCRIPT_DIR/../arc-kde.knsv"
+konsave -r arc-kde
+konsave -i "$CURRENT_DIR/../arc-kde.knsv"
 sleep 1
 konsave -a arc-kde

@@ -9,14 +9,14 @@
 #--------------------------------------------------------------------
 SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
-source "${SCRIPT_DIR}/install.conf"
+source $SCRIPT_DIR/install.conf
 
 if [ $(whoami) = "root"  ]; then
   echo "Don't run this as root!"
   exit
 fi
 
-source "$SCRIPT_DIR/functions/dotfiles.sh"
+$SCRIPT_DIR/functions/dotfiles.sh
 
 $SCRIPT_DIR/functions/install/yay.sh
 
@@ -28,7 +28,7 @@ echo -ne "
 
 $SCRIPT_DIR/functions/install/install-packages.sh --aur aur-minimal
 
-source $SCRIPT_DIR/functions/kde-import.sh
+$SCRIPT_DIR/functions/kde-import.sh
 
 echo -ne "
 -------------------------------------------------------------------------
