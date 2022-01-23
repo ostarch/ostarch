@@ -11,7 +11,7 @@ CURRENT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd 
 source $CURRENT_DIR/../install.conf &>/dev/null
 
 if [ "$SKIP_MIRRORS" = true ]; then
-  return
+  exit
 fi
 sudo pacman -S --noconfirm --needed curl pacman-contrib rsync reflector python
 iso=$(curl -4 ifconfig.co/country-iso)
