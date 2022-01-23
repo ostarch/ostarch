@@ -59,7 +59,7 @@ configurationMenu() {
       nextItem="$hostname"
       ;;
     "Set Hostname")
-      "$SCRIPT_DIR/functions/sethostname.sh"
+      "$SCRIPT_DIR/functions/hostname.sh"
       nextItem="$shutdown_timeout"
       ;;
     "Set Systemd Shutdown Timeout")

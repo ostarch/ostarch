@@ -48,7 +48,7 @@ echo -ne "
 $SCRIPT_DIR/functions/install/install-packages.sh pacman-gaming
 
 $SCRIPT_DIR/functions/adduser.sh
-$SCRIPT_DIR/functions/sethostname.sh
+$SCRIPT_DIR/functions/hostname.sh
 $SCRIPT_DIR/functions/keyboard-layout.sh
 $SCRIPT_DIR/functions/shutdown-timeout.sh
 
