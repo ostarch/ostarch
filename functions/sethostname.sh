@@ -9,6 +9,7 @@
 #--------------------------------------------------------------------
 CURRENT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
+unset HOSTNAME
 source "${CURRENT_DIR}/../install.conf" &>/dev/null
 if [ -z "$HOSTNAME" ]; then
   source "${CURRENT_DIR}/../dialogs/menu.sh"
