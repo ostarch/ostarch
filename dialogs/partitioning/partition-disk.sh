@@ -74,11 +74,11 @@ partitionDiskMenu() {
 
   if [[ ! -z "$BOOT_PARTITION_NUM" ]] && [[ ! -z "$ROOT_PARTITION_NUM" ]]; then
     if [[ ${DISK} =~ "nvme" ]]; then
-      export BOOT_PARTITION="${DISK}p${BOOT_PARTITION_NUM}"
-      export ROOT_PARTITION="${DISK}p${ROOT_PARTITION_NUM}"
+      BOOT_PARTITION="${DISK}p${BOOT_PARTITION_NUM}"
+      ROOT_PARTITION="${DISK}p${ROOT_PARTITION_NUM}"
     else
-      export BOOT_PARTITION="${DISK}${BOOT_PARTITION_NUM}"
-      export ROOT_PARTITION="${DISK}${ROOT_PARTITION_NUM}"
+      BOOT_PARTITION="${DISK}${BOOT_PARTITION_NUM}"
+      ROOT_PARTITION="${DISK}${ROOT_PARTITION_NUM}"
     fi
     menu formatPartitionsMenu
     return "$?"

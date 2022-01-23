@@ -24,6 +24,8 @@ pacman -S --noconfirm --needed gptfdisk grub btrfs-progs xfsprogs dosfstools e2f
 
 mkdir /mnt &>/dev/null
 umount -R /mnt &>/dev/null
+unset BOOT_PARTITION
+unset ROOT_PARTITION
 
 source "$SCRIPT_DIR/dialogs/mainmenu.sh"
 
