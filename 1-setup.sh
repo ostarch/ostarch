@@ -94,6 +94,7 @@ fi
 source "$SCRIPT_DIR/functions/adduser.sh"
 source "$SCRIPT_DIR/functions/sethostname.sh"
 source "$SCRIPT_DIR/functions/keyboard-layout.sh"
+source "$SCRIPT_DIR/functions/shutdown-timeout.sh"
 
 cp -R "/root/$BASENAME" "/home/$USERNAME/$BASENAME"
 chown -R $USERNAME: "/home/$USERNAME/$BASENAME"
