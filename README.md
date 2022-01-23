@@ -29,7 +29,16 @@ cd ~/ArchDave
 ```
 
 ### System Description
-This is completely automated arch install of the KDE desktop environment on arch using all the packages I use on a daily basis. 
+This is completely automated arch install of the KDE desktop environment on arch using all the packages I use on a daily basis.
+
+## Configuration
+If you only want to configure things like the keyboard layout or use my configurations for grub, zsh, KDE Desktop and so on, you can do so by running the following commands:
+
+```bash
+git clone https://github.com/d4ve10/ArchDave
+cd ArchDave
+./configure.sh
+```
 
 ## Troubleshooting
 
