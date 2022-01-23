@@ -12,7 +12,6 @@ if [ $(whoami) = "root"  ]; then
   echo "Don't run this as root!"
   exit
 fi
-SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
 git clone "https://github.com/d4ve10/dotfiles" ~/.dotfiles 2> /dev/null
 if [ ! "$?" = "0" ]; then
