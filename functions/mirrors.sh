@@ -25,7 +25,7 @@ echo -ne "
   ██║  ██║██║  ██║╚██████╗██║  ██║██████╔╝██║  ██║ ╚████╔╝ ███████╗
   ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚═════╝ ╚═╝  ╚═╝  ╚═══╝  ╚══════╝
 --------------------------------------------------------------------
-            Setting up $iso mirrors for faster downloads            
+             Setting up $iso mirrors for faster downloads            
 --------------------------------------------------------------------
 "
 sudo reflector -c "$iso" -l 15 -p "https,http" --sort rate --save /etc/pacman.d/mirrorlist \

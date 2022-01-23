@@ -21,10 +21,10 @@ if [ -z "$TIMEZONE" ] || [ -z "$LOCALE" ]; then
   fi
 fi
 echo -ne "
--------------------------------------------------------------------------
-                     Changing Locale to ${LOCALE}
+--------------------------------------------------------------------
+                      Changing Locale to ${LOCALE}
                  Changing Timezone to ${TIMEZONE}
--------------------------------------------------------------------------
+--------------------------------------------------------------------
 "
 echo "LANG=${LOCALE}.UTF-8" | sudo tee /etc/locale.conf > /dev/null
 echo "LC_COLLATE=C" | sudo tee -a /etc/locale.conf > /dev/null

@@ -16,9 +16,9 @@ $SCRIPT_DIR/functions/mirrors.sh
 
 
 echo -ne "
--------------------------------------------------------------------------
-                    Installing Prerequisites
--------------------------------------------------------------------------
+--------------------------------------------------------------------
+                      Installing Prerequisites
+--------------------------------------------------------------------
 "
 pacman -S --noconfirm --needed gptfdisk grub btrfs-progs xfsprogs dosfstools e2fsprogs
 
@@ -45,9 +45,9 @@ if ! grep -qs '/mnt' /proc/mounts; then
     $SCRIPT_DIR/functions/exit.sh
 fi
 echo -ne "
--------------------------------------------------------------------------
-                    Arch Install on Main Drive
--------------------------------------------------------------------------
+--------------------------------------------------------------------
+                     Arch Install on Main Drive
+--------------------------------------------------------------------
 "
 pacstrap /mnt base base-devel linux linux-firmware vim nano sudo archlinux-keyring wget git libnewt --noconfirm --needed
 genfstab -U /mnt >> /mnt/etc/fstab
@@ -56,9 +56,9 @@ echo "DISK=$DISK" >> "$SCRIPT_DIR/install.conf"
 cp -R "${SCRIPT_DIR}" /mnt/root
 cp /etc/pacman.d/mirrorlist /mnt/etc/pacman.d/mirrorlist
 echo -ne "
--------------------------------------------------------------------------
-                    Checking for low memory systems <8G
--------------------------------------------------------------------------
+--------------------------------------------------------------------
+                 Checking for low memory systems <8G
+--------------------------------------------------------------------
 "
 TOTALMEM=$(cat /proc/meminfo | grep -i 'memtotal' | grep -o '[[:digit:]]*')
 if [[  $TOTALMEM -lt 8000000 ]]; then
@@ -74,7 +74,7 @@ if [[  $TOTALMEM -lt 8000000 ]]; then
     echo "/opt/swap/swapfile	none	swap	sw	0	0" >> /mnt/etc/fstab # Add swap to fstab, so it KEEPS working after installation.
 fi
 echo -ne "
--------------------------------------------------------------------------
-                    System ready for 1-setup.sh
--------------------------------------------------------------------------
+--------------------------------------------------------------------
+                     System ready for 1-setup.sh
+--------------------------------------------------------------------
 "

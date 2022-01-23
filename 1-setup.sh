@@ -11,9 +11,9 @@ SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 BASENAME="$( basename $SCRIPT_DIR)"
 
 echo -ne "
--------------------------------------------------------------------------
-                              Network Setup
--------------------------------------------------------------------------
+--------------------------------------------------------------------
+                            Network Setup
+--------------------------------------------------------------------
 "
 pacman -S networkmanager dhclient --noconfirm --needed
 systemctl enable --now NetworkManager
@@ -34,16 +34,16 @@ $SCRIPT_DIR/functions/install/microcode.sh
 $SCRIPT_DIR/functions/install/graphics-drivers.sh
 
 echo -ne "
--------------------------------------------------------------------------
-                    Installing Base System  
--------------------------------------------------------------------------
+--------------------------------------------------------------------
+                       Installing Base System  
+--------------------------------------------------------------------
 "
 $SCRIPT_DIR/functions/install/install-packages.sh pacman
 
 echo -ne "
--------------------------------------------------------------------------
-                    Installing Gaming Drivers
--------------------------------------------------------------------------
+--------------------------------------------------------------------
+                      Installing Gaming Drivers
+--------------------------------------------------------------------
 "
 $SCRIPT_DIR/functions/install/install-packages.sh pacman-gaming
 
@@ -56,7 +56,7 @@ $SCRIPT_DIR/functions/shutdown-timeout.sh
 cp -R "/root/$BASENAME" "/home/$USERNAME/$BASENAME"
 chown -R $USERNAME: "/home/$USERNAME/$BASENAME"
 echo -ne "
--------------------------------------------------------------------------
-                    System ready for 2-user.sh
--------------------------------------------------------------------------
+--------------------------------------------------------------------
+                     System ready for 2-user.sh
+--------------------------------------------------------------------
 "

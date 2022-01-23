@@ -21,9 +21,9 @@ $SCRIPT_DIR/functions/dotfiles.sh
 $SCRIPT_DIR/functions/install/yay.sh
 
 echo -ne "
--------------------------------------------------------------------------
-                         Installing AUR Packages
--------------------------------------------------------------------------
+--------------------------------------------------------------------
+                       Installing AUR Packages
+--------------------------------------------------------------------
 "
 
 $SCRIPT_DIR/functions/install/install-packages.sh --aur aur-minimal
@@ -31,7 +31,7 @@ $SCRIPT_DIR/functions/install/install-packages.sh --aur aur-minimal
 $SCRIPT_DIR/functions/kde-import.sh
 
 echo -ne "
--------------------------------------------------------------------------
-                    System ready for 3-post-setup.sh
--------------------------------------------------------------------------
+--------------------------------------------------------------------
+                  System ready for 3-post-setup.sh
+--------------------------------------------------------------------
 "
