@@ -35,7 +35,7 @@ formatPartitionsMenu() {
         if [[ ! "$bootExitCode" = "0" && ! "$rootExitCode" = "0" ]]; then
           return 0
         else
-          configurationMenu
+          configurationMenuScript
           if [ ! "$?" = "0" ]; then
             return 0
           fi
@@ -44,7 +44,7 @@ formatPartitionsMenu() {
       fi
       ;;
     "Mount and Install")
-      configurationMenu
+      configurationMenuScript
       if [ ! "$?" = "0" ]; then
         return 0
       fi

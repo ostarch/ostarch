@@ -19,7 +19,7 @@ setKeyboardLayoutMenu() {
   if [ ! "$?" = "0" ]; then
     return 1
   fi
-  loadkeys "$result"
+  sudo loadkeys "$result"
   echo "KEYMAP=$result" >> "${CURRENT_DIR}/../../install.conf"
 }
 

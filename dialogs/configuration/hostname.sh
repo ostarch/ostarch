@@ -10,7 +10,11 @@
 CURRENT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
 setHostnameMenu() {
-  hostname=$(whiptail --backtitle "${TITLE}" --title "Set Computer Name" --inputbox "Enter your hostname" 8 40 "archlinux" 3>&1 1>&2 2>&3)
+  defaultHostname="$(cat /etc/hostname)"
+  if [ "$defaultHostname" = "archiso" ]; then
+    defaultHostname="archlinux"
+  fi
+  hostname=$(whiptail --backtitle "${TITLE}" --title "Set Computer Name" --inputbox "Enter your hostname" 8 40 "$defaultHostname" 3>&1 1>&2 2>&3)
   if [ ! "$?" = "0" ]; then
     return 1
   fi

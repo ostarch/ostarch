@@ -8,7 +8,7 @@
 #  ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚═════╝ ╚═╝  ╚═╝  ╚═══╝  ╚══════╝
 #--------------------------------------------------------------------
 
-configurationMenu() {
+configurationMenuScript() {
   menuFlow setKeyboardLayoutMenu setLocaleMenu setTimeZoneMenu addUserMenu setUserPasswordMenu setHostnameMenu
   return "$?"
 }
