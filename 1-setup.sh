@@ -47,13 +47,14 @@ echo -ne "
 "
 $SCRIPT_DIR/functions/install/install-packages.sh pacman-gaming
 
-source "$SCRIPT_DIR/functions/adduser.sh"
-
+$SCRIPT_DIR/functions/adduser.sh
 $SCRIPT_DIR/functions/sethostname.sh
 $SCRIPT_DIR/functions/keyboard-layout.sh
 $SCRIPT_DIR/functions/shutdown-timeout.sh
 
-cp -R "/root/$BASENAME" "/home/$USERNAME/$BASENAME"
+source "$SCRIPT_DIR/install.conf"
+
+cp -R "$SCRIPT_DIR" "/home/$USERNAME/$BASENAME"
 chown -R $USERNAME: "/home/$USERNAME/$BASENAME"
 echo -ne "
 --------------------------------------------------------------------
