@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 #--------------------------------------------------------------------
 #   █████╗ ██████╗  ██████╗██╗  ██╗██████╗  █████╗ ██╗   ██╗███████╗
 #  ██╔══██╗██╔══██╗██╔════╝██║  ██║██╔══██╗██╔══██╗██║   ██║██╔════╝
@@ -7,31 +7,21 @@
 #  ██║  ██║██║  ██║╚██████╗██║  ██║██████╔╝██║  ██║ ╚████╔╝ ███████╗
 #  ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚═════╝ ╚═╝  ╚═╝  ╚═══╝  ╚══════╝
 #--------------------------------------------------------------------
-SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
-
-source "${SCRIPT_DIR}/install.conf"
+CURRENT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
 if [ $(whoami) = "root"  ]; then
   echo "Don't run this as root!"
   exit
 fi
 
-source "$SCRIPT_DIR/functions/dotfiles.sh"
-
-$SCRIPT_DIR/functions/install/yay.sh
-
 echo -ne "
 -------------------------------------------------------------------------
-                         Installing AUR Packages
+                             Installing YAY
 -------------------------------------------------------------------------
 "
 
-$SCRIPT_DIR/functions/install/install-packages.sh --aur aur-minimal
-
-source $SCRIPT_DIR/functions/kde-import.sh
-
-echo -ne "
--------------------------------------------------------------------------
-                    System ready for 3-post-setup.sh
--------------------------------------------------------------------------
-"
+cd ~
+git clone "https://aur.archlinux.org/yay.git"
+cd ~/yay
+makepkg -si --noconfirm
+cd ~

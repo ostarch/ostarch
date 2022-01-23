@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 #--------------------------------------------------------------------
 #   █████╗ ██████╗  ██████╗██╗  ██╗██████╗  █████╗ ██╗   ██╗███████╗
 #  ██╔══██╗██╔══██╗██╔════╝██║  ██║██╔══██╗██╔══██╗██║   ██║██╔════╝
@@ -7,31 +7,19 @@
 #  ██║  ██║██║  ██║╚██████╗██║  ██║██████╔╝██║  ██║ ╚████╔╝ ███████╗
 #  ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚═════╝ ╚═╝  ╚═╝  ╚═══╝  ╚══════╝
 #--------------------------------------------------------------------
-SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+[ "$(id -u)" = "0" ] || exec sudo "$0" "$@"
 
-source "${SCRIPT_DIR}/install.conf"
-
-if [ $(whoami) = "root"  ]; then
-  echo "Don't run this as root!"
-  exit
+nc="$(grep -c ^processor /proc/cpuinfo)"
+nc2=$(expr $(expr $(grep -c ^processor /proc/cpuinfo) + 1) / 2) # half of the number of cores
+echo -ne "
+-------------------------------------------------------------------------
+                      You have "$nc" cores.
+              Changing the makeflags for "$nc" cores.
+          Changing the compression settings for "$nc" cores.
+-------------------------------------------------------------------------
+"
+TOTALMEM=$(cat /proc/meminfo | grep -i 'memtotal' | grep -o '[[:digit:]]*')
+if [[  $TOTALMEM -gt 8000000 ]]; then
+	sed -i 's/#MAKEFLAGS="-j2"/MAKEFLAGS="-j'"$nc2"'"/g' /etc/makepkg.conf
+	sed -i 's/COMPRESSXZ=(xz -c -z -)/COMPRESSXZ=(xz -c -T '"$nc2"' -z -)/g' /etc/makepkg.conf
 fi
-
-source "$SCRIPT_DIR/functions/dotfiles.sh"
-
-$SCRIPT_DIR/functions/install/yay.sh
-
-echo -ne "
--------------------------------------------------------------------------
-                         Installing AUR Packages
--------------------------------------------------------------------------
-"
-
-$SCRIPT_DIR/functions/install/install-packages.sh --aur aur-minimal
-
-source $SCRIPT_DIR/functions/kde-import.sh
-
-echo -ne "
--------------------------------------------------------------------------
-                    System ready for 3-post-setup.sh
--------------------------------------------------------------------------
-"

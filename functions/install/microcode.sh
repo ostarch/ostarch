@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 #--------------------------------------------------------------------
 #   █████╗ ██████╗  ██████╗██╗  ██╗██████╗  █████╗ ██╗   ██╗███████╗
 #  ██╔══██╗██╔══██╗██╔════╝██║  ██║██╔══██╗██╔══██╗██║   ██║██╔════╝
@@ -7,31 +7,14 @@
 #  ██║  ██║██║  ██║╚██████╗██║  ██║██████╔╝██║  ██║ ╚████╔╝ ███████╗
 #  ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚═════╝ ╚═╝  ╚═╝  ╚═══╝  ╚══════╝
 #--------------------------------------------------------------------
-SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+CURRENT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
-source "${SCRIPT_DIR}/install.conf"
-
-if [ $(whoami) = "root"  ]; then
-  echo "Don't run this as root!"
-  exit
+if lscpu | grep "GenuineIntel"; then
+    echo "Installing Intel microcode"
+    pacman -S --noconfirm intel-ucode
+    proc_ucode=intel-ucode.img
+elif lscpu | grep "AuthenticAMD"; then
+    echo "Installing AMD microcode"
+    pacman -S --noconfirm amd-ucode
+    proc_ucode=amd-ucode.img
 fi
-
-source "$SCRIPT_DIR/functions/dotfiles.sh"
-
-$SCRIPT_DIR/functions/install/yay.sh
-
-echo -ne "
--------------------------------------------------------------------------
-                         Installing AUR Packages
--------------------------------------------------------------------------
-"
-
-$SCRIPT_DIR/functions/install/install-packages.sh --aur aur-minimal
-
-source $SCRIPT_DIR/functions/kde-import.sh
-
-echo -ne "
--------------------------------------------------------------------------
-                    System ready for 3-post-setup.sh
--------------------------------------------------------------------------
-"

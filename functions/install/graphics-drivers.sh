@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 #--------------------------------------------------------------------
 #   █████╗ ██████╗  ██████╗██╗  ██╗██████╗  █████╗ ██╗   ██╗███████╗
 #  ██╔══██╗██╔══██╗██╔════╝██║  ██║██╔══██╗██╔══██╗██║   ██║██╔════╝
@@ -7,31 +7,25 @@
 #  ██║  ██║██║  ██║╚██████╗██║  ██║██████╔╝██║  ██║ ╚████╔╝ ███████╗
 #  ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚═════╝ ╚═╝  ╚═╝  ╚═══╝  ╚══════╝
 #--------------------------------------------------------------------
-SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+CURRENT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
-source "${SCRIPT_DIR}/install.conf"
+echo -ne "
+-------------------------------------------------------------------------
+                    Installing Graphics Drivers
+-------------------------------------------------------------------------
+"
 
-if [ $(whoami) = "root"  ]; then
-  echo "Don't run this as root!"
-  exit
+if lspci | grep -E "NVIDIA|GeForce"; then
+	pacman -S nvidia nvidia-lts nvidia-settings nvidia-utils lib32-nvidia-utils lib32-opencl-nvidia --noconfirm --needed
+	nvidia-xconfig
+	echo "options nvidia_drm modeset=1" > /usr/lib/modprobe.d/nvidia-drm.conf
+	#cp "$SCRIPT_DIR/nvidia.conf" "/etc/X11/xorg.conf.d/"
 fi
 
-source "$SCRIPT_DIR/functions/dotfiles.sh"
+if lspci | grep 'VGA' | grep -E "Radeon|AMD"; then
+	pacman -S xf86-video-amdgpu vulkan-radeon lib32-vulkan-radeon --noconfirm --needed
+fi
 
-$SCRIPT_DIR/functions/install/yay.sh
-
-echo -ne "
--------------------------------------------------------------------------
-                         Installing AUR Packages
--------------------------------------------------------------------------
-"
-
-$SCRIPT_DIR/functions/install/install-packages.sh --aur aur-minimal
-
-source $SCRIPT_DIR/functions/kde-import.sh
-
-echo -ne "
--------------------------------------------------------------------------
-                    System ready for 3-post-setup.sh
--------------------------------------------------------------------------
-"
+if lspci | grep "VGA" | grep "Intel" | grep "Graphics"; then
+	pacman -S libva-intel-driver libvdpau-va-gl lib32-vulkan-intel vulkan-intel libva-intel-driver libva-utils --needed --noconfirm
+fi

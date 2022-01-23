@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 #--------------------------------------------------------------------
 #   █████╗ ██████╗  ██████╗██╗  ██╗██████╗  █████╗ ██╗   ██╗███████╗
 #  ██╔══██╗██╔══██╗██╔════╝██║  ██║██╔══██╗██╔══██╗██║   ██║██╔════╝
@@ -7,31 +7,28 @@
 #  ██║  ██║██║  ██║╚██████╗██║  ██║██████╔╝██║  ██║ ╚████╔╝ ███████╗
 #  ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚═════╝ ╚═╝  ╚═╝  ╚═══╝  ╚══════╝
 #--------------------------------------------------------------------
-SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+CURRENT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
-source "${SCRIPT_DIR}/install.conf"
-
-if [ $(whoami) = "root"  ]; then
-  echo "Don't run this as root!"
+if [ "$1" = "--help" ] || [ "$1" = "-h" ] || [ -z "$1" ]; then
+  echo "Usage: install-packages.sh [--help] [--aur|--pacman] <package-filename>"
+  echo "  --help: show this help"
+  echo "  --pacman: install packages from pacman (default)"
+  echo "  --aur: install packages from AUR with yay"
+  echo "  <package-filename>: the filename in the packages directory"
+  echo "    for example: 'pacman', 'pacman-gaming', 'aur'"
+  echo
   exit
 fi
 
-source "$SCRIPT_DIR/functions/dotfiles.sh"
+filename="$CURRENT_DIR/../../packages/${@: -1}.txt"
+if [ ! -f "$filename" ]; then
+  echo "Error: file '$filename' does not exist"
+  exit
+fi
 
-$SCRIPT_DIR/functions/install/yay.sh
+command="sudo pacman"
+if [ "$1" = "--aur" ]; then
+  command="yay"
+fi
 
-echo -ne "
--------------------------------------------------------------------------
-                         Installing AUR Packages
--------------------------------------------------------------------------
-"
-
-$SCRIPT_DIR/functions/install/install-packages.sh --aur aur-minimal
-
-source $SCRIPT_DIR/functions/kde-import.sh
-
-echo -ne "
--------------------------------------------------------------------------
-                    System ready for 3-post-setup.sh
--------------------------------------------------------------------------
-"
+sed -e "/^#/d" -e "s/ #.*//" -e 's/ //g' "$filename" | $command -S --needed --noconfirm -
