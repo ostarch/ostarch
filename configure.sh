@@ -83,7 +83,7 @@ configurationMenu() {
       nextItem="$add_user"
       ;;
     "Add User")
-      "$SCRIPT_DIR/functions/adduser.sh"
+      "$SCRIPT_DIR/functions/user.sh"
       nextItem="$zsh"
       ;;
   esac
