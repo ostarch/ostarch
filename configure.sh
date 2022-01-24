@@ -42,47 +42,47 @@ configurationMenu() {
     exit
   fi
   case ${sel} in
-    "Zsh Configuration + dotfiles")
+    "$zsh")
       "$SCRIPT_DIR/functions/dotfiles.sh"
       nextItem="$grub"
       ;;
-    "Grub Customization")
+    "$grub")
       "$SCRIPT_DIR/functions/grub.sh"
       nextItem="$keyboard"
       ;;
-    "Set Keyboard Layout")
+    "$keyboard")
       "$SCRIPT_DIR/functions/keyboard-layout.sh"
       nextItem="$locale"
       ;;
-    "Set Locale and Timezone")
+    "$locale")
       "$SCRIPT_DIR/functions/locale.sh"
       nextItem="$hostname"
       ;;
-    "Set Hostname")
+    "$hostname")
       "$SCRIPT_DIR/functions/hostname.sh"
       nextItem="$shutdown_timeout"
       ;;
-    "Set Systemd Shutdown Timeout")
+    "$shutdown_timeout")
       "$SCRIPT_DIR/functions/shutdown-timeout.sh"
       nextItem="$mirrors"
       ;;
-    "Update Mirrors")
+    "$mirrors")
       "$SCRIPT_DIR/functions/mirrors.sh"
       nextItem="$pacman"
       ;;
-    "Pacman Customization")
+    "$pacman")
       "$SCRIPT_DIR/functions/pacman.sh"
       nextItem="$kde_import"
       ;;
-    "Import KDE Configuration")
+    "$kde_import")
       "$SCRIPT_DIR/functions/kde-import.sh"
       nextItem="$kde_export"
       ;;
-    "Export KDE Configuration")
+    "$kde_export")
       "$SCRIPT_DIR/functions/kde-export.sh"
       nextItem="$add_user"
       ;;
-    "Add User")
+    "$add_user")
       "$SCRIPT_DIR/functions/user.sh"
       nextItem="$zsh"
       ;;
