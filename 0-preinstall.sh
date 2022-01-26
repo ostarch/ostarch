@@ -9,11 +9,10 @@
 #--------------------------------------------------------------------
 SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
+$SCRIPT_DIR/functions/pacman.sh
+
 pacman -S --noconfirm --needed terminus-font
 setfont ter-v22b
-$SCRIPT_DIR/functions/pacman.sh
-$SCRIPT_DIR/functions/mirrors.sh
-
 
 echo -ne "
 --------------------------------------------------------------------
@@ -44,6 +43,9 @@ if ! grep -qs '/mnt' /proc/mounts; then
     echo "Drive is not mounted, can not continue"
     $SCRIPT_DIR/functions/exit.sh
 fi
+
+$SCRIPT_DIR/functions/mirrors.sh
+
 echo -ne "
 --------------------------------------------------------------------
                      Arch Install on Main Drive

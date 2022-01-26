@@ -10,6 +10,8 @@
 SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 BASENAME="$( basename $SCRIPT_DIR)"
 
+$SCRIPT_DIR/functions/pacman.sh
+$SCRIPT_DIR/functions/mirrors.sh
 echo -ne "
 --------------------------------------------------------------------
                             Network Setup
@@ -18,8 +20,6 @@ echo -ne "
 pacman -S networkmanager dhclient --noconfirm --needed
 systemctl enable --now NetworkManager
 
-$SCRIPT_DIR/functions/mirrors.sh
-
 $SCRIPT_DIR/functions/makeflags.sh
 
 $SCRIPT_DIR/functions/locale.sh
@@ -27,7 +27,6 @@ $SCRIPT_DIR/functions/locale.sh
 # Add sudo no password rights
 sed -i 's/^# %wheel ALL=(ALL) NOPASSWD: ALL/%wheel ALL=(ALL) NOPASSWD: ALL/' /etc/sudoers
 
-$SCRIPT_DIR/functions/pacman.sh
 
 
 $SCRIPT_DIR/functions/install/microcode.sh
