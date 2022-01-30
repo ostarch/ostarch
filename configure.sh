@@ -18,6 +18,7 @@ hostname="Set Hostname"
 shutdown_timeout="Set Systemd Shutdown Timeout"
 mirrors="Update System Mirrors"
 pacman="Pacman Customization"
+xdg="Always use KDE File Picker"
 kde_import="Import KDE Configuration"
 kde_export="Export KDE Configuration"
 add_user="Add User"
@@ -34,6 +35,7 @@ configurationMenu() {
   options+=("$shutdown_timeout" "")
   options+=("$mirrors" "")
   options+=("$pacman" "")
+  options+=("$xdg" "")
   options+=("$kde_import" "")
   options+=("$kde_export" "")
   options+=("$add_user" "")
@@ -72,6 +74,10 @@ configurationMenu() {
       ;;
     "$pacman")
       "$SCRIPT_DIR/functions/pacman.sh"
+      nextItem="$xdg"
+      ;;
+    "$xdg")
+      "$SCRIPT_DIR/functions/xdg-portal.sh"
       nextItem="$kde_import"
       ;;
     "$kde_import")

@@ -223,6 +223,7 @@ winetricks
 wireguard-tools
 wireless_tools
 wireshark-qt
+xdg-desktop-portal
 xdg-desktop-portal-kde
 xdg-user-dirs
 xdotool
