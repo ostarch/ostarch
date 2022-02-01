@@ -23,6 +23,7 @@ pacman -S --noconfirm --needed archlinux-keyring gptfdisk grub btrfs-progs xfspr
 
 mkdir /mnt &>/dev/null
 umount -R /mnt &>/dev/null
+swapoff -a &>/dev/null
 unset BOOT_PARTITION
 unset ROOT_PARTITION
 
