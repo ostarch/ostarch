@@ -67,7 +67,7 @@ if [[ $TOTALMEM -lt 8000000 ]]; then
         chmod 600 /mnt/opt/swap/swapfile
         mkswap /mnt/opt/swap/swapfile
     fi
-    swapon /mnt/opt/swap/swapfile
+    swapon /mnt/opt/swap/swapfile &>/dev/null
 fi
 echo "# <file system> <dir> <type> <options> <dump> <pass>" > /mnt/etc/fstab
 genfstab -U /mnt >> /mnt/etc/fstab
