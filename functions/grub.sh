@@ -8,7 +8,9 @@
 #  ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚═════╝ ╚═╝  ╚═╝  ╚═══╝  ╚══════╝
 #--------------------------------------------------------------------
 [ "$(id -u)" = "0" ] || exec sudo "$0" "$@"
+CURRENT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
+cp -an /etc/default/grub /etc/default/grub.bak
 sed -i 's/^GRUB_DEFAULT=.*/GRUB_DEFAULT="Advanced options for Arch Linux>Arch Linux, with Linux linux"/' /etc/default/grub
 sed -i 's/^GRUB_TIMEOUT=.*/GRUB_TIMEOUT=1/' /etc/default/grub
 sed -i 's/quiet splash/text/' /etc/default/grub
@@ -23,4 +25,7 @@ if ! grep -q "GRUB_DISABLE_OS_PROBER=false" /etc/default/grub; then
   echo "GRUB_DISABLE_OS_PROBER=false" | tee -a /etc/default/grub > /dev/null
 fi
 sed -i 's/#GRUB_DISABLE_OS_PROBER=false/GRUB_DISABLE_OS_PROBER=false/' /etc/default/grub
+
+$CURRENT_DIR/../stylish-grub-theme/install.sh
+
 grub-mkconfig -o /boot/grub/grub.cfg
