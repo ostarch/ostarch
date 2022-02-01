@@ -30,7 +30,7 @@ unset ROOT_PARTITION
 source "$SCRIPT_DIR/dialogs/mainmenu.sh"
 
 if [[ -z "$BOOT_PARTITION" ]] || [[ -z "$ROOT_PARTITION" ]]; then
-    $SCRIPT_DIR/functions/exit.sh
+    source $SCRIPT_DIR/functions/exit.sh
 fi
 
 
@@ -42,7 +42,7 @@ mount "$BOOT_PARTITION" /mnt/boot/
 
 if ! grep -qs '/mnt' /proc/mounts; then
     echo "Drive is not mounted, can not continue"
-    $SCRIPT_DIR/functions/exit.sh
+    source $SCRIPT_DIR/functions/exit.sh
 fi
 
 $SCRIPT_DIR/functions/mirrors.sh
