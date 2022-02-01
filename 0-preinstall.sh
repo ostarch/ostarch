@@ -52,14 +52,6 @@ echo -ne "
 --------------------------------------------------------------------
 "
 pacstrap /mnt base base-devel linux linux-firmware vim nano sudo archlinux-keyring wget git libnewt --noconfirm --needed
-echo "# <file system> <dir> <type> <options> <dump> <pass>" > /mnt/etc/fstab
-genfstab -U /mnt >> /mnt/etc/fstab
-echo "keyserver hkp://keyserver.ubuntu.com" >> /mnt/etc/pacman.d/gnupg/gpg.conf
-echo "DISK=$DISK" >> "$SCRIPT_DIR/install.conf"
-echo "BOOT_PARTITION=$BOOT_PARTITION" >> "$SCRIPT_DIR/install.conf"
-echo "ROOT_PARTITION=$ROOT_PARTITION" >> "$SCRIPT_DIR/install.conf"
-cp -R "${SCRIPT_DIR}" /mnt/root
-cp /etc/pacman.d/mirrorlist /mnt/etc/pacman.d/mirrorlist
 TOTALMEM=$(cat /proc/meminfo | grep -i 'memtotal' | grep -o '[[:digit:]]*')
 if [[ $TOTALMEM -lt 8000000 ]]; then
     if [ ! -f /mnt/opt/swap/swapfile ]; then
@@ -76,8 +68,15 @@ if [[ $TOTALMEM -lt 8000000 ]]; then
         mkswap /mnt/opt/swap/swapfile
     fi
     swapon /mnt/opt/swap/swapfile
-    echo "/opt/swap/swapfile	none	swap	sw	0	0" >> /mnt/etc/fstab
 fi
+echo "# <file system> <dir> <type> <options> <dump> <pass>" > /mnt/etc/fstab
+genfstab -U /mnt >> /mnt/etc/fstab
+echo "keyserver hkp://keyserver.ubuntu.com" >> /mnt/etc/pacman.d/gnupg/gpg.conf
+echo "DISK=$DISK" >> "$SCRIPT_DIR/install.conf"
+echo "BOOT_PARTITION=$BOOT_PARTITION" >> "$SCRIPT_DIR/install.conf"
+echo "ROOT_PARTITION=$ROOT_PARTITION" >> "$SCRIPT_DIR/install.conf"
+cp -R "${SCRIPT_DIR}" /mnt/root
+cp /etc/pacman.d/mirrorlist /mnt/etc/pacman.d/mirrorlist
 echo -ne "
 --------------------------------------------------------------------
                      System ready for 1-setup.sh
