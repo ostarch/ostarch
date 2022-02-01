@@ -4,11 +4,13 @@ CURRENT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd 
 
 THEME_DIR="/boot/grub/themes"
 THEME_NAME=Stylish
+ICON="color"
 
 [[ -d ${THEME_DIR}/${THEME_NAME} ]] && rm -rf ${THEME_DIR}/${THEME_NAME}
 mkdir -p "${THEME_DIR}/${THEME_NAME}"
 
-cp -r ${CURRENT_DIR}/${THEME_NAME} ${THEME_DIR}
+cp ${CURRENT_DIR}/${THEME_NAME}/*.* ${THEME_DIR}/${THEME_NAME}
+cp -r ${CURRENT_DIR}/${THEME_NAME}/icons-${ICON} ${THEME_DIR}/${THEME_NAME}/icons
 
 if grep "GRUB_GFXMODE=auto" /etc/default/grub 2>&1 >/dev/null; then
   sed -i "s|.*GRUB_GFXMODE=.*|GRUB_GFXMODE=1920x1080,auto|" /etc/default/grub
