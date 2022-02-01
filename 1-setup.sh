@@ -37,7 +37,7 @@ echo -ne "
                        Installing Base System  
 --------------------------------------------------------------------
 "
-$SCRIPT_DIR/functions/install/install-packages.sh pacman
+$SCRIPT_DIR/functions/install/install-packages.sh pacman || exit 1
 
 echo -ne "
 --------------------------------------------------------------------
