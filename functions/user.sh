@@ -11,7 +11,7 @@ CURRENT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd 
 
 unset USERNAME
 source "${CURRENT_DIR}/../install.conf" &>/dev/null
-if [ ! -z "$USERNAME" ] && [ id "$USERNAME" &>/dev/null ]; then
+if [ ! -z "$USERNAME" ] && id "$USERNAME" &>/dev/null; then
   exit
 fi
 if [ -z "$USERNAME" ] || [ -z "$PASSWORD" ]; then
