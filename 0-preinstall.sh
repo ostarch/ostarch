@@ -19,6 +19,7 @@ echo -ne "
                       Installing Prerequisites
 --------------------------------------------------------------------
 "
+pacman -S --noconfirm archlinux-keyring
 pacman -S --noconfirm --needed gptfdisk grub btrfs-progs xfsprogs dosfstools e2fsprogs
 
 mkdir /mnt &>/dev/null
