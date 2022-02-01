@@ -19,7 +19,7 @@ echo -ne "
                       Installing Prerequisites
 --------------------------------------------------------------------
 "
-pacman -S --noconfirm --needed gptfdisk grub btrfs-progs xfsprogs dosfstools e2fsprogs
+pacman -S --noconfirm --needed archlinux-keyring gptfdisk grub btrfs-progs xfsprogs dosfstools e2fsprogs
 
 mkdir /mnt &>/dev/null
 umount -R /mnt &>/dev/null
@@ -51,7 +51,6 @@ echo -ne "
                      Arch Install on Main Drive
 --------------------------------------------------------------------
 "
-pacman -S --noconfirm archlinux-keyring
 pacstrap /mnt base base-devel linux linux-firmware vim nano sudo archlinux-keyring wget git libnewt --noconfirm --needed
 genfstab -U /mnt >> /mnt/etc/fstab
 echo "keyserver hkp://keyserver.ubuntu.com" >> /mnt/etc/pacman.d/gnupg/gpg.conf
