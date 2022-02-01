@@ -22,8 +22,8 @@ echo -ne "
 pacman -S --noconfirm --needed archlinux-keyring gptfdisk grub btrfs-progs xfsprogs dosfstools e2fsprogs
 
 mkdir /mnt &>/dev/null
-umount -R /mnt &>/dev/null
 swapoff -a &>/dev/null
+umount -R /mnt &>/dev/null
 unset BOOT_PARTITION
 unset ROOT_PARTITION
 
