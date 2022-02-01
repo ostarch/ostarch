@@ -52,6 +52,7 @@ echo -ne "
 --------------------------------------------------------------------
 "
 pacstrap /mnt base base-devel linux linux-firmware vim nano sudo archlinux-keyring wget git libnewt --noconfirm --needed
+echo "# <file system> <dir> <type> <options> <dump> <pass>" > /mnt/etc/fstab
 genfstab -U /mnt >> /mnt/etc/fstab
 echo "keyserver hkp://keyserver.ubuntu.com" >> /mnt/etc/pacman.d/gnupg/gpg.conf
 echo "DISK=$DISK" >> "$SCRIPT_DIR/install.conf"
@@ -60,18 +61,20 @@ echo "ROOT_PARTITION=$ROOT_PARTITION" >> "$SCRIPT_DIR/install.conf"
 cp -R "${SCRIPT_DIR}" /mnt/root
 cp /etc/pacman.d/mirrorlist /mnt/etc/pacman.d/mirrorlist
 TOTALMEM=$(cat /proc/meminfo | grep -i 'memtotal' | grep -o '[[:digit:]]*')
-if [[ $TOTALMEM -lt 8000000 ]] && ! grep -q swapfile /mnt/etc/fstab; then
-    echo
-    echo "--------------------------------------------------------------------"
-    echo "                         Creating Swap File                         "
-    echo "--------------------------------------------------------------------"
-    mkdir /mnt/opt/swap # make a dir that we can apply NOCOW to to make it btrfs-friendly.
-    truncate -s 0 /mnt/opt/swap
-    chattr +C /mnt/opt/swap # apply NOCOW, btrfs needs that.
-    btrfs property set /mnt/opt/swap compression none
-    dd if=/dev/zero of=/mnt/opt/swap/swapfile bs=1M count=2048 status=progress
-    chmod 600 /mnt/opt/swap/swapfile
-    mkswap /mnt/opt/swap/swapfile
+if [[ $TOTALMEM -lt 8000000 ]]; then
+    if [ ! -f /mnt/opt/swap/swapfile ]; then
+        echo
+        echo "--------------------------------------------------------------------"
+        echo "                         Creating Swap File                         "
+        echo "--------------------------------------------------------------------"
+        mkdir /mnt/opt/swap # make a dir that we can apply NOCOW to to make it btrfs-friendly.
+        truncate -s 0 /mnt/opt/swap
+        chattr +C /mnt/opt/swap # apply NOCOW, btrfs needs that.
+        btrfs property set /mnt/opt/swap compression none
+        dd if=/dev/zero of=/mnt/opt/swap/swapfile bs=1M count=2048 status=progress
+        chmod 600 /mnt/opt/swap/swapfile
+        mkswap /mnt/opt/swap/swapfile
+    fi
     swapon /mnt/opt/swap/swapfile
     echo "/opt/swap/swapfile	none	swap	sw	0	0" >> /mnt/etc/fstab
 fi
