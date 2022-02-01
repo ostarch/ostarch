@@ -61,9 +61,9 @@ if [[ $TOTALMEM -lt 8000000 ]]; then
         echo "                         Creating Swap File                         "
         echo "--------------------------------------------------------------------"
         mkdir /mnt/opt/swap # make a dir that we can apply NOCOW to to make it btrfs-friendly.
-        truncate -s 0 /mnt/opt/swap
-        chattr +C /mnt/opt/swap # apply NOCOW, btrfs needs that.
-        btrfs property set /mnt/opt/swap compression none
+        truncate -s 0 /mnt/opt/swap/swapfile
+        chattr +C /mnt/opt/swap/swapfile # apply NOCOW, btrfs needs that.
+        btrfs property set /mnt/opt/swap/swapfile compression none
         dd if=/dev/zero of=/mnt/opt/swap/swapfile bs=1M count=2048 status=progress
         chmod 600 /mnt/opt/swap/swapfile
         mkswap /mnt/opt/swap/swapfile
