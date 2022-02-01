@@ -35,6 +35,7 @@ mainmenu() {
 	fi
 }
 
+CURRENT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 source "$CURRENT_DIR/../install.conf" &> /dev/null
 if [ ! -z "$BOOT_PARTITION" ] && [ ! -z "$ROOT_PARTITION" ]; then
 	whiptail --backtitle "$TITLE" --title "Continue Script" --yesno "Continue the script with the current partition setup?" 0 0
