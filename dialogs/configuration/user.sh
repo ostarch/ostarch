@@ -7,7 +7,7 @@
 #  ██║  ██║██║  ██║╚██████╗██║  ██║██████╔╝██║  ██║ ╚████╔╝ ███████╗
 #  ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚═════╝ ╚═╝  ╚═╝  ╚═══╝  ╚══════╝
 #--------------------------------------------------------------------
-CURRENT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+CONFIG_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
 addUserMenu() {
   user=$(whiptail --backtitle "${TITLE}" --title "Add User" --inputbox "Enter the username" 8 40 3>&1 1>&2 2>&3)
@@ -24,7 +24,7 @@ addUserMenu() {
     addUserMenu
     return "$?"
   fi
-  echo "USERNAME=$user" >> "${CURRENT_DIR}/../../install.conf"
+  echo "USERNAME=$user" >> "${CONFIG_DIR}/../../install.conf"
 }
 
 setUserPasswordMenu() {
@@ -47,5 +47,5 @@ setUserPasswordMenu() {
     return "$?"
   fi
   encrpytedPassword=$(echo "$password" | openssl passwd -6 -stdin)
-  echo "PASSWORD=${encrpytedPassword//$/\\$}" >> "${CURRENT_DIR}/../../install.conf"
+  echo "PASSWORD=${encrpytedPassword//$/\\$}" >> "${CONFIG_DIR}/../../install.conf"
 }

@@ -7,7 +7,7 @@
 #  ██║  ██║██║  ██║╚██████╗██║  ██║██████╔╝██║  ██║ ╚████╔╝ ███████╗
 #  ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚═════╝ ╚═╝  ╚═╝  ╚═══╝  ╚══════╝
 #--------------------------------------------------------------------
-CURRENT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+CONFIG_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
 setLocaleMenu() {
 	options=()
@@ -19,5 +19,5 @@ setLocaleMenu() {
   if [ ! "$?" = "0" ]; then
     return 1
   fi
-  echo "LOCALE=$result" >> "${CURRENT_DIR}/../../install.conf"
+  echo "LOCALE=$result" >> "${CONFIG_DIR}/../../install.conf"
 }

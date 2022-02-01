@@ -7,7 +7,7 @@
 #  ██║  ██║██║  ██║╚██████╗██║  ██║██████╔╝██║  ██║ ╚████╔╝ ███████╗
 #  ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚═════╝ ╚═╝  ╚═╝  ╚═══╝  ╚══════╝
 #--------------------------------------------------------------------
-CURRENT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+CONFIG_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
 setHostnameMenu() {
   defaultHostname="$(cat /etc/hostname)"
@@ -28,5 +28,5 @@ setHostnameMenu() {
     setHostnameMenu
     return "$?"
   fi
-  echo "HOSTNAME=$hostname" >> "${CURRENT_DIR}/../../install.conf"
+  echo "HOSTNAME=$hostname" >> "${CONFIG_DIR}/../../install.conf"
 }

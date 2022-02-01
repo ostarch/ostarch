@@ -7,7 +7,7 @@
 #  ██║  ██║██║  ██║╚██████╗██║  ██║██████╔╝██║  ██║ ╚████╔╝ ███████╗
 #  ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚═════╝ ╚═╝  ╚═╝  ╚═══╝  ╚══════╝
 #--------------------------------------------------------------------
-CURRENT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+CONFIG_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
 setKeyboardLayoutMenu() {
   options=()
@@ -20,7 +20,7 @@ setKeyboardLayoutMenu() {
     return 1
   fi
   sudo loadkeys "$result"
-  echo "KEYMAP=$result" >> "${CURRENT_DIR}/../../install.conf"
+  echo "KEYMAP=$result" >> "${CONFIG_DIR}/../../install.conf"
 }
 
 

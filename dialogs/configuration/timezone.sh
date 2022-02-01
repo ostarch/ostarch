@@ -7,7 +7,7 @@
 #  ██║  ██║██║  ██║╚██████╗██║  ██║██████╔╝██║  ██║ ╚████╔╝ ███████╗
 #  ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚═════╝ ╚═╝  ╚═╝  ╚═══╝  ╚══════╝
 #--------------------------------------------------------------------
-CURRENT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+CONFIG_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
 setTimeZoneMenu() {
   localTimezone="$(curl -s --connect-timeout 2 --fail https://ipapi.co/timezone)"
@@ -23,5 +23,5 @@ setTimeZoneMenu() {
   if [ ! "$?" = "0" ]; then
     return 1
   fi
-  echo "TIMEZONE=$result" >> "${CURRENT_DIR}/../../install.conf"
+  echo "TIMEZONE=$result" >> "${CONFIG_DIR}/../../install.conf"
 }
