@@ -56,7 +56,7 @@ formatPartitionsMenu() {
 setupBootPartition() {
   umount -R /mnt &> /dev/null
   options=()
-  options+=("fat32" "(EFI)")
+  options+=("fat32" "")
   options+=("ext4" "")
   result=$(whiptail --backtitle "${TITLE}" --title "Format boot partition" --menu "Select partition format for boot ($BOOT_PARTITION):" 0 0 0 "${options[@]}" 3>&1 1>&2 2>&3)
   if [ ! "$?" = "0" ]; then
