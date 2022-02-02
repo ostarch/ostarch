@@ -139,7 +139,7 @@ npm
 ntfs-3g
 obs-studio
 okular
-gnu-netcat
+openbsd-netcat
 openssh
 os-prober
 oxygen
