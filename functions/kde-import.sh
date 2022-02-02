@@ -15,6 +15,7 @@ if [ $(whoami) = "root"  ]; then
 fi
 
 konsave -r arc-kde
+mkdir -p ~/.local/share
 konsave -i "$CURRENT_DIR/../arc-kde.knsv"
 sleep 1
 konsave -a arc-kde
