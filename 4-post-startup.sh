@@ -21,4 +21,5 @@ echo -ne "
                          Final Configuration
 --------------------------------------------------------------------
 "
+sudo virsh net-autostart default
 $SCRIPT_DIR/functions/kde-import.sh
