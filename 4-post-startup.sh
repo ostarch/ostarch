@@ -21,4 +21,5 @@ echo -ne "
 "
 if ! systemd-detect-virt &>/dev/null; then
   sudo virsh net-autostart default
+  sudo virsh net-start default
 fi
