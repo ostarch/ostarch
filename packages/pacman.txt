@@ -35,10 +35,13 @@ cups
 cups-pdf
 dialog
 discord
+dmidecode
+dnsmasq
 dolphin
 dolphin-plugins
 dosfstools
 dtc
+edk2-ovmf # UEFI Support for Virt-Manager
 efibootmgr # EFI boot
 egl-wayland
 evolution
@@ -69,7 +72,7 @@ htop
 hunspell
 hunspell-en_us
 hunspell-de
-#iptables-nft
+iptables-nft
 jdk-openjdk # Java 17
 kate
 kcalc
