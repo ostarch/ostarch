@@ -72,7 +72,7 @@ htop
 hunspell
 hunspell-en_us
 hunspell-de
-iptables-nft
+#iptables-nft
 jdk-openjdk # Java 17
 kate
 kcalc
