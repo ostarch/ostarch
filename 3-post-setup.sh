@@ -77,7 +77,9 @@ systemctl disable dhcpcd.service
 systemctl stop dhcpcd.service
 systemctl enable NetworkManager.service
 systemctl enable bluetooth.service
-systemctl enable libvirtd.service
+if ! systemd-detect-virt &>/dev/null; then
+  systemctl enable libvirtd.service
+fi
 echo -ne "
 --------------------------------------------------------------------
                               Cleaning 

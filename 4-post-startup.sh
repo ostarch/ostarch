@@ -21,5 +21,7 @@ echo -ne "
                          Final Configuration
 --------------------------------------------------------------------
 "
-sudo virsh net-autostart default
+if ! systemd-detect-virt &>/dev/null; then
+  sudo virsh net-autostart default
+fi
 $SCRIPT_DIR/functions/kde-import.sh
