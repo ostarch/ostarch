@@ -14,8 +14,6 @@ if [ $(whoami) = "root"  ]; then
   exit
 fi
 
-$SCRIPT_DIR/functions/locale.sh
-
 echo -ne "
 --------------------------------------------------------------------
                          Final Configuration
