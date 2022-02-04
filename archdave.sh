@@ -9,11 +9,11 @@ cleanLog() {
 }
 
 pacman -Sy --noconfirm --needed expect
-unbuffer bash $SCRIPT_DIR/0-preinstall.sh || exit 0 | tee $SCRIPT_DIR/0-preinstall.log
-unbuffer arch-chroot /mnt /root/$BASENAME/1-setup.sh || exit 0 | tee $SCRIPT_DIR/1-setup.log
+script -qec "bash $SCRIPT_DIR/0-preinstall.sh" -O $SCRIPT_DIR/0-preinstall.log || exit 0
+script -qec "arch-chroot /mnt /root/$BASENAME/1-setup.sh" -O $SCRIPT_DIR/1-setup.log || exit 0
 source /mnt/root/$BASENAME/install.conf
-unbuffer arch-chroot /mnt /usr/bin/runuser -u $USERNAME -- /home/$USERNAME/$BASENAME/2-user.sh | tee $SCRIPT_DIR/2-user.log
-unbuffer arch-chroot /mnt /root/$BASENAME/3-post-setup.sh | tee $SCRIPT_DIR/3-post-setup.log
+script -qec "arch-chroot /mnt /usr/bin/runuser -u $USERNAME -- /home/$USERNAME/$BASENAME/2-user.sh" -O $SCRIPT_DIR/2-user.log
+script -qec "arch-chroot /mnt /root/$BASENAME/3-post-setup.sh" -O $SCRIPT_DIR/3-post-setup.log
 bash $SCRIPT_DIR/functions/exit.sh 0
 
 cleanLog $SCRIPT_DIR/0-preinstall.log
