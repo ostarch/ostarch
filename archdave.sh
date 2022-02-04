@@ -5,6 +5,7 @@ BASENAME="$( basename $SCRIPT_DIR)"
 cleanLog() {
   cat "$1" | $SCRIPT_DIR/functions/filter.sh | tee "$1"
   sed -i "/\r/d" "$1"
+  sed -i '/^\s*$/d' "$1"
 }
 
 pacman -Sy --noconfirm --needed expect
