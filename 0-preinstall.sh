@@ -34,10 +34,8 @@ if [[ -z "$BOOT_PARTITION" ]] || [[ -z "$ROOT_PARTITION" ]]; then
 fi
 
 
-# mount target
 mount "$ROOT_PARTITION" /mnt
-mkdir /mnt/boot
-mkdir /mnt/boot/efi
+mkdir /mnt/boot &>/dev/null
 mount "$BOOT_PARTITION" /mnt/boot/
 
 if ! grep -qs '/mnt' /proc/mounts; then
@@ -52,7 +50,7 @@ echo -ne "
                      Arch Install on Main Drive
 --------------------------------------------------------------------
 "
-pacstrap /mnt base base-devel linux linux-firmware vim nano sudo archlinux-keyring wget git libnewt --noconfirm --needed
+pacstrap /mnt base base-devel linux linux-lts linux-firmware vim nano sudo archlinux-keyring wget git libnewt --noconfirm --needed
 TOTALMEM=$(cat /proc/meminfo | grep -i 'memtotal' | grep -o '[[:digit:]]*')
 if [[ $TOTALMEM -lt 8000000 ]]; then
     if [ ! -f /mnt/opt/swap/swapfile ]; then

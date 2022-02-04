@@ -47,13 +47,6 @@ systemctl enable sddm.service
 
 echo -ne "
 --------------------------------------------------------------------
-                      Enabling ckb-next Daemon
---------------------------------------------------------------------
-"
-systemctl enable ckb-next-daemon.service
-
-echo -ne "
---------------------------------------------------------------------
                         Setting up SDDM Theme
 --------------------------------------------------------------------
 "
@@ -74,7 +67,6 @@ echo -ne "
 
 systemctl enable cups.service
 systemctl disable dhcpcd.service
-systemctl stop dhcpcd.service
 systemctl enable NetworkManager.service
 systemctl enable bluetooth.service
 if ! systemd-detect-virt &>/dev/null; then

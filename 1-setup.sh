@@ -18,7 +18,7 @@ echo -ne "
 --------------------------------------------------------------------
 "
 pacman -S networkmanager dhclient --noconfirm --needed
-systemctl enable --now NetworkManager
+systemctl enable NetworkManager
 
 $SCRIPT_DIR/functions/makeflags.sh
 
