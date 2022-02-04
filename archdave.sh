@@ -6,8 +6,8 @@ cleanLog() {
   if [ ! -f "$1" ]; then
     return
   fi
+  sed -i "/\[97m/d" "$1" 
   cat "$1" | $SCRIPT_DIR/functions/filter.sh | tee "$1" &> /dev/null
-  sed -i "/\r/d" "$1"
   sed -i '/^\s*$/d' "$1"
 }
 
