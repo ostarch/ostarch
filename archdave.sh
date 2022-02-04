@@ -11,7 +11,6 @@ cleanLog() {
   sed -i '/^\s*$/d' "$1"
 }
 
-pacman -Sy --noconfirm --needed expect
 script -qec "bash $SCRIPT_DIR/0-preinstall.sh" -O $SCRIPT_DIR/0-preinstall.log
 if [ ! "$?" = "0" ]; then
   cleanLog $SCRIPT_DIR/0-preinstall.log
