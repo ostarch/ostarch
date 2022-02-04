@@ -17,17 +17,17 @@ if [ ! "$?" = "0" ]; then
   cleanLog $SCRIPT_DIR/0-preinstall.log
   exit
 fi
+cleanLog $SCRIPT_DIR/0-preinstall.log
 script -qec "arch-chroot /mnt /root/$BASENAME/1-setup.sh" -O $SCRIPT_DIR/1-setup.log
 if [ ! "$?" = "0" ]; then
   cleanLog $SCRIPT_DIR/1-setup.log
   exit
 fi
+cleanLog $SCRIPT_DIR/1-setup.log
 source /mnt/root/$BASENAME/install.conf
 script -qec "arch-chroot /mnt /usr/bin/runuser -u $USERNAME -- /home/$USERNAME/$BASENAME/2-user.sh" -O $SCRIPT_DIR/2-user.log
-script -qec "arch-chroot /mnt /root/$BASENAME/3-post-setup.sh" -O $SCRIPT_DIR/3-post-setup.log
-bash $SCRIPT_DIR/functions/exit.sh 0
-
-cleanLog $SCRIPT_DIR/0-preinstall.log
-cleanLog $SCRIPT_DIR/1-setup.log
 cleanLog $SCRIPT_DIR/2-user.log
+script -qec "arch-chroot /mnt /root/$BASENAME/3-post-setup.sh" -O $SCRIPT_DIR/3-post-setup.log
 cleanLog $SCRIPT_DIR/3-post-setup.log
+cp $SCRIPT_DIR/*.log /mnt/home/$USERNAME/$BASENAME/
+bash $SCRIPT_DIR/functions/exit.sh 0
