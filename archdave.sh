@@ -12,8 +12,16 @@ cleanLog() {
 }
 
 pacman -Sy --noconfirm --needed expect
-script -qec "bash $SCRIPT_DIR/0-preinstall.sh" -O $SCRIPT_DIR/0-preinstall.log || ( cleanLog $SCRIPT_DIR/0-preinstall.log && exit 0 )
-script -qec "arch-chroot /mnt /root/$BASENAME/1-setup.sh" -O $SCRIPT_DIR/1-setup.log || ( cleanLog $SCRIPT_DIR/1-setup.log && exit 0 )
+script -qec "bash $SCRIPT_DIR/0-preinstall.sh" -O $SCRIPT_DIR/0-preinstall.log
+if [ ! "$?" = "0" ]; then
+  cleanLog $SCRIPT_DIR/0-preinstall.log
+  exit
+fi
+script -qec "arch-chroot /mnt /root/$BASENAME/1-setup.sh" -O $SCRIPT_DIR/1-setup.log
+if [ ! "$?" = "0" ]; then
+  cleanLog $SCRIPT_DIR/1-setup.log
+  exit
+fi
 source /mnt/root/$BASENAME/install.conf
 script -qec "arch-chroot /mnt /usr/bin/runuser -u $USERNAME -- /home/$USERNAME/$BASENAME/2-user.sh" -O $SCRIPT_DIR/2-user.log
 script -qec "arch-chroot /mnt /root/$BASENAME/3-post-setup.sh" -O $SCRIPT_DIR/3-post-setup.log
