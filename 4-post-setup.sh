@@ -71,6 +71,7 @@ systemctl enable NetworkManager.service
 systemctl enable bluetooth.service
 if ! systemd-detect-virt &>/dev/null; then
   systemctl enable libvirtd.service
+  usermod -aG libvirt "$USERNAME" &>/dev/null
 fi
 echo -ne "
 --------------------------------------------------------------------

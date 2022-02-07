@@ -35,5 +35,8 @@ if [ "$?" = "0" ]; then
   sed -i '/^PASSWORD=/d' "${CURRENT_DIR}/../install.conf"
   unset PASSWORD
 fi
-sudo usermod -aG libvirt "$USERNAME"
+if grep -qE "^libvirt:" /etc/group; then
+  echo "Adding user $USERNAME to the libvirt group"
+  sudo usermod -aG libvirt "$USERNAME"
+fi
 sudo grpck
