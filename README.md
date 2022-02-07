@@ -25,7 +25,7 @@ To fix this, just run the following commands after you logged in to KDE.
 
 ```bash
 cd ~/ArchDave
-./4-post-startup.sh
+./5-post-startup.sh
 ```
 
 ### System Description

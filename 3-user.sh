@@ -32,6 +32,6 @@ $SCRIPT_DIR/functions/kde-import.sh
 
 echo -ne "
 --------------------------------------------------------------------
-                  System ready for 3-post-setup.sh
+                  System ready for 4-post-setup.sh
 --------------------------------------------------------------------
 "
