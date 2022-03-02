@@ -31,4 +31,12 @@ if [ "$1" = "--aur" ]; then
   command="yay"
 fi
 
-sed -e "/^#/d" -e "s/ #.*//" -e 's/ //g' "$filename" | $command -S --needed --noconfirm -
+source "$CURRENT_DIR/../../install.conf"
+packages=$(sed -e "/^#/d" -e "s/ #.*//" "$filename")
+if [ "$INSTALL_TYPE" = "full" ]; then
+  packages=$(echo "$packages" | sed -e '/--END OF MINIMAL INSTALL--/d')
+else
+  packages=$(echo "$packages" | sed -e '/--END OF MINIMAL INSTALL--/Q')
+fi
+packages=$(echo "$packages" | sed -e 's/ //g')
+echo "$packages" | $command -S --needed --noconfirm -

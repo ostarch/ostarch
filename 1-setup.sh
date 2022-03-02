@@ -17,7 +17,7 @@ echo -ne "
                             Network Setup
 --------------------------------------------------------------------
 "
-pacman -S networkmanager dhclient --noconfirm --needed
+pacman -S --noconfirm --needed networkmanager dhclient
 systemctl enable NetworkManager
 
 $SCRIPT_DIR/functions/makeflags.sh

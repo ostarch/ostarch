@@ -23,7 +23,9 @@ runAndLog "bash $SCRIPT_DIR/0-preinstall.sh" $SCRIPT_DIR/0-preinstall.log || exi
 runAndLog "arch-chroot /mnt /root/$BASENAME/1-setup.sh" $SCRIPT_DIR/1-setup.log || exit
 runAndLog "arch-chroot /mnt /root/$BASENAME/2-install.sh" $SCRIPT_DIR/2-install.log || exit
 source /mnt/root/$BASENAME/install.conf
-runAndLog "arch-chroot /mnt /usr/bin/runuser -u $USERNAME -- /home/$USERNAME/$BASENAME/3-user.sh" $SCRIPT_DIR/3-user.log || exit
+if [[ ! $DESKTOP_ENV == "server" ]]; then
+  runAndLog "arch-chroot /mnt /usr/bin/runuser -u $USERNAME -- /home/$USERNAME/$BASENAME/3-user.sh" $SCRIPT_DIR/3-user.log || exit
+fi
 runAndLog "arch-chroot /mnt /root/$BASENAME/4-post-setup.sh" $SCRIPT_DIR/4-post-setup.log || exit
 cp $SCRIPT_DIR/*.log /mnt/home/$USERNAME/$BASENAME/
 bash $SCRIPT_DIR/functions/exit.sh 0

@@ -1,4 +1,10 @@
+binutils
+dosfstools
+linux-headers
 mesa # Essential Xorg First
+noto-fonts-emoji
+usbutils
+xdg-user-dirs
 xorg
 xorg-server
 xorg-apps
@@ -6,11 +12,9 @@ xorg-drivers
 xorg-xkill
 xorg-xinit
 xterm
-plasma-desktop # KDE Load second
+--END OF MINIMAL INSTALL--
 alsa-plugins # audio plugins
 alsa-utils # audio utils
-ark # compression
-audiocd-kio # CD/DVD Audio
 autoconf # build
 automake # build
 awesome-terminal-fonts
@@ -20,12 +24,9 @@ bash-completion
 bind
 binutils
 bison
-bluedevil
 bluez
 bluez-libs
 bluez-utils
-breeze
-breeze-gtk
 bridge-utils
 btrfs-progs
 celluloid # video players
@@ -37,8 +38,6 @@ dialog
 discord
 dmidecode
 dnsmasq
-dolphin
-dolphin-plugins
 dosfstools
 dtc
 edk2-ovmf # UEFI Support for Virt-Manager
@@ -46,8 +45,6 @@ efibootmgr # EFI boot
 egl-wayland
 evolution
 exfatprogs
-extra-cmake-modules
-filelight
 firefox
 flameshot
 flex # recognize lexical patterns in text
@@ -66,7 +63,6 @@ gst-libav
 gst-plugins-good
 gst-plugins-ugly
 gutenprint
-gwenview
 haveged
 htop
 hunspell
@@ -74,38 +70,6 @@ hunspell-en_us
 hunspell-de
 #iptables-nft
 jdk-openjdk # Java 17
-kate
-kcalc
-kcharselect
-kcodecs
-kcoreaddons
-kcrash
-kcron
-kde-gtk-config
-kdeconnect
-konsole
-kdenetwork-filesharing
-kdenlive
-kdeplasma-addons
-kdialog
-keychain
-kfind
-kgamma5
-kgpg
-khotkeys
-kinfocenter
-kmenuedit
-kompare
-konsole
-krdc
-kscreen
-ksystemlog
-ksysguard
-ktorrent
-kwallet
-kwalletmanager
-kwallet-pam
-layer-shell-qt
 libappindicator-gtk3
 libdvdcss
 libindicator-gtk2
@@ -127,7 +91,6 @@ m4
 make
 man-db
 man-pages
-milou # alternative to KRunner
 nano
 neofetch
 neovim
@@ -141,11 +104,9 @@ nmap
 npm
 ntfs-3g
 obs-studio
-okular
 openbsd-netcat
 openssh
 os-prober
-oxygen
 p7zip
 pacman-contrib
 partitionmanager
@@ -158,17 +119,8 @@ php7-cgi
 php7-gd
 picom
 pkgconf
-plasma-browser-integration
-plasma-disks
-plasma-firewall
-plasma-nm
-plasma-pa
-plasma-thunderbolt
-plasma-vault
-powerdevil
 powerline-fonts
 powertop
-print-manager
 pulseaudio
 pulseaudio-alsa
 pulseaudio-bluetooth
@@ -188,13 +140,11 @@ shellcheck
 simple-scan
 simplescreenrecorder
 #snapper
-#spectacle
 speedtest-cli
 steam
 stow
 sudo
 swtpm
-systemsettings
 terminus-font
 tesseract
 tesseract-data-deu
@@ -212,6 +162,7 @@ ufw
 unrar
 unzip
 usbutils
+vde2
 vi
 vim
 virt-manager
@@ -227,12 +178,10 @@ wireguard-tools
 wireless_tools
 wireshark-qt
 xdg-desktop-portal
-xdg-desktop-portal-kde
 xdg-user-dirs
 xdotool
 xfsprogs
 xsel
-zeroconf-ioslave
 zip
 zsh
 zsh-syntax-highlighting

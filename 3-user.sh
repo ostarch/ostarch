@@ -26,7 +26,7 @@ echo -ne "
 --------------------------------------------------------------------
 "
 
-$SCRIPT_DIR/functions/install/install-packages.sh --aur aur-minimal
+$SCRIPT_DIR/functions/install/install-packages.sh --aur aur
 
 $SCRIPT_DIR/functions/kde-import.sh
 
