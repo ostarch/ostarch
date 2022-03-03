@@ -9,6 +9,6 @@
 #--------------------------------------------------------------------
 
 configurationMenuScript() {
-  menuFlow setKeyboardLayoutMenu setLocaleMenu setTimeZoneMenu addUserMenu setUserPasswordMenu setHostnameMenu
+  menuFlow setKeyboardLayoutMenu setLocaleMenu setTimeZoneMenu setDesktopEnvironment setInstallType addUserMenu setUserPasswordMenu setHostnameMenu
   return "$?"
 }
