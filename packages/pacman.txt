@@ -1,8 +1,12 @@
 binutils
 dosfstools
+efibootmgr # EFI boot
+grub
 linux-headers
 mesa # Essential Xorg First
 noto-fonts-emoji
+os-prober
+stow
 usbutils
 xdg-user-dirs
 xorg
@@ -12,6 +16,7 @@ xorg-drivers
 xorg-xkill
 xorg-xinit
 xterm
+zsh
 --END OF MINIMAL INSTALL--
 alsa-plugins # audio plugins
 alsa-utils # audio utils
@@ -41,7 +46,6 @@ dnsmasq
 dosfstools
 dtc
 edk2-ovmf # UEFI Support for Virt-Manager
-efibootmgr # EFI boot
 egl-wayland
 evolution
 exfatprogs
@@ -57,7 +61,6 @@ gimp # Photo editing
 git
 gptfdisk
 gradle
-grub
 grub-customizer
 gst-libav
 gst-plugins-good
@@ -106,7 +109,6 @@ ntfs-3g
 obs-studio
 openbsd-netcat
 openssh
-os-prober
 p7zip
 pacman-contrib
 partitionmanager
@@ -134,16 +136,12 @@ remmina
 rsync
 screen
 scrot
-sddm
-sddm-kcm
 shellcheck
 simple-scan
 simplescreenrecorder
 #snapper
 speedtest-cli
 steam
-stow
-sudo
 swtpm
 terminus-font
 tesseract
@@ -183,6 +181,5 @@ xdotool
 xfsprogs
 xsel
 zip
-zsh
 zsh-syntax-highlighting
 zsh-autosuggestions

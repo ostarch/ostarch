@@ -7,13 +7,10 @@ sddm
 --END OF MINIMAL INSTALL--
 ark # compression
 audiocd-kio # CD/DVD Audio
-bluedevil
-discover
 extra-cmake-modules
 filelight
 gwenview
 kate
-kde-gtk-config
 kdeconnect
 kcalc
 kcharselect
@@ -23,40 +20,24 @@ kcrash
 kcron
 kdenetwork-filesharing
 kdenlive
-kdeplasma-addons
 kdialog
 keychain
 kfind
-kgamma5
 kgpg
-khotkeys
-kinfocenter
 kmenuedit
 kompare
 konsole
 krdc
-kscreen
 ksystemlog
 ksysguard
 ktorrent
 kvantum-qt5
 kwallet
 kwalletmanager
-kwallet-pam
-kwayland-integration
 layer-shell-qt
 milou # alternative to KRunner
 okular
-oxygen
-plasma-browser-integration
-plasma-disks
-plasma-firewall
-plasma-nm
-plasma-pa
-plasma-thunderbolt
-plasma-vault
-powerdevil
+plasma-meta
 print-manager
 systemsettings
-xdg-desktop-portal-kde
 zeroconf-ioslave
