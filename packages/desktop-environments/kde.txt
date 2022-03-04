@@ -31,7 +31,6 @@ krdc
 ksystemlog
 ksysguard
 ktorrent
-kvantum-qt5
 kwallet
 kwalletmanager
 layer-shell-qt
