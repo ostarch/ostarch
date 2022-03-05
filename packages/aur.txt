@@ -1,7 +1,5 @@
 arc-kde
-autojump
 brave-bin # Brave Browser
-konsave
 --END OF MINIMAL INSTALL--
 cups-bjnp
 dxvk-bin # DXVK DirectX to Vulcan

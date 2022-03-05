@@ -6,6 +6,7 @@ linux-headers
 mesa # Essential Xorg First
 noto-fonts-emoji
 os-prober
+python-pip
 stow
 usbutils
 xdg-user-dirs
@@ -129,7 +130,6 @@ pulseaudio-bluetooth
 python-notify2
 python-psutil
 python-pyqt5
-python-pip
 qemu
 qemu-arch-extra
 remmina
