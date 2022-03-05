@@ -2,6 +2,7 @@ binutils
 dosfstools
 efibootmgr # EFI boot
 grub
+htop
 linux-headers
 mesa # Essential Xorg First
 noto-fonts-emoji
@@ -68,7 +69,6 @@ gst-plugins-good
 gst-plugins-ugly
 gutenprint
 haveged
-htop
 hunspell
 hunspell-en_us
 hunspell-de

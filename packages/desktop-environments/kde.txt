@@ -1,16 +1,19 @@
+ark # compression
 breeze
 breeze-gtk
 dolphin
 dolphin-plugins
+gwenview
+kate
+konsole
+okular
 plasma-desktop
+plasma-meta
 sddm
 --END OF MINIMAL INSTALL--
-ark # compression
 audiocd-kio # CD/DVD Audio
 extra-cmake-modules
 filelight
-gwenview
-kate
 kdeconnect
 kcalc
 kcharselect
@@ -26,7 +29,6 @@ kfind
 kgpg
 kmenuedit
 kompare
-konsole
 krdc
 ksystemlog
 ksysguard
@@ -35,8 +37,5 @@ kwallet
 kwalletmanager
 layer-shell-qt
 milou # alternative to KRunner
-okular
-plasma-meta
 print-manager
-systemsettings
 zeroconf-ioslave
