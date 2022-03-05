@@ -13,7 +13,7 @@ source $CURRENT_DIR/../install.conf &>/dev/null
 if [ "$SKIP_MIRRORS" = true ]; then
   exit
 fi
-sudo pacman -S --noconfirm --needed curl pacman-contrib rsync reflector python
+sudo pacman -S --noconfirm --needed curl glibc pacman-contrib rsync reflector
 iso=$(curl -4 ifconfig.co/country-iso)
 sudo cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
 echo -ne "

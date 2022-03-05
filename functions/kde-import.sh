@@ -15,7 +15,7 @@ if [ $(whoami) = "root"  ]; then
 fi
 
 export PATH=$PATH:~/.local/bin
-if [ ! type konsave &> /dev/null ]; then
+if ! type konsave &> /dev/null; then
   pip install konsave
 fi
 konsave -r arc-kde
