@@ -3,6 +3,9 @@ dosfstools
 efibootmgr # EFI boot
 grub
 htop
+lib32-mesa
+libva-vdpau-driver
+libvdpau-va-gl
 linux-headers
 mesa # Essential Xorg First
 noto-fonts-emoji
@@ -11,12 +14,10 @@ python-pip
 stow
 usbutils
 xdg-user-dirs
-xorg
 xorg-server
-xorg-apps
-xorg-drivers
 xorg-xkill
 xorg-xinit
+xorg-xinput
 xterm
 zsh
 --END OF MINIMAL INSTALL--
@@ -95,6 +96,7 @@ m4
 make
 man-db
 man-pages
+mpv
 nano
 neofetch
 neovim
@@ -165,7 +167,6 @@ vi
 vim
 virt-manager
 virt-viewer
-vlc
 wget
 which
 wine

@@ -27,5 +27,5 @@ if lspci | grep 'VGA' | grep -Eq "Radeon|AMD"; then
 fi
 
 if lspci | grep "VGA" | grep "Intel" | grep -q "Graphics"; then
-	pacman -S --noconfirm --needed libva-intel-driver libvdpau-va-gl lib32-vulkan-intel vulkan-intel libva-intel-driver libva-utils lib32-mesa
+	pacman -S --noconfirm --needed intel-media-driver libva-intel-driver libva-utils vulkan-intel lib32-vulkan-intel
 fi
