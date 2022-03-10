@@ -45,4 +45,6 @@ else
   fi
 fi
 packages=$(echo "$packages" | sed -e 's/ //g')
-echo "$packages" | $command -S --needed --noconfirm -
+if [ ! -z "$packages" ]; then
+  echo "$packages" | $command -S --needed --noconfirm -
+fi
