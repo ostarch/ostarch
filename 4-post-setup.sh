@@ -51,7 +51,7 @@ elif [ "$DESKTOP_ENV" = "gnome" ]; then
   systemctl enable gdm.service
 elif [ "$DESKTOP_ENV" = "lxde" ]; then
   systemctl enable lxdm.service
-else
+elif [ ! "$DESKTOP_ENV" = "none" ]; then
   pacman -S --noconfirm --needed lightdm lightdm-gtk-greeter
   systemctl enable lightdm.service
 fi
