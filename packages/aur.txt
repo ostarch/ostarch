@@ -12,7 +12,7 @@ phpstorm
 phpstorm-jre
 pycharm-professional
 rambox-bin
-rtl88x2bu-dkms-git
+#rtl88x2bu-dkms-git # for WiFi USB adapters
 timeshift
 ttf-meslo # Nerdfont package
 ttf-ms-fonts
