@@ -22,7 +22,7 @@ if lspci | grep -Eq "NVIDIA|GeForce"; then
 		nvidia_lts="nvidia-lts"
 	fi
 	pacman -S --noconfirm --needed nvidia $nvidia_lts nvidia-settings nvidia-utils lib32-nvidia-utils lib32-opencl-nvidia
-	#nvidia-xconfig
+	nvidia-xconfig
 	echo "options nvidia_drm modeset=1" > /usr/lib/modprobe.d/nvidia-drm.conf
 	#cp "$SCRIPT_DIR/nvidia.conf" "/etc/X11/xorg.conf.d/"
 fi
