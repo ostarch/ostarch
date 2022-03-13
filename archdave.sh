@@ -28,6 +28,5 @@ source /mnt/root/$BASENAME/install.conf
 runAndLog "arch-chroot /mnt /usr/bin/runuser -u $USERNAME -- /home/$USERNAME/$BASENAME/3-user.sh" || exit
 runAndLog "arch-chroot /mnt /root/$BASENAME/4-post-setup.sh" || exit
 cp -r $SCRIPT_DIR/logs /mnt/home/$USERNAME/$BASENAME/
-cp $SCRIPT_DIR/install.conf /mnt/home/$USERNAME/$BASENAME/logs/
-rm /mnt/home/$USERNAME/$BASENAME/install.conf &>/dev/null
+mv /mnt/home/$USERNAME/$BASENAME/install.conf /mnt/home/$USERNAME/$BASENAME/logs/ &>/dev/null
 bash $SCRIPT_DIR/functions/exit.sh 0
