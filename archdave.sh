@@ -20,7 +20,7 @@ runAndLog() {
   return $errorCode
 }
 
-mkdir "$SCRIPT_DIR/logs"
+mkdir "$SCRIPT_DIR/logs" &>/dev/null
 runAndLog "bash $SCRIPT_DIR/0-preinstall.sh" || exit
 runAndLog "arch-chroot /mnt /root/$BASENAME/1-setup.sh" || exit
 runAndLog "arch-chroot /mnt /root/$BASENAME/2-install.sh" || exit
