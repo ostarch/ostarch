@@ -3,16 +3,22 @@ dosfstools
 efibootmgr # EFI boot
 grub
 htop
+lib32-libva-mesa-driver
+lib32-libva-vdpau-driver
 lib32-mesa
+lib32-mesa-vdpau
+libva-mesa-driver
 libva-vdpau-driver
 libvdpau-va-gl
 linux-headers
-mesa # Essential Xorg First
+mesa
+mesa-vdpau
 noto-fonts-emoji
 os-prober
 python-pip
 stow
 usbutils
+vulkan-tools
 xdg-user-dirs
 xorg-server
 xorg-xkill
