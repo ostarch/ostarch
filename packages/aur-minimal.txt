@@ -1,4 +1,0 @@
-arc-kde
-autojump
-brave-bin # Brave Browser
-konsave

@@ -15,7 +15,7 @@ if [ "$1" = "--help" ] || [ "$1" = "-h" ] || [ -z "$1" ]; then
   echo "  --pacman: install packages from pacman (default)"
   echo "  --aur: install packages from AUR with yay"
   echo "  <package-filename>: the filename in the packages directory"
-  echo "    for example: 'pacman', 'pacman-gaming', 'aur'"
+  echo "    for example: 'pacman', 'pacman-gaming', 'aur', 'desktop-environments/kde'"
   echo
   exit
 fi
@@ -31,4 +31,20 @@ if [ "$1" = "--aur" ]; then
   command="yay"
 fi
 
-sed -e "/^#/d" -e "s/ #.*//" -e 's/ //g' "$filename" | $command -S --needed --noconfirm -
+source "$CURRENT_DIR/../../install.conf" &> /dev/null
+packages=$(sed -e "/^#/d" -e "s/ #.*//" "$filename")
+if [ "$INSTALL_TYPE" = "full" ]; then
+  packages=$(echo "$packages" | sed -e '/--END OF MINIMAL INSTALL--/d')
+elif [ "$INSTALL_TYPE" = "minimal" ]; then
+  packages=$(echo "$packages" | sed -e '/--END OF MINIMAL INSTALL--/Q')
+else
+  if [ "$1" = "--aur" ]; then
+    packages=$(echo "$packages" | sed -e '/--END OF MINIMAL INSTALL--/Q')
+  else
+    packages=$(echo "$packages" | sed -e '/--END OF MINIMAL INSTALL--/d')
+  fi
+fi
+packages=$(echo "$packages" | sed -e 's/ //g')
+if [ ! -z "$packages" ]; then
+  echo "$packages" | $command -S --needed --noconfirm -
+fi

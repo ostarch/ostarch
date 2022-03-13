@@ -43,21 +43,18 @@ echo -ne "
                    Enabling Login Display Manager
 --------------------------------------------------------------------
 "
-systemctl enable sddm.service
-
-echo -ne "
---------------------------------------------------------------------
-                        Setting up SDDM Theme
---------------------------------------------------------------------
-"
-cat <<EOF > /etc/sddm.conf
-[Theme]
-Current=breeze
-EOF
-
-cat <<EOF >> /usr/share/sddm/scripts/Xsetup
-/home/$USERNAME/bin/xrandr_display
-EOF
+if [ "$DESKTOP_ENV" = "kde" ]; then
+  systemctl enable sddm.service
+  echo -e "[Theme]\nCurrent=breeze" > /etc/sddm.conf
+  echo "/home/$USERNAME/bin/xrandr_display" >> /usr/share/sddm/scripts/Xsetup
+elif [ "$DESKTOP_ENV" = "gnome" ]; then
+  systemctl enable gdm.service
+elif [ "$DESKTOP_ENV" = "lxde" ]; then
+  systemctl enable lxdm.service
+elif [ ! "$DESKTOP_ENV" = "none" ]; then
+  pacman -S --noconfirm --needed lightdm lightdm-gtk-greeter
+  systemctl enable lightdm.service
+fi
 
 echo -ne "
 --------------------------------------------------------------------

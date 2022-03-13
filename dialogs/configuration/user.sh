@@ -10,7 +10,7 @@
 CONFIG_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
 addUserMenu() {
-  user=$(whiptail --backtitle "${TITLE}" --title "Add User" --inputbox "Enter the username" 8 40 3>&1 1>&2 2>&3)
+  user=$(whiptail --backtitle "${TITLE}" --title "Add User" --cancel-button "Back" --inputbox "Enter the username" 8 40 3>&1 1>&2 2>&3)
   if [ ! "$?" = "0" ]; then
     return 1
   fi
@@ -28,11 +28,11 @@ addUserMenu() {
 }
 
 setUserPasswordMenu() {
-  password=$(whiptail --backtitle "${TITLE}" --title "Set User Password" --passwordbox "Enter your password" 8 40 3>&1 1>&2 2>&3)
+  password=$(whiptail --backtitle "${TITLE}" --title "Set User Password" --cancel-button "Back" --passwordbox "Enter your password" 8 40 3>&1 1>&2 2>&3)
   if [ ! "$?" = "0" ]; then
     return 1
   fi
-  passwordRepeat=$(whiptail --backtitle "${TITLE}" --title "Set User Password" --passwordbox "Repeat your password" 8 40 3>&1 1>&2 2>&3)
+  passwordRepeat=$(whiptail --backtitle "${TITLE}" --title "Set User Password" --cancel-button "Back" --passwordbox "Repeat your password" 8 40 3>&1 1>&2 2>&3)
   if [ ! "$?" = "0" ]; then
     return 1
   fi

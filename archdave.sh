@@ -13,17 +13,20 @@ cleanLog() {
 }
 
 runAndLog() {
-  script -qec "$1" -O "$2"
+  local logfile="$SCRIPT_DIR/logs/$(basename "$1" .sh).log"
+  script -qec "$1" -O "$logfile"
   local errorCode="$?"
-  cleanLog "$2"
+  cleanLog "$logfile"
   return $errorCode
 }
 
-runAndLog "bash $SCRIPT_DIR/0-preinstall.sh" $SCRIPT_DIR/0-preinstall.log || exit
-runAndLog "arch-chroot /mnt /root/$BASENAME/1-setup.sh" $SCRIPT_DIR/1-setup.log || exit
-runAndLog "arch-chroot /mnt /root/$BASENAME/2-install.sh" $SCRIPT_DIR/2-install.log || exit
+mkdir "$SCRIPT_DIR/logs" &>/dev/null
+runAndLog "bash $SCRIPT_DIR/0-preinstall.sh" || exit
+runAndLog "arch-chroot /mnt /root/$BASENAME/1-setup.sh" || exit
+runAndLog "arch-chroot /mnt /root/$BASENAME/2-install.sh" || exit
 source /mnt/root/$BASENAME/install.conf
-runAndLog "arch-chroot /mnt /usr/bin/runuser -u $USERNAME -- /home/$USERNAME/$BASENAME/3-user.sh" $SCRIPT_DIR/3-user.log || exit
-runAndLog "arch-chroot /mnt /root/$BASENAME/4-post-setup.sh" $SCRIPT_DIR/4-post-setup.log || exit
-cp $SCRIPT_DIR/*.log /mnt/home/$USERNAME/$BASENAME/
+runAndLog "arch-chroot /mnt /usr/bin/runuser -u $USERNAME -- /home/$USERNAME/$BASENAME/3-user.sh" || exit
+runAndLog "arch-chroot /mnt /root/$BASENAME/4-post-setup.sh" || exit
+cp -r $SCRIPT_DIR/logs /mnt/home/$USERNAME/$BASENAME/
+mv /mnt/home/$USERNAME/$BASENAME/install.conf /mnt/home/$USERNAME/$BASENAME/logs/ &>/dev/null
 bash $SCRIPT_DIR/functions/exit.sh 0

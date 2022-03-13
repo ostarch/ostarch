@@ -50,7 +50,7 @@ echo -ne "
                      Arch Install on Main Drive
 --------------------------------------------------------------------
 "
-pacstrap /mnt base base-devel linux linux-lts linux-firmware vim nano sudo archlinux-keyring wget git libnewt --noconfirm --needed
+pacstrap /mnt --noconfirm --needed base base-devel linux linux-firmware vim nano sudo archlinux-keyring wget git libnewt
 TOTALMEM=$(cat /proc/meminfo | grep -i 'memtotal' | grep -o '[[:digit:]]*')
 if [[ $TOTALMEM -lt 8000000 ]]; then
     if [ ! -f /mnt/opt/swap/swapfile ]; then

@@ -1,2 +1,3 @@
 install.conf
 *.log
+logs/

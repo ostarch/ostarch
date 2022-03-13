@@ -26,9 +26,21 @@ echo -ne "
 --------------------------------------------------------------------
 "
 
-$SCRIPT_DIR/functions/install/install-packages.sh --aur aur-minimal
+$SCRIPT_DIR/functions/install/install-packages.sh --aur aur
 
 $SCRIPT_DIR/functions/kde-import.sh
+mkdir -p ~/.config/autostart
+cat <<EOF > ~/.config/autostart/wallpaper-post-startup.desktop
+[Desktop Entry]
+Exec=$SCRIPT_DIR/functions/wallpaper.sh
+Icon=dialog-scripts
+Name=wallpaper-post-startup
+Path=
+Type=Application
+X-KDE-AutostartScript=true
+X-KDE-autostart-phase=2
+X-KDE-startup-notify=false
+EOF
 
 echo -ne "
 --------------------------------------------------------------------

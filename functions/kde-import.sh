@@ -14,6 +14,10 @@ if [ $(whoami) = "root"  ]; then
   exit
 fi
 
+export PATH=$PATH:~/.local/bin
+if ! type konsave &> /dev/null; then
+  pip install konsave
+fi
 konsave -r arc-kde
 mkdir -p ~/.local/share
 konsave -i "$CURRENT_DIR/../arc-kde.knsv"

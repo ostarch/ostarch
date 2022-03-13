@@ -1,0 +1,41 @@
+ark # compression
+breeze
+breeze-gtk
+dolphin
+dolphin-plugins
+gwenview
+kate
+konsole
+okular
+plasma-desktop
+plasma-meta
+sddm
+--END OF MINIMAL INSTALL--
+audiocd-kio # CD/DVD Audio
+extra-cmake-modules
+filelight
+kdeconnect
+kcalc
+kcharselect
+kcodecs
+kcoreaddons
+kcrash
+kcron
+kdenetwork-filesharing
+kdenlive
+kdialog
+keychain
+kfind
+kgpg
+kmenuedit
+kompare
+krdc
+ksystemlog
+ksysguard
+ktorrent
+kwallet
+kwalletmanager
+layer-shell-qt
+milou # alternative to KRunner
+print-manager
+zeroconf-ioslave

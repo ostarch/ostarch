@@ -22,6 +22,16 @@ $SCRIPT_DIR/functions/install/install-packages.sh pacman || exit 1
 
 echo -ne "
 --------------------------------------------------------------------
+                   Installing Desktop Environment  
+--------------------------------------------------------------------
+"
+source $SCRIPT_DIR/install.conf
+if [ -f "$SCRIPT_DIR/packages/desktop-environments/$DESKTOP_ENV.txt" ]; then
+  $SCRIPT_DIR/functions/install/install-packages.sh desktop-environments/$DESKTOP_ENV || exit 1
+fi
+
+echo -ne "
+--------------------------------------------------------------------
                       Installing Gaming Drivers
 --------------------------------------------------------------------
 "
