@@ -14,7 +14,7 @@ setHostnameMenu() {
   if [ "$defaultHostname" = "archiso" ]; then
     defaultHostname="archlinux"
   fi
-  hostname=$(whiptail --backtitle "${TITLE}" --title "Set Computer Name" --inputbox "Enter your hostname" 8 40 "$defaultHostname" 3>&1 1>&2 2>&3)
+  hostname=$(whiptail --backtitle "${TITLE}" --title "Set Computer Name" --cancel-button "Back" --inputbox "Enter your hostname" 8 40 "$defaultHostname" 3>&1 1>&2 2>&3)
   if [ ! "$?" = "0" ]; then
     return 1
   fi
