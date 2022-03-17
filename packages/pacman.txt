@@ -1,12 +1,18 @@
 binutils
 dosfstools
+easyeffects
 efibootmgr # EFI boot
 grub
+gst-plugin-pipewire
 htop
 lib32-libva-mesa-driver
 lib32-libva-vdpau-driver
 lib32-mesa
 lib32-mesa-vdpau
+lib32-pipewire
+lib32-pipewire-jack
+lib32-pipewire-v4l2
+libpipewire02
 libva-mesa-driver
 libva-vdpau-driver
 libvdpau-va-gl
@@ -15,7 +21,14 @@ mesa
 mesa-vdpau
 noto-fonts-emoji
 os-prober
+pipewire
+pipewire-alsa
+pipewire-jack
+pipewire-media-session
+pipewire-pulse
+pipewire-v4l2
 python-pip
+qpwgraph
 stow
 usbutils
 vulkan-tools
@@ -132,9 +145,6 @@ picom
 pkgconf
 powerline-fonts
 powertop
-pulseaudio
-pulseaudio-alsa
-pulseaudio-bluetooth
 python-notify2
 python-psutil
 python-pyqt5
@@ -183,7 +193,6 @@ wireguard-tools
 wireless_tools
 wireshark-qt
 xdg-desktop-portal
-xdg-user-dirs
 xdotool
 xfsprogs
 xsel
