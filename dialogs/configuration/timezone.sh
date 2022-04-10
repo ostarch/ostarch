@@ -11,7 +11,7 @@ CONFIG_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
 setTimeZoneMenu() {
   localTimezone="$(curl -s --connect-timeout 2 --fail https://ipapi.co/timezone)"
-  if [ -z "$timezone" ]; then
+  if [ -z "$localTimezone" ]; then
     localTimezone="Europe/Berlin"
   fi
   options=()
