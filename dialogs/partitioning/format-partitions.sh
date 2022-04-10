@@ -67,7 +67,7 @@ setupBootPartition() {
       mkfs.vfat -F32 -n "BOOT" "${BOOT_PARTITION}"
       ;;
     "ext4")
-      mkfs.ext4 -L "BOOT" "${BOOT_PARTITION}"
+      yes | mkfs.ext4 -L "BOOT" "${BOOT_PARTITION}"
       ;;
   esac
 }
@@ -84,7 +84,7 @@ setupRootPartition() {
   fi
   case "$result" in
     "ext4")
-      mkfs.ext4 -L "ROOT" "${ROOT_PARTITION}"
+      yes | mkfs.ext4 -L "ROOT" "${ROOT_PARTITION}"
       ;;
     "btrfs")
       mkfs.btrfs -L "ROOT" -f "${ROOT_PARTITION}"
