@@ -66,7 +66,7 @@ systemctl enable cups.service
 systemctl disable dhcpcd.service
 systemctl enable NetworkManager.service
 systemctl enable bluetooth.service
-if ! systemd-detect-virt &>/dev/null; then
+if ! systemd-detect-virt &>/dev/null && [ ! "$INSTALL_TYPE" = "minimal" ]; then
   systemctl enable libvirtd.service
   usermod -aG libvirt "$USERNAME" &>/dev/null
   if [ -f /etc/libvirt/qemu/networks/default.xml ]; then
