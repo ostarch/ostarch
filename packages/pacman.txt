@@ -24,7 +24,6 @@ os-prober
 pipewire
 pipewire-alsa
 pipewire-jack
-pipewire-media-session
 pipewire-pulse
 pipewire-v4l2
 python-pip
@@ -32,6 +31,7 @@ qpwgraph
 stow
 usbutils
 vulkan-tools
+wireplumber
 xdg-user-dirs
 xorg-server
 xorg-xkill
