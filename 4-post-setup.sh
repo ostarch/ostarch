@@ -69,6 +69,10 @@ systemctl enable bluetooth.service
 if ! systemd-detect-virt &>/dev/null; then
   systemctl enable libvirtd.service
   usermod -aG libvirt "$USERNAME" &>/dev/null
+  if [ -f /etc/libvirt/qemu/networks/default.xml ]; then
+    echo "Enabling autostart for default virtualization network"
+    ln -s /etc/libvirt/qemu/networks/default.xml /etc/libvirt/qemu/networks/autostart/default.xml &>/dev/null
+  fi
 fi
 echo -ne "
 --------------------------------------------------------------------
