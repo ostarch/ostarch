@@ -7,6 +7,10 @@
 #  ██║  ██║██║  ██║╚██████╗██║  ██║██████╔╝██║  ██║ ╚████╔╝ ███████╗
 #  ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚═════╝ ╚═╝  ╚═╝  ╚═══╝  ╚══════╝
 #--------------------------------------------------------------------
+if [ $(whoami) = "root"  ]; then
+  echo "Don't run this as root!"
+  exit
+fi
 SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 source "$SCRIPT_DIR/dialogs/menu.sh"
 
@@ -18,6 +22,9 @@ hostname="Set Hostname"
 shutdown_timeout="Set Systemd Shutdown Timeout"
 mirrors="Update System Mirrors"
 pacman="Pacman Customization"
+graphics_drivers="Install Graphics Drivers and Microcode"
+base_packages="Install Base Packages"
+desktop_environment="Install Desktop Environment"
 xdg="Always use KDE File Picker"
 kde_import="Import KDE Configuration"
 kde_export="Export KDE Configuration"
@@ -35,6 +42,9 @@ configurationMenu() {
   options+=("$shutdown_timeout" "")
   options+=("$mirrors" "")
   options+=("$pacman" "")
+  options+=("$graphics_drivers" "")
+  options+=("$base_packages" "")
+  options+=("$desktop_environment" "")
   options+=("$xdg" "")
   options+=("$kde_import" "")
   options+=("$kde_export" "")
@@ -74,6 +84,29 @@ configurationMenu() {
       ;;
     "$pacman")
       "$SCRIPT_DIR/functions/pacman.sh"
+      nextItem="$graphics_drivers"
+      ;;
+    "$graphics_drivers")
+      sudo "$SCRIPT_DIR/functions/install/microcode.sh"
+      sudo "$SCRIPT_DIR/functions/install/graphics-drivers.sh"
+      nextItem="$base_packages"
+      ;;
+    "$base_packages")
+      setInstallType || return 0
+      "$SCRIPT_DIR/functions/install/install-packages.sh" pacman || return 1
+      "$SCRIPT_DIR/functions/install/install-packages.sh" pacman-gaming || return 1
+      if ! pacman -Qi yay &>/dev/null; then
+        "$SCRIPT_DIR/functions/install/yay.sh" || return 1
+      fi
+      "$SCRIPT_DIR/functions/install/install-packages.sh" --aur aur || return 1
+      nextItem="$desktop_environment"
+      ;;
+    "$desktop_environment")
+      menuFlow setDesktopEnvironment setInstallType || return 0
+      source "$SCRIPT_DIR/install.conf" &>/dev/null
+      if [ -f "$SCRIPT_DIR/packages/desktop-environments/$DESKTOP_ENV.txt" ]; then
+        $SCRIPT_DIR/functions/install/install-packages.sh desktop-environments/$DESKTOP_ENV || return 1
+      fi
       nextItem="$xdg"
       ;;
     "$xdg")

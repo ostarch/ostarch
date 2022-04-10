@@ -18,7 +18,9 @@ fi
 
 $SCRIPT_DIR/functions/dotfiles.sh
 
-$SCRIPT_DIR/functions/install/yay.sh
+if ! pacman -Qi yay &>/dev/null; then
+  $SCRIPT_DIR/functions/install/yay.sh
+fi
 
 echo -ne "
 --------------------------------------------------------------------

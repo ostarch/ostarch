@@ -18,7 +18,7 @@ echo -ne "
 if lspci | grep -Eq "NVIDIA|GeForce"; then
 	nvidia_lts=""
 	source "$CURRENT_DIR/../../install.conf" &> /dev/null
-	if [ ! "$INSTALL_TYPE" = "minimal" ]; then
+	if [ ! "$INSTALL_TYPE" = "minimal" ] || pacman -Qi linux-lts &>/dev/null; then
 		nvidia_lts="nvidia-lts"
 	fi
 	pacman -S --noconfirm --needed nvidia $nvidia_lts nvidia-settings nvidia-utils lib32-nvidia-utils
