@@ -46,7 +46,7 @@ echo -ne "
 if [ "$DESKTOP_ENV" = "kde" ]; then
   systemctl enable sddm.service
   echo -e "[Theme]\nCurrent=breeze" > /etc/sddm.conf
-  echo "/home/$USERNAME/bin/xrandr_display" >> /usr/share/sddm/scripts/Xsetup
+  echo "/home/$USERNAME/bin/xrandr-display" >> /usr/share/sddm/scripts/Xsetup
 elif [ "$DESKTOP_ENV" = "gnome" ]; then
   systemctl enable gdm.service
 elif [ "$DESKTOP_ENV" = "lxde" ]; then
