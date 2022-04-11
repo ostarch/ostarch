@@ -17,5 +17,6 @@ export PATH=$PATH:~/.local/bin
 if ! type konsave &> /dev/null; then
   pip install konsave
 fi
+konsave -r arc-kde
 konsave -s arc-kde
 konsave -e arc-kde
