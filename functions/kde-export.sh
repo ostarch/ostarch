@@ -19,4 +19,6 @@ if ! type konsave &> /dev/null; then
 fi
 konsave -r arc-kde
 konsave -s arc-kde
+sed -i '/^History Items/d' "$HOME/.config/konsave/profiles/arc-kde/configs/kdeglobals"
+sed -i '/^LaunchCounts/d' "$HOME/.config/konsave/profiles/arc-kde/configs/plasmashellrc"
 konsave -e arc-kde
