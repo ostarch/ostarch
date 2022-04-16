@@ -4,9 +4,11 @@ brave-bin # Brave Browser
 cups-bjnp
 dxvk-bin # DXVK DirectX to Vulcan
 etcher-bin
+mangohud
 minecraft-launcher
 intellij-idea-ultimate-edition
 intellij-idea-ultimate-edition-jre
+lib32-mangohud
 ocs-url # install packages from websites
 phpstorm
 phpstorm-jre

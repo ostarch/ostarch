@@ -33,6 +33,7 @@ $SCRIPT_DIR/functions/hostname.sh
 $SCRIPT_DIR/functions/keyboard-layout.sh
 $SCRIPT_DIR/functions/shutdown-timeout.sh
 $SCRIPT_DIR/functions/xdg-portal.sh
+echo "MANGOHUD=1" >> /etc/environment
 
 source "$SCRIPT_DIR/install.conf"
 
