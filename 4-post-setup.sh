@@ -74,6 +74,9 @@ if ! systemd-detect-virt &>/dev/null && [ ! "$INSTALL_TYPE" = "minimal" ]; then
     ln -s /etc/libvirt/qemu/networks/default.xml /etc/libvirt/qemu/networks/autostart/default.xml &>/dev/null
   fi
 fi
+if hdparm -I "$DISK" | grep TRIM &>/dev/null; then
+  systemctl enable fstrim.timer
+fi
 echo -ne "
 --------------------------------------------------------------------
                               Cleaning 
