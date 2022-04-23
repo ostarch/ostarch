@@ -3,8 +3,10 @@ breeze
 breeze-gtk
 dolphin
 dolphin-plugins
+ffmpegthumbs
 gwenview
 kate
+kdegraphics-thumbnailers
 konsole
 okular
 plasma-desktop
