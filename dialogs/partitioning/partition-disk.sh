@@ -86,7 +86,7 @@ partitionDisks() {
   fi
 
   sgdisk -n ${BOOT_PARTITION_NUM}::+200M --typecode=${BOOT_PARTITION_NUM}:ef00 --change-name=${BOOT_PARTITION_NUM}:'BOOT' ${DISK} # partition 1 (Boot Partition)
-  if [[ -n "$SWAP_TYPE" && "$SWAP_TYPE" != "none" ]]; then
+  if [[ -n "$SWAP_TYPE" && "$SWAP_TYPE" == "partition" ]]; then
     swapSize=$(getSwapSpace)
     if [ $swapSize -gt 0 ]; then
       sgdisk -n ${ROOT_PARTITION_NUM}::+${swapSize}M --typecode=${ROOT_PARTITION_NUM}:8200 --change-name=${ROOT_PARTITION_NUM}:'SWAP' ${DISK} # partition 2 (Swap)
