@@ -31,7 +31,7 @@ if lspci | grep "VGA" | grep -Eq "Radeon|AMD"; then
 fi
 
 if lspci | grep "VGA" | grep "Intel" | grep -q "Graphics"; then
-	pacman -S --noconfirm --needed intel-media-driver libva-intel-driver lib32-libva-intel-driver vulkan-intel lib32-vulkan-intel
+	pacman -S --noconfirm --needed intel-media-driver libva-intel-driver lib32-libva-intel-driver vulkan-intel lib32-vulkan-intel intel-gpu-tools
 fi
 
 $CURRENT_DIR/vm-guest-tools.sh
