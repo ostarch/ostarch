@@ -69,7 +69,6 @@ if [[ "$SWAP_TYPE" == "file" ]]; then
         swapon /mnt/swapfile &>/dev/null
     fi
 elif [[ -n "$SWAP_PARTITION" && "$SWAP_PARTITION" != "none" ]]; then
-    mkswap "$SWAP_PARTITION"
     swapon "$SWAP_PARTITION"
 fi
 echo "# <file system> <dir> <type> <options> <dump> <pass>" > /mnt/etc/fstab

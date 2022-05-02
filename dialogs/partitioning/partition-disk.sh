@@ -89,7 +89,7 @@ partitionDisks() {
   if [[ -n "$SWAP_TYPE" && "$SWAP_TYPE" != "none" ]]; then
     swapSize=$(getSwapSpace)
     if [ $swapSize -gt 0 ]; then
-      sgdisk -n ${ROOT_PARTITION_NUM}::+${swapSize} --typecode=${ROOT_PARTITION_NUM}:8200 --change-name=${ROOT_PARTITION_NUM}:'SWAP' ${DISK} # partition 2 (Swap)
+      sgdisk -n ${ROOT_PARTITION_NUM}::+${swapSize}M --typecode=${ROOT_PARTITION_NUM}:8200 --change-name=${ROOT_PARTITION_NUM}:'SWAP' ${DISK} # partition 2 (Swap)
       SWAP_PARTITION_NUM=${ROOT_PARTITION_NUM}
       ROOT_PARTITION_NUM=$((ROOT_PARTITION_NUM + 1))
     fi

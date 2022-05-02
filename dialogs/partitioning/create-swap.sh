@@ -53,6 +53,7 @@ selectSwapOption() {
 
 }
 
+# returning the swap size in MiB
 getSwapSpace() {
   availableSpace=$(lsblk -dnb -o SIZE "$DISK")
   spaceThreshold=$((availableSpace * 10 / 100))
@@ -78,6 +79,8 @@ getSwapSpace() {
   if [ "$HIBERNATE_TYPE" != "hibernate" ]; then
     swapSize=$(( $swapSize > $spaceThreshold ? $spaceThreshold : $swapSize ))
   fi
+
+  swapSize=$(echo $swapSize | awk '{print int($1/1024/1024+0.5)}')
 
   echo $swapSize
 }
