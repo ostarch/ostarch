@@ -51,22 +51,26 @@ echo -ne "
 --------------------------------------------------------------------
 "
 pacstrap /mnt --noconfirm --needed base base-devel linux linux-firmware vim nano sudo archlinux-keyring wget git libnewt
-TOTALMEM=$(cat /proc/meminfo | grep -i 'memtotal' | grep -o '[[:digit:]]*')
-if [[ $TOTALMEM -lt 8000000 ]]; then
-    if [ ! -f /mnt/opt/swap/swapfile ]; then
-        echo
-        echo "--------------------------------------------------------------------"
-        echo "                         Creating Swap File                         "
-        echo "--------------------------------------------------------------------"
-        mkdir /mnt/opt/swap # make a dir that we can apply NOCOW to to make it btrfs-friendly.
-        truncate -s 0 /mnt/opt/swap/swapfile
-        chattr +C /mnt/opt/swap/swapfile # apply NOCOW, btrfs needs that.
-        btrfs property set /mnt/opt/swap/swapfile compression none
-        dd if=/dev/zero of=/mnt/opt/swap/swapfile bs=1M count=2048 status=progress
-        chmod 600 /mnt/opt/swap/swapfile
-        mkswap /mnt/opt/swap/swapfile
+if [[ "$SWAP_TYPE" == "file" ]]; then
+    swapSize=$(getSwapSpace)
+    if [[ "$swapSize" -gt 0 ]]; then
+        if [ ! -f /mnt/swapfile ]; then
+            echo
+            echo "--------------------------------------------------------------------"
+            echo "                         Creating Swap File                         "
+            echo "--------------------------------------------------------------------"
+            truncate -s 0 /mnt/swapfile
+            chattr +C /mnt/swapfile # apply NOCOW, btrfs needs that.
+            btrfs property set /mnt/swapfile compression none
+            dd if=/dev/zero of=/mnt/swapfile bs=1M count="$swapSize" status=progress
+            chmod 600 /mnt/swapfile
+            mkswap /mnt/swapfile
+        fi
+        swapon /mnt/swapfile &>/dev/null
     fi
-    swapon /mnt/opt/swap/swapfile &>/dev/null
+elif [[ -n "$SWAP_PARTITION" && "$SWAP_PARTITION" != "none" ]]; then
+    mkswap "$SWAP_PARTITION"
+    swapon "$SWAP_PARTITION"
 fi
 echo "# <file system> <dir> <type> <options> <dump> <pass>" > /mnt/etc/fstab
 genfstab -U /mnt >> /mnt/etc/fstab

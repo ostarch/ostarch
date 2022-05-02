@@ -7,13 +7,10 @@
 #  ██║  ██║██║  ██║╚██████╗██║  ██║██████╔╝██║  ██║ ╚████╔╝ ███████╗
 #  ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚═════╝ ╚═╝  ╚═╝  ╚═══╝  ╚══════╝
 #--------------------------------------------------------------------
-CURRENT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
-
 selectPartitionMenu() {
   if [[ -n "${1}" ]]; then
     DISK="${1}"
   else
-    source "${CURRENT_DIR}/select-disk.sh"
     selectDiskMenu
     if [ ! "$?" = "0" ]; then
       return 1
@@ -44,17 +41,30 @@ selectPartitionMenu() {
   fi
   ROOT_PARTITION=${result%%\ *}
 
+  options=("none" "" "${options[@]}")
+  result=$(whiptail --backtitle "$TITLE" --title "Select Partitions" --menu "Select swap device:" 0 0 0 "${options[@]}" 3>&1 1>&2 2>&3)
+  if [ ! "$?" = "0" ]; then
+    return 1
+  fi
+  SWAP_PARTITION=${result%%\ *}
+
+  if [[ "$SWAP_PARTITION" == "none" ]]; then
+    selectSwapOption file
+  fi
+
 
   msg="Selected devices:\n\n"
-	msg=${msg}"boot: "${BOOT_PARTITION}"\n"
-	msg=${msg}"root: "${ROOT_PARTITION}"\n\n"
-  msg=${msg}"Continue?"
+	msg="${msg}boot: ${BOOT_PARTITION}\n"
+	msg="${msg}root: ${ROOT_PARTITION}\n"
+	msg="${msg}swap: ${SWAP_PARTITION}\n\n"
+  msg="${msg}Continue?"
   if (whiptail --backtitle "$TITLE" --title "Install" --yesno "$msg" --defaultno 0 0); then
     menu formatPartitionsMenu
     return "$?"
   else
     unset BOOT_PARTITION
     unset ROOT_PARTITION
+    unset SWAP_PARTITION
     return 1
   fi
 }

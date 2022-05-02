@@ -7,8 +7,6 @@
 #  ██║  ██║██║  ██║╚██████╗██║  ██║██████╔╝██║  ██║ ╚████╔╝ ███████╗
 #  ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚═════╝ ╚═╝  ╚═╝  ╚═══╝  ╚══════╝
 #--------------------------------------------------------------------
-CURRENT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
-
 formatPartitionsMenu() {
   if [[ -z "$BOOT_PARTITION" || -z "$ROOT_PARTITION" ]]; then
     return 1
@@ -21,6 +19,7 @@ formatPartitionsMenu() {
   if [ ! "$?" = "0" ]; then
     unset BOOT_PARTITION
     unset ROOT_PARTITION
+    unset SWAP_PARTITION
     return 1
   fi
   case "$result" in
@@ -32,6 +31,9 @@ formatPartitionsMenu() {
         local bootExitCode="$?"
         setupRootPartition
         local rootExitCode="$?"
+        if [[ -n "$SWAP_PARTITION" && "$SWAP_PARTITION" != "none" ]]; then
+          setupSwapPartition
+        fi
         if [[ ! "$bootExitCode" = "0" && ! "$rootExitCode" = "0" ]]; then
           return 0
         else
@@ -95,6 +97,21 @@ setupRootPartition() {
       ;;
     "xfs")
       mkfs.xfs -L "ROOT" -f "${ROOT_PARTITION}"
+      ;;
+  esac
+}
+
+setupSwapPartition() {
+  umount -R /mnt &> /dev/null
+  options=()
+  options+=("swap" "")
+  result=$(whiptail --backtitle "${TITLE}" --title "Format swap partition" --menu "Select partition format for swap ($SWAP_PARTITION):" 0 0 0 "${options[@]}" 3>&1 1>&2 2>&3)
+  if [ ! "$?" = "0" ]; then
+    return 1
+  fi
+  case "$result" in
+    "swap")
+      mkswap -L "SWAP" "${SWAP_PARTITION}"
       ;;
   esac
 }
