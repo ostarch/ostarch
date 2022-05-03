@@ -26,6 +26,7 @@ swapoff -a &>/dev/null
 umount -R /mnt &>/dev/null
 unset BOOT_PARTITION
 unset ROOT_PARTITION
+unset SWAP_PARTITION
 
 source "$SCRIPT_DIR/dialogs/mainmenu.sh"
 
@@ -59,15 +60,17 @@ if [[ "$SWAP_TYPE" == "file" ]]; then
             echo "--------------------------------------------------------------------"
             echo "                         Creating Swap File                         "
             echo "--------------------------------------------------------------------"
-            truncate -s 0 /mnt/swapfile
-            chattr +C /mnt/swapfile # apply NOCOW, btrfs needs that.
-            btrfs property set /mnt/swapfile compression none
+            if [ "$(lsblk -plnf -o FSTYPE "$ROOT_PARTITION")" == 'btrfs' ]; then
+                truncate -s 0 /mnt/swapfile
+                chattr +C /mnt/swapfile
+                btrfs property set /mnt/swapfile compression none
+            fi
             dd if=/dev/zero of=/mnt/swapfile bs=1M count="$swapSize" status=progress
             chmod 600 /mnt/swapfile
             mkswap /mnt/swapfile
         fi
-        swapon /mnt/swapfile &>/dev/null
     fi
+    swapon /mnt/swapfile
 elif [[ -n "$SWAP_PARTITION" && "$SWAP_PARTITION" != "none" ]]; then
     swapon "$SWAP_PARTITION"
 fi
