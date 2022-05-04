@@ -1,8 +1,7 @@
-arc-kde
+arc-kde-git
 brave-bin # Brave Browser
 --END OF MINIMAL INSTALL--
 cups-bjnp
-dxvk-bin # DXVK DirectX to Vulcan
 etcher-bin
 mangohud
 minecraft-launcher
