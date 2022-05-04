@@ -23,6 +23,7 @@ if lspci | grep -Eq "NVIDIA|GeForce"; then
 	fi
 	pacman -S --noconfirm --needed nvidia $nvidia_lts nvidia-settings nvidia-utils lib32-nvidia-utils
 	echo "options nvidia_drm modeset=1" > /usr/lib/modprobe.d/nvidia-drm.conf
+	echo "MANGOHUD=1" >> /etc/environment
 	#cp "$SCRIPT_DIR/nvidia.conf" "/etc/X11/xorg.conf.d/"
 fi
 
