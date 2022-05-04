@@ -42,8 +42,10 @@ if [ ! -z "$BOOT_PARTITION" ] && [ ! -z "$ROOT_PARTITION" ]; then
 	if [ ! "$?" = "0" ]; then
 		unset BOOT_PARTITION
 		unset ROOT_PARTITION
+		unset SWAP_PARTITION
 		sed -i '/BOOT_PARTITION=/d' "$CURRENT_DIR/../install.conf"
 		sed -i '/ROOT_PARTITION=/d' "$CURRENT_DIR/../install.conf"
+		sed -i '/SWAP_PARTITION=/d' "$CURRENT_DIR/../install.conf"
 		menu mainmenu
 	fi
 else

@@ -78,6 +78,7 @@ partitionDisks() {
 
   BOOT_PARTITION_NUM=1
   ROOT_PARTITION_NUM=2
+  unset SWAP_PARTITION_NUM
 
   if [[ "$1" != "efi" ]]; then
     sgdisk -n 1::+1M --typecode=1:ef02 --change-name=1:'BIOSBOOT' ${DISK} # partition 1 (BIOS Boot Partition)
