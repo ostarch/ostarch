@@ -2,6 +2,7 @@ binutils
 dosfstools
 easyeffects
 efibootmgr # EFI boot
+ethtool
 grub
 gst-plugin-pipewire
 hdparm
