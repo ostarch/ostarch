@@ -48,6 +48,9 @@ selectSwapOption() {
     return 0
   fi
   case "$result" in
+    "without Hibernate")
+      return 1
+      ;;
     "with Hibernate")
       HIBERNATE_TYPE="hibernate"
       return 1
