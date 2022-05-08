@@ -32,6 +32,8 @@ $SCRIPT_DIR/functions/user.sh
 $SCRIPT_DIR/functions/hostname.sh
 $SCRIPT_DIR/functions/keyboard-layout.sh
 $SCRIPT_DIR/functions/shutdown-timeout.sh
+$SCRIPT_DIR/functions/suspend-then-hibernate.sh
+$SCRIPT_DIR/functions/hibernation.sh
 $SCRIPT_DIR/functions/xdg-portal.sh
 ! grep -q "PLASMA_USE_QT_SCALING=1" /etc/environment && echo "PLASMA_USE_QT_SCALING=1" >> /etc/environment
 
