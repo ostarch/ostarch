@@ -50,6 +50,7 @@ selectSwapOption() {
   case "$result" in
     "with Hibernate")
       HIBERNATE_TYPE="hibernate"
+      return 1
       ;;
   esac
 
