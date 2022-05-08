@@ -21,12 +21,14 @@ runAndLog() {
 }
 
 mkdir "$SCRIPT_DIR/logs" &>/dev/null
+rm "$SCRIPT_DIR"/logs/* &>/dev/null
 runAndLog "bash $SCRIPT_DIR/0-preinstall.sh" || exit
 runAndLog "arch-chroot /mnt /root/$BASENAME/1-setup.sh" || exit
 runAndLog "arch-chroot /mnt /root/$BASENAME/2-install.sh" || exit
 source /mnt/root/$BASENAME/install.conf
 runAndLog "arch-chroot /mnt /usr/bin/runuser -u $USERNAME -- /home/$USERNAME/$BASENAME/3-user.sh" || exit
 runAndLog "arch-chroot /mnt /root/$BASENAME/4-post-setup.sh" || exit
-cp -r $SCRIPT_DIR/logs /mnt/home/$USERNAME/$BASENAME/
-mv /mnt/home/$USERNAME/$BASENAME/install.conf /mnt/home/$USERNAME/$BASENAME/logs/ &>/dev/null
+current_date=$(date +%d-%m-%y-%T)
+cp -r $SCRIPT_DIR/logs /mnt/home/$USERNAME/$BASENAME/$current_date
+mv /mnt/home/$USERNAME/$BASENAME/install.conf /mnt/home/$USERNAME/$BASENAME/$current_date/ &>/dev/null
 bash $SCRIPT_DIR/functions/exit.sh 0
