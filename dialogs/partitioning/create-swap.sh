@@ -11,7 +11,9 @@ PARTITION_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pw
 
 
 selectSwapOption() {
-  SWAP_TYPE=""
+  unset SWAP_TYPE
+  unset HIBERNATE_TYPE
+
   sed -i '/^SWAP_TYPE=/d' "$PARTITION_DIR/../../install.conf"
   options=()
   options+=("none" "")
@@ -38,7 +40,6 @@ selectSwapOption() {
   esac
 
 
-  HIBERNATE_TYPE=""
   sed -i '/^HIBERNATE_TYPE=/d' "$PARTITION_DIR/../../install.conf"
   options=()
   options+=("without Hibernate" "")
