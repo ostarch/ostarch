@@ -48,15 +48,24 @@ selectPartitionMenu() {
   fi
   SWAP_PARTITION=${result%%\ *}
 
+  SWAP_OPTION="$SWAP_PARTITION"
+
   if [[ "$SWAP_PARTITION" == "none" ]]; then
     selectSwapOption file
+    if [ "$SWAP_TYPE" == "file" ]; then
+      if [ "$HIBERNATE_TYPE" == "hibernate" ]; then
+        SWAP_OPTION="Swap File (with Hibernation)"
+      else
+        SWAP_OPTION="Swap File (without Hibernation)"
+      fi
+    fi
   fi
 
 
   msg="Selected devices:\n\n"
 	msg="${msg}boot: ${BOOT_PARTITION}\n"
 	msg="${msg}root: ${ROOT_PARTITION}\n"
-	msg="${msg}swap: ${SWAP_PARTITION}\n\n"
+	msg="${msg}swap: ${SWAP_OPTION}\n\n"
   msg="${msg}Continue?"
   if (whiptail --backtitle "$TITLE" --title "Install" --yesno "$msg" --defaultno 0 0); then
     menu formatPartitionsMenu
