@@ -51,7 +51,7 @@ selectPartitionMenu() {
   SWAP_OPTION="$SWAP_PARTITION"
 
   if [[ "$SWAP_PARTITION" == "none" ]]; then
-    selectSwapOption file
+    menu selectSwapOption file
     if [ "$SWAP_TYPE" == "file" ]; then
       if [ "$HIBERNATE_TYPE" == "hibernate" ]; then
         SWAP_OPTION="Swap File (with Hibernation)"

@@ -32,13 +32,13 @@ partitionDiskMenu() {
   fi
   case ${partitionOption} in
     "Auto Partitions (gpt)")
-      selectSwapOption
+      menu selectSwapOption
       if (displayWarning "Auto Partitions (gpt)" "$DISK"); then
         partitionDisks
       fi
     ;;
     "Auto Partitions (gpt,efi)")
-      selectSwapOption
+      menu selectSwapOption
       if (displayWarning "Auto Partitions (gpt,efi)" "$DISK"); then
         partitionDisks efi
       fi

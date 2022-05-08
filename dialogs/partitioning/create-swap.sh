@@ -25,6 +25,8 @@ selectSwapOption() {
   fi
   case "$result" in
     "none")
+      unset SWAP_TYPE
+      unset HIBERNATE_TYPE
       return 1
       ;;
     "Swap Partition")
