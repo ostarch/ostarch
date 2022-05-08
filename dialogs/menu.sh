@@ -5,7 +5,7 @@ menu() {
 	$@
 	exitcode="$?"
 	if [ "$exitcode" = "0" ]; then
-    menu $1
+    menu $@
 		exitcode="$?"
 	fi
 	return "$exitcode"
