@@ -62,15 +62,18 @@ echo -ne "
 --------------------------------------------------------------------
 "
 
-cat <<EOF > /etc/xdg/autostart/fingerprint-pam-post-startup.desktop
-[Desktop Entry]
-Exec=/home/$USERNAME/$BASENAME/functions/fingerprint-pam.sh
-Name=fingerprint-pam-post-startup
-Type=Application
-X-KDE-AutostartScript=true
-X-KDE-autostart-phase=2
-X-KDE-startup-notify=false
+cat <<EOF > /etc/systemd/system/fingerprint-pam-post-startup.service
+[Unit]
+Description=Fingerprint PAM Post Startup
+
+[Service]
+ExecStart=/home/$USERNAME/$BASENAME/functions/fingerprint-pam.sh
+Type=oneshot
+
+[Install]
+WantedBy=multi-user.target
 EOF
+systemctl enable fingerprint-pam-post-startup.service
 
 systemctl enable cups.service
 systemctl disable dhcpcd.service
