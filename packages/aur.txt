@@ -1,5 +1,6 @@
 arc-kde-git
 brave-bin # Brave Browser
+system-monitoring-center
 --END OF MINIMAL INSTALL--
 cups-bjnp
 etcher-bin
