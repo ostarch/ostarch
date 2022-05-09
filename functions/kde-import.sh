@@ -19,7 +19,7 @@ if ! type konsave &> /dev/null; then
   pip install konsave
 fi
 konsave -r arc-kde
-mkdir -p ~/.local/share
+mkdir -p ~/.local/share/plasma
 konsave -i "$CURRENT_DIR/../arc-kde.knsv"
 sleep 1
 konsave -a arc-kde
