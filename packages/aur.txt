@@ -20,4 +20,5 @@ ttf-meslo # Nerdfont package
 ttf-ms-fonts
 typora
 ventoy-bin
+visual-studio-code-bin
 zoom # video conferences
