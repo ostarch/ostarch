@@ -35,6 +35,7 @@ if [ "$HIBERNATE_TYPE" == "hibernate" ]; then
   if [ "$configured" == "true" ]; then
     if ! grep ^HOOKS /etc/mkinitcpio.conf | grep -q resume; then
       sed -i '/^HOOKS/s/filesystems/filesystems resume/' /etc/mkinitcpio.conf
+      mkinitcpio -P
     fi
 
     sed -i 's/HibernateDelaySec=.*/HibernateDelaySec=30min/' /etc/systemd/sleep.conf
