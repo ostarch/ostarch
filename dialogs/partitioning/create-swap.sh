@@ -29,7 +29,7 @@ selectSwapOption() {
     "none")
       unset SWAP_TYPE
       unset HIBERNATE_TYPE
-      return 1
+      return 2
       ;;
     "Swap Partition")
       SWAP_TYPE="partition"
