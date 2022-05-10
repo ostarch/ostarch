@@ -53,7 +53,7 @@ echo -ne "
                      Arch Install on Main Drive
 --------------------------------------------------------------------
 "
-pacstrap /mnt --noconfirm --needed base base-devel linux linux-firmware vim nano sudo archlinux-keyring wget git libnewt fprintd
+pacstrap /mnt --noconfirm --needed base base-devel linux linux-firmware vim nano sudo archlinux-keyring wget git libnewt fprintd grub
 if [[ "$SWAP_TYPE" == "file" ]]; then
     swapSize=$(getSwapSpace)
     if [[ "$swapSize" -gt 0 ]]; then
