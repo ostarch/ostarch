@@ -31,12 +31,14 @@ selectPartitionMenu() {
 
   result=$(whiptail --backtitle "$TITLE" --title "Select Partitions" --menu "Select boot device:" 0 0 0 "${options[@]}" 3>&1 1>&2 2>&3)
   if [ ! "$?" = "0" ]; then
+    unsetAllVariables
     return 1
   fi
   BOOT_PARTITION=${result%%\ *}
 
   result=$(whiptail --backtitle "$TITLE" --title "Select Partitions" --menu "Select root device:" 0 0 0 "${options[@]}" 3>&1 1>&2 2>&3)
   if [ ! "$?" = "0" ]; then
+    unsetAllVariables
     return 1
   fi
   ROOT_PARTITION=${result%%\ *}
@@ -44,6 +46,7 @@ selectPartitionMenu() {
   options=("none" "" "${options[@]}")
   result=$(whiptail --backtitle "$TITLE" --title "Select Partitions" --menu "Select swap device:" 0 0 0 "${options[@]}" 3>&1 1>&2 2>&3)
   if [ ! "$?" = "0" ]; then
+    unsetAllVariables
     return 1
   fi
   SWAP_PARTITION=${result%%\ *}
@@ -53,6 +56,7 @@ selectPartitionMenu() {
   if [[ "$SWAP_PARTITION" == "none" ]]; then
     menu selectSwapOption file
     if [ "$?" == "1" ]; then
+      unsetAllVariables
       return 1
     fi
     if [ "$SWAP_TYPE" == "file" ]; then
@@ -74,9 +78,13 @@ selectPartitionMenu() {
     menu formatPartitionsMenu
     return "$?"
   else
-    unset BOOT_PARTITION
-    unset ROOT_PARTITION
-    unset SWAP_PARTITION
+    unsetAllVariables
     return 1
   fi
+}
+
+unsetAllVariables() {
+  unset BOOT_PARTITION
+  unset ROOT_PARTITION
+  unset SWAP_PARTITION
 }
