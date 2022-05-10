@@ -90,6 +90,10 @@ fi
 if hdparm -I "$DISK" | grep TRIM &>/dev/null; then
   systemctl enable fstrim.timer
 fi
+if [ "$HIBERNATE_TYPE" != "hibernate" ]; then
+  sed -i '/suspendThenHibernate/d' /home/$USERNAME/.config/powermanagementprofilesrc
+  sed -i '/suspendType=2/d' /home/$USERNAME/.config/powermanagementprofilesrc
+fi
 echo -ne "
 --------------------------------------------------------------------
                               Cleaning 
