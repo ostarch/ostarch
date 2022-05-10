@@ -37,5 +37,5 @@ else
   rm /mnt/home/$USERNAME/$BASENAME/logs/0-preinstall.log &>/dev/null
 fi
 mv /mnt/home/$USERNAME/$BASENAME/install.conf /mnt/home/$USERNAME/$BASENAME/logs/$current_date/ &>/dev/null
-chown -R $USERNAME: /mnt/home/$USERNAME/$BASENAME/ &>/dev/null
+arch-chroot /mnt chown -R $USERNAME: /home/$USERNAME/$BASENAME/ &>/dev/null
 bash $SCRIPT_DIR/functions/exit.sh 0
