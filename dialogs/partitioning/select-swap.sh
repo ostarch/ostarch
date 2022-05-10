@@ -81,7 +81,7 @@ getSwapSpace() {
     swapSize=$(( $swapSize < ${GiB8} ? $swapSize : ${GiB8} ))
   fi
 
-  swapSize=$(echo $swapSize | awk '{print int($1*1.3+0.5)}')
+  swapSize=$(echo $swapSize | awk '{print int($1*1.1+0.5)}')
 
   if [ "$HIBERNATE_TYPE" != "hibernate" ]; then
     swapSize=$(( $swapSize > $spaceThreshold ? $spaceThreshold : $swapSize ))
