@@ -53,7 +53,7 @@ selectPartitionMenu() {
   if [[ "$SWAP_PARTITION" == "none" ]]; then
     menu selectSwapOption file
     if [ "$?" == "1" ]; then
-      return 0
+      return 1
     fi
     if [ "$SWAP_TYPE" == "file" ]; then
       if [ "$HIBERNATE_TYPE" == "hibernate" ]; then
