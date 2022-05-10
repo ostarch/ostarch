@@ -31,5 +31,11 @@ runAndLog "arch-chroot /mnt /root/$BASENAME/4-post-setup.sh" || exit
 current_date=$(date +%d-%m-%y-%T)
 mkdir -p /mnt/home/$USERNAME/$BASENAME/logs/$current_date &>/dev/null
 cp -r $SCRIPT_DIR/logs/* /mnt/home/$USERNAME/$BASENAME/logs/$current_date/ &>/dev/null
+if [ "$(stat --printf="%s" "/mnt/home/$USERNAME/$BASENAME/logs/$current_date/0-preinstall.log")" -eq 0 ]; then
+  mv /mnt/home/$USERNAME/$BASENAME/logs/0-preinstall.log /mnt/home/$USERNAME/$BASENAME/logs/$current_date/ &>/dev/null
+else
+  rm /mnt/home/$USERNAME/$BASENAME/logs/0-preinstall.log &>/dev/null
+fi
 mv /mnt/home/$USERNAME/$BASENAME/install.conf /mnt/home/$USERNAME/$BASENAME/logs/$current_date/ &>/dev/null
+chown -R $USERNAME: /mnt/home/$USERNAME/$BASENAME/ &>/dev/null
 bash $SCRIPT_DIR/functions/exit.sh 0
