@@ -43,5 +43,18 @@ if [ "$HIBERNATE_TYPE" == "hibernate" ]; then
 
     sed -i 's/HandleLidSwitch=.*/HandleLidSwitch=suspend-then-hibernate/' /etc/systemd/logind.conf
     sed -i 's/#HandleLidSwitch=/HandleLidSwitch=/' /etc/systemd/logind.conf
+
+    sed -i 's/AllowHibernation=.*/AllowHibernation=yes/' /etc/systemd/sleep.conf
+    sed -i 's/#AllowHibernation=/AllowHibernation=/' /etc/systemd/sleep.conf
+
+    sed -i 's/AllowSuspendThenHibernate=.*/AllowSuspendThenHibernate=yes/' /etc/systemd/sleep.conf
+    sed -i 's/#AllowSuspendThenHibernate=/AllowSuspendThenHibernate=/' /etc/systemd/sleep.conf
+
   fi
+else
+  sed -i 's/AllowHibernation=.*/AllowHibernation=no/' /etc/systemd/sleep.conf
+  sed -i 's/#AllowHibernation=/AllowHibernation=/' /etc/systemd/sleep.conf
+
+  sed -i 's/AllowSuspendThenHibernate=.*/AllowSuspendThenHibernate=no/' /etc/systemd/sleep.conf
+  sed -i 's/#AllowSuspendThenHibernate=/AllowSuspendThenHibernate=/' /etc/systemd/sleep.conf
 fi
