@@ -2,6 +2,7 @@ binutils
 dosfstools
 easyeffects
 efibootmgr # EFI boot
+ethtool
 grub
 gst-plugin-pipewire
 hdparm
@@ -75,6 +76,7 @@ exfatprogs
 firefox
 flameshot
 flex # recognize lexical patterns in text
+freerdp
 fuse2
 fuse3
 fuseiso

@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 #--------------------------------------------------------------------
 #   █████╗ ██████╗  ██████╗██╗  ██╗██████╗  █████╗ ██╗   ██╗███████╗
 #  ██╔══██╗██╔══██╗██╔════╝██║  ██║██╔══██╗██╔══██╗██║   ██║██╔════╝
@@ -7,37 +7,14 @@
 #  ██║  ██║██║  ██║╚██████╗██║  ██║██████╔╝██║  ██║ ╚████╔╝ ███████╗
 #  ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚═════╝ ╚═╝  ╚═╝  ╚═══╝  ╚══════╝
 #--------------------------------------------------------------------
-CURRENT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+[ "$(id -u)" = "0" ] || exec sudo "$0" "$@"
 
-unset USERNAME
-source "${CURRENT_DIR}/../install.conf" &>/dev/null
-if [ ! -z "$USERNAME" ] && id "$USERNAME" &>/dev/null; then
-  sed -i '/^PASSWORD=/d' "${CURRENT_DIR}/../install.conf" &>/dev/null
-  exit
+try_first_pass="auth\t\tsufficient\tpam_unix.so try_first_pass likeauth nullok"
+sufficient_fprintd="auth\t\tsufficient\tpam_fprintd.so"
+
+if type "fprintd-list" &> /dev/null && fprintd-list root 2>/dev/null | grep -vq 'No devices available'; then
+  sed -i.old "1s;^;$sufficient_fprintd\n;" /etc/pam.d/{system-local-login,login,su,sudo,lightdm,kde}
+  sed -i.old "1s;^;$try_first_pass\n;" /etc/pam.d/kde
 fi
-if [ -z "$USERNAME" ] || [ -z "$PASSWORD" ]; then
-  source "${CURRENT_DIR}/../dialogs/menu.sh"
-  menuFlow addUserMenu setUserPasswordMenu
-  if [ ! "$?" = "0" ]; then
-    exit 1
-  else
-    CURRENT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
-    source "${CURRENT_DIR}/../install.conf"
-  fi
-fi
-echo -ne "
---------------------------------------------------------------------
-                         Adding User $USERNAME
---------------------------------------------------------------------
-"
-sudo useradd -m -N -G wheel -s /bin/bash "$USERNAME"
-sudo usermod -p "$PASSWORD" "$USERNAME"
-if [ "$?" = "0" ]; then
-  sed -i '/^PASSWORD=/d' "${CURRENT_DIR}/../install.conf"
-  unset PASSWORD
-fi
-if grep -qE "^libvirt:" /etc/group; then
-  echo "Adding user $USERNAME to the libvirt group"
-  sudo usermod -aG libvirt "$USERNAME"
-fi
-sudo grpck
+systemctl disable fingerprint-pam-post-startup.service
+rm /etc/systemd/system/fingerprint-pam-post-startup.service &>/dev/null

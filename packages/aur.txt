@@ -1,8 +1,8 @@
-arc-kde
+arc-kde-git
 brave-bin # Brave Browser
+system-monitoring-center
 --END OF MINIMAL INSTALL--
 cups-bjnp
-dxvk-bin # DXVK DirectX to Vulcan
 etcher-bin
 mangohud
 minecraft-launcher
@@ -20,4 +20,5 @@ ttf-meslo # Nerdfont package
 ttf-ms-fonts
 typora
 ventoy-bin
+visual-studio-code-bin
 zoom # video conferences

@@ -26,6 +26,9 @@ swapoff -a &>/dev/null
 umount -R /mnt &>/dev/null
 unset BOOT_PARTITION
 unset ROOT_PARTITION
+unset SWAP_PARTITION
+unset SWAP_TYPE
+unset HIBERNATE_TYPE
 
 source "$SCRIPT_DIR/dialogs/mainmenu.sh"
 
@@ -43,6 +46,13 @@ if ! grep -qs '/mnt' /proc/mounts; then
     source $SCRIPT_DIR/functions/exit.sh
 fi
 
+echo "DISK=$DISK" >> "$SCRIPT_DIR/install.conf"
+echo "BOOT_PARTITION=$BOOT_PARTITION" >> "$SCRIPT_DIR/install.conf"
+echo "ROOT_PARTITION=$ROOT_PARTITION" >> "$SCRIPT_DIR/install.conf"
+[ -n "$SWAP_PARTITION" ] && echo "SWAP_PARTITION=$SWAP_PARTITION" >> "$SCRIPT_DIR/install.conf"
+[ -n "$SWAP_TYPE" ] && echo "SWAP_TYPE=$SWAP_TYPE" >> "$SCRIPT_DIR/install.conf"
+[ -n "$HIBERNATE_TYPE" ] && echo "HIBERNATE_TYPE=$HIBERNATE_TYPE" >> "$SCRIPT_DIR/install.conf"
+
 $SCRIPT_DIR/functions/mirrors.sh
 
 echo -ne "
@@ -50,30 +60,32 @@ echo -ne "
                      Arch Install on Main Drive
 --------------------------------------------------------------------
 "
-pacstrap /mnt --noconfirm --needed base base-devel linux linux-firmware vim nano sudo archlinux-keyring wget git libnewt
-TOTALMEM=$(cat /proc/meminfo | grep -i 'memtotal' | grep -o '[[:digit:]]*')
-if [[ $TOTALMEM -lt 8000000 ]]; then
-    if [ ! -f /mnt/opt/swap/swapfile ]; then
-        echo
-        echo "--------------------------------------------------------------------"
-        echo "                         Creating Swap File                         "
-        echo "--------------------------------------------------------------------"
-        mkdir /mnt/opt/swap # make a dir that we can apply NOCOW to to make it btrfs-friendly.
-        truncate -s 0 /mnt/opt/swap/swapfile
-        chattr +C /mnt/opt/swap/swapfile # apply NOCOW, btrfs needs that.
-        btrfs property set /mnt/opt/swap/swapfile compression none
-        dd if=/dev/zero of=/mnt/opt/swap/swapfile bs=1M count=2048 status=progress
-        chmod 600 /mnt/opt/swap/swapfile
-        mkswap /mnt/opt/swap/swapfile
+pacstrap /mnt --noconfirm --needed base base-devel linux linux-firmware vim nano sudo archlinux-keyring wget git libnewt fprintd grub
+if [[ "$SWAP_TYPE" == "file" ]]; then
+    swapSize=$(getSwapSpace)
+    if [[ "$swapSize" -gt 0 ]]; then
+        if [ ! -f /mnt/swapfile ]; then
+            echo
+            echo "--------------------------------------------------------------------"
+            echo "                         Creating Swap File                         "
+            echo "--------------------------------------------------------------------"
+            if [ "$(lsblk -plnf -o FSTYPE "$ROOT_PARTITION")" == 'btrfs' ]; then
+                truncate -s 0 /mnt/swapfile
+                chattr +C /mnt/swapfile
+                btrfs property set /mnt/swapfile compression none
+            fi
+            dd if=/dev/zero of=/mnt/swapfile bs=1M count="$swapSize" status=progress
+            chmod 600 /mnt/swapfile
+            mkswap /mnt/swapfile
+        fi
     fi
-    swapon /mnt/opt/swap/swapfile &>/dev/null
+    swapon /mnt/swapfile
+elif [[ -n "$SWAP_PARTITION" && "$SWAP_PARTITION" != "none" ]]; then
+    swapon "$SWAP_PARTITION"
 fi
 echo "# <file system> <dir> <type> <options> <dump> <pass>" > /mnt/etc/fstab
 genfstab -U /mnt >> /mnt/etc/fstab
 echo "keyserver hkp://keyserver.ubuntu.com" >> /mnt/etc/pacman.d/gnupg/gpg.conf
-echo "DISK=$DISK" >> "$SCRIPT_DIR/install.conf"
-echo "BOOT_PARTITION=$BOOT_PARTITION" >> "$SCRIPT_DIR/install.conf"
-echo "ROOT_PARTITION=$ROOT_PARTITION" >> "$SCRIPT_DIR/install.conf"
 cp -R "${SCRIPT_DIR}" /mnt/root
 cp /etc/pacman.d/mirrorlist /mnt/etc/pacman.d/mirrorlist
 echo -ne "

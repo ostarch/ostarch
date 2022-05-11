@@ -62,6 +62,19 @@ echo -ne "
 --------------------------------------------------------------------
 "
 
+cat <<EOF > /etc/systemd/system/fingerprint-pam-post-startup.service
+[Unit]
+Description=Fingerprint PAM Post Startup
+
+[Service]
+ExecStart=/home/$USERNAME/$BASENAME/functions/fingerprint-pam.sh
+Type=oneshot
+
+[Install]
+WantedBy=multi-user.target
+EOF
+systemctl enable fingerprint-pam-post-startup.service
+
 systemctl enable cups.service
 systemctl disable dhcpcd.service
 systemctl enable NetworkManager.service
@@ -77,6 +90,12 @@ fi
 if hdparm -I "$DISK" | grep TRIM &>/dev/null; then
   systemctl enable fstrim.timer
 fi
+
+if [ "$HIBERNATE_TYPE" != "hibernate" ]; then
+  sed -i '/suspendThenHibernate/d' /home/$USERNAME/.config/powermanagementprofilesrc
+  sed -i '/suspendType=2/d' /home/$USERNAME/.config/powermanagementprofilesrc
+fi
+sed -i '/ScaleFactor/d' /home/$USERNAME/.config/kdeglobals
 echo -ne "
 --------------------------------------------------------------------
                               Cleaning 
