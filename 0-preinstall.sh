@@ -46,6 +46,13 @@ if ! grep -qs '/mnt' /proc/mounts; then
     source $SCRIPT_DIR/functions/exit.sh
 fi
 
+echo "DISK=$DISK" >> "$SCRIPT_DIR/install.conf"
+echo "BOOT_PARTITION=$BOOT_PARTITION" >> "$SCRIPT_DIR/install.conf"
+echo "ROOT_PARTITION=$ROOT_PARTITION" >> "$SCRIPT_DIR/install.conf"
+[ -n "$SWAP_PARTITION" ] && echo "SWAP_PARTITION=$SWAP_PARTITION" >> "$SCRIPT_DIR/install.conf"
+[ -n "$SWAP_TYPE" ] && echo "SWAP_TYPE=$SWAP_TYPE" >> "$SCRIPT_DIR/install.conf"
+[ -n "$HIBERNATE_TYPE" ] && echo "HIBERNATE_TYPE=$HIBERNATE_TYPE" >> "$SCRIPT_DIR/install.conf"
+
 $SCRIPT_DIR/functions/mirrors.sh
 
 echo -ne "
@@ -79,12 +86,6 @@ fi
 echo "# <file system> <dir> <type> <options> <dump> <pass>" > /mnt/etc/fstab
 genfstab -U /mnt >> /mnt/etc/fstab
 echo "keyserver hkp://keyserver.ubuntu.com" >> /mnt/etc/pacman.d/gnupg/gpg.conf
-echo "DISK=$DISK" >> "$SCRIPT_DIR/install.conf"
-echo "BOOT_PARTITION=$BOOT_PARTITION" >> "$SCRIPT_DIR/install.conf"
-echo "ROOT_PARTITION=$ROOT_PARTITION" >> "$SCRIPT_DIR/install.conf"
-[ -n "$SWAP_PARTITION" ] && echo "SWAP_PARTITION=$SWAP_PARTITION" >> "$SCRIPT_DIR/install.conf"
-[ -n "$SWAP_TYPE" ] && echo "SWAP_TYPE=$SWAP_TYPE" >> "$SCRIPT_DIR/install.conf"
-[ -n "$HIBERNATE_TYPE" ] && echo "HIBERNATE_TYPE=$HIBERNATE_TYPE" >> "$SCRIPT_DIR/install.conf"
 cp -R "${SCRIPT_DIR}" /mnt/root
 cp /etc/pacman.d/mirrorlist /mnt/etc/pacman.d/mirrorlist
 echo -ne "
