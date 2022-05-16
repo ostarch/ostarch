@@ -18,9 +18,7 @@ selectSwapOption() {
   options=()
   options+=("none" "")
   options+=("Swap File" "")
-  if [ ! "$1" = "file" ]; then
-    options+=("Swap Partition" "")
-  fi
+  options+=("Swap Partition" "")
   result=$(whiptail --backtitle "${TITLE}" --title "Select Swap Option" --menu "" --default-item "Swap File" 0 0 0 "${options[@]}" 3>&1 1>&2 2>&3)
   if [ ! "$?" = "0" ]; then
     return 1
@@ -29,15 +27,12 @@ selectSwapOption() {
     "none")
       unset SWAP_TYPE
       unset HIBERNATE_TYPE
-      return 2
       ;;
     "Swap Partition")
       SWAP_TYPE="partition"
-      return 2
       ;;
     "Swap File")
       SWAP_TYPE="file"
-      return 2
       ;;
   esac
 }
@@ -54,11 +49,9 @@ selectHibernateOption() {
   fi
   case "$result" in
     "without Hibernate")
-      return 2
       ;;
     "with Hibernate")
       HIBERNATE_TYPE="hibernate"
-      return 2
       ;;
   esac
 }

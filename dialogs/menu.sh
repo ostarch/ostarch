@@ -2,16 +2,25 @@
 CURRENT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 for f in $(find "${CURRENT_DIR}/" -type f ! -name "mainmenu.sh" ! -name "menu.sh"); do source $f; done
 
+# return types:
+# 0 - success
+# 1 - error
+# 2 - exit
+# 3 - show menu again
 menu() {
 	$@
 	exitcode="$?"
-	if [ "$exitcode" = "0" ]; then
+	if [ "$exitcode" = "3" ]; then
     menu $@
 		exitcode="$?"
 	fi
 	return "$exitcode"
 }
 
+# return types:
+# 0 - next menu
+# 1 - one menu back
+# 2 - exit
 menuFlow() {
 	i=1
 	while [ "$i" -le "$#" ]; do

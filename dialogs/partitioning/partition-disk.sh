@@ -28,13 +28,13 @@ partitionDiskMenu() {
   fi
   selectDiskMenu
   if [ ! "$?" = "0" ]; then
-    return 0
+    return 3
   fi
   case ${partitionOption} in
     "Auto Partitions (gpt)")
       menu selectSwapOption
       if [ "$?" == "1" ]; then
-        return 0
+        return 3
       fi
       if (displayWarning "Auto Partitions (gpt)" "$DISK"); then
         partitionDisks
@@ -43,7 +43,7 @@ partitionDiskMenu() {
     "Auto Partitions (gpt,efi)")
       menu selectSwapOption
       if [ "$?" == "1" ]; then
-        return 0
+        return 3
       fi
       if (displayWarning "Auto Partitions (gpt,efi)" "$DISK"); then
         partitionDisks efi

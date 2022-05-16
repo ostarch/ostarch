@@ -76,11 +76,6 @@ selectSwapPartitionMenu() {
     unsetAllVariables
     return 1
   fi
-  menu selectHibernateOption
-  if [ "$?" == "1" ]; then
-    unsetAllVariables
-    return 1
-  fi
   if [ "$SWAP_TYPE" == "partition" ]; then
     SWAP_PARTITION="$(selectSpecificPartitionMenu swap)"
     if [ ! "$?" = "0" ]; then
@@ -92,6 +87,11 @@ selectSwapPartitionMenu() {
 
 
   if [[ -z "$SWAP_PARTITION" && "$SWAP_TYPE" == "file" ]]; then
+    menu selectHibernateOption
+    if [ "$?" == "1" ]; then
+      unsetAllVariables
+      return 1
+    fi
     if [ "$HIBERNATE_TYPE" == "hibernate" ]; then
       SWAP_OPTION="Swap File (with Hibernation)"
     else
