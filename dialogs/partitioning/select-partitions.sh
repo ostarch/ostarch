@@ -16,6 +16,7 @@ selectPartitionMenu() {
       return 1
     fi
   fi
+  unsetAllVariables
 
   BOOT_PARTITION="$(selectSpecificPartitionMenu boot)"
   if [ ! "$?" = "0" ]; then
@@ -49,7 +50,6 @@ selectPartitionMenu() {
 selectSpecificPartitionMenu() {
   items=$(lsblk -pln -o NAME,SIZE -e 7,11 "$DISK")
   options=()
-  [ "$1" == "swap" ] && options+=("none" "")
   IFS_ORIG=$IFS
   IFS=$'\n'
   for item in ${items}
@@ -70,25 +70,32 @@ selectSpecificPartitionMenu() {
 }
 
 selectSwapPartitionMenu() {
-  SWAP_PARTITION="$(selectSpecificPartitionMenu swap)"
-  if [ ! "$?" = "0" ]; then
+  SWAP_OPTION="none"
+  menu selectSwapOption
+  if [ "$?" == "1" ]; then
+    unsetAllVariables
     return 1
   fi
-
-  SWAP_OPTION="$SWAP_PARTITION"
-
-  if [[ "$SWAP_PARTITION" == "none" ]]; then
-    menu selectSwapOption file
-    if [ "$?" == "1" ]; then
+  menu selectHibernateOption
+  if [ "$?" == "1" ]; then
+    unsetAllVariables
+    return 1
+  fi
+  if [ "$SWAP_TYPE" == "partition" ]; then
+    SWAP_PARTITION="$(selectSpecificPartitionMenu swap)"
+    if [ ! "$?" = "0" ]; then
       unsetAllVariables
       return 1
     fi
-    if [ "$SWAP_TYPE" == "file" ]; then
-      if [ "$HIBERNATE_TYPE" == "hibernate" ]; then
-        SWAP_OPTION="Swap File (with Hibernation)"
-      else
-        SWAP_OPTION="Swap File (without Hibernation)"
-      fi
+    SWAP_OPTION="$SWAP_PARTITION"
+  fi
+
+
+  if [[ -z "$SWAP_PARTITION" && "$SWAP_TYPE" == "file" ]]; then
+    if [ "$HIBERNATE_TYPE" == "hibernate" ]; then
+      SWAP_OPTION="Swap File (with Hibernation)"
+    else
+      SWAP_OPTION="Swap File (without Hibernation)"
     fi
   fi
 }

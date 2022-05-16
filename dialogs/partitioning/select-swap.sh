@@ -33,25 +33,24 @@ selectSwapOption() {
       ;;
     "Swap Partition")
       SWAP_TYPE="partition"
+      return 2
       ;;
     "Swap File")
       SWAP_TYPE="file"
+      return 2
       ;;
   esac
-
-
-  selectHibernateOption
-  return "$?"
 }
 
 selectHibernateOption() {
+  unset HIBERNATE_TYPE
   sed -i '/^HIBERNATE_TYPE=/d' "$PARTITION_DIR/../../install.conf" &>/dev/null
   options=()
   options+=("without Hibernate" "")
   options+=("with Hibernate" "")
   result=$(whiptail --backtitle "${TITLE}" --title "Select Hibernate Option" --cancel-button "Back" --menu "" 0 0 0 "${options[@]}" 3>&1 1>&2 2>&3)
   if [ ! "$?" = "0" ]; then
-    return 0
+    return 1
   fi
   case "$result" in
     "without Hibernate")
