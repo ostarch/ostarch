@@ -7,15 +7,18 @@
 #  ██║  ██║██║  ██║╚██████╗██║  ██║██████╔╝██║  ██║ ╚████╔╝ ███████╗
 #  ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚═════╝ ╚═╝  ╚═╝  ╚═══╝  ╚══════╝
 #--------------------------------------------------------------------
+showDiskMenu=true
 selectPartitionMenu() {
   if [[ -n "${1}" ]]; then
     DISK="${1}"
-  else
+  elif [ "$showDiskMenu" == true ]; then
     selectDiskMenu
     if [ ! "$?" = "0" ]; then
       return 1
     fi
   fi
+
+  showDiskMenu=true
   unsetAllVariables
 
   BOOT_PARTITION="$(selectSpecificPartitionMenu boot)"
@@ -25,12 +28,14 @@ selectPartitionMenu() {
 
   ROOT_PARTITION="$(selectSpecificPartitionMenu root)"
   if [ ! "$?" = "0" ]; then
-    return 1
+    showDiskMenu=false
+    return 3
   fi
 
-  selectSwapPartitionMenu
+  menu selectSwapPartitionMenu
   if [ ! "$?" = "0" ]; then
-    return 1
+    showDiskMenu=false
+    return 3
   fi
 
   msg="Selected devices:\n\n"
@@ -61,7 +66,7 @@ selectSpecificPartitionMenu() {
   done
   IFS=$IFS_ORIG
 
-  result=$(whiptail --backtitle "$TITLE" --title "Select Partitions" --menu "Select $1 device:" 0 0 0 "${options[@]}" 3>&1 1>&2 2>&3)
+  result=$(whiptail --backtitle "$TITLE" --title "Select Partitions" --cancel-button "Back" --menu "Select $1 device:" 0 0 0 "${options[@]}" 3>&1 1>&2 2>&3)
   if [ ! "$?" = "0" ]; then
     unsetAllVariables
     return 1
@@ -80,7 +85,7 @@ selectSwapPartitionMenu() {
     SWAP_PARTITION="$(selectSpecificPartitionMenu swap)"
     if [ ! "$?" = "0" ]; then
       unsetAllVariables
-      return 1
+      return 3
     fi
     SWAP_OPTION="$SWAP_PARTITION"
   fi
@@ -90,7 +95,7 @@ selectSwapPartitionMenu() {
     menu selectHibernateOption
     if [ "$?" == "1" ]; then
       unsetAllVariables
-      return 1
+      return 3
     fi
     if [ "$HIBERNATE_TYPE" == "hibernate" ]; then
       SWAP_OPTION="Swap File (with Hibernation)"

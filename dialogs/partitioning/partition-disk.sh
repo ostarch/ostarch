@@ -32,7 +32,7 @@ partitionDiskMenu() {
   fi
   case ${partitionOption} in
     "Auto Partitions (gpt)")
-      menu selectSwapOption
+      menuFlow selectSwapOption selectHibernateOption
       if [ "$?" == "1" ]; then
         return 3
       fi
@@ -41,7 +41,7 @@ partitionDiskMenu() {
       fi
     ;;
     "Auto Partitions (gpt,efi)")
-      menu selectSwapOption
+      menuFlow selectSwapOption selectHibernateOption
       if [ "$?" == "1" ]; then
         return 3
       fi
