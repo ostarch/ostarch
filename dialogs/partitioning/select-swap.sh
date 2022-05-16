@@ -14,7 +14,7 @@ selectSwapOption() {
   unset SWAP_TYPE
   unset HIBERNATE_TYPE
 
-  sed -i '/^SWAP_TYPE=/d' "$PARTITION_DIR/../../install.conf"
+  sed -i '/^SWAP_TYPE=/d' "$PARTITION_DIR/../../install.conf" &>/dev/null
   options=()
   options+=("none" "")
   options+=("Swap File" "")
@@ -40,11 +40,16 @@ selectSwapOption() {
   esac
 
 
-  sed -i '/^HIBERNATE_TYPE=/d' "$PARTITION_DIR/../../install.conf"
+  selectHibernateOption
+  return "$?"
+}
+
+selectHibernateOption() {
+  sed -i '/^HIBERNATE_TYPE=/d' "$PARTITION_DIR/../../install.conf" &>/dev/null
   options=()
   options+=("without Hibernate" "")
   options+=("with Hibernate" "")
-  result=$(whiptail --backtitle "${TITLE}" --title "Select Swap Option" --cancel-button "Back" --menu "" 0 0 0 "${options[@]}" 3>&1 1>&2 2>&3)
+  result=$(whiptail --backtitle "${TITLE}" --title "Select Hibernate Option" --cancel-button "Back" --menu "" 0 0 0 "${options[@]}" 3>&1 1>&2 2>&3)
   if [ ! "$?" = "0" ]; then
     return 0
   fi
@@ -57,12 +62,13 @@ selectSwapOption() {
       return 2
       ;;
   esac
-
 }
 
 # returning the swap size in MiB
 getSwapSpace() {
-  availableSpace=$(lsblk -dnb -o SIZE "$DISK")
+  local disk="$ROOT_PARTITION"
+  [ -z "$disk" ] && disk="$DISK"
+  availableSpace=$(lsblk -dnb -o SIZE "$disk")
   spaceThreshold=$((availableSpace * 10 / 100))
   totalMemory=$(awk '/^MemTotal/ {print $2}' /proc/meminfo)
   totalMemory=$((totalMemory * 1024))
