@@ -16,6 +16,8 @@ source "$SCRIPT_DIR/dialogs/menu.sh"
 
 zsh="Zsh Configuration + dotfiles"
 grub="Grub Customization"
+swap="Configure Swap"
+hibernation="Enable Hibernation"
 keyboard="Set Keyboard Layout"
 locale="Set Locale and Timezone"
 hostname="Set Hostname"
@@ -34,8 +36,10 @@ nextItem="$zsh"
 configurationMenu() {
   rm "$SCRIPT_DIR/install.conf" 2> /dev/null
   options=()
-  options+=("$zsh" "") 
-  options+=("$grub" "") 
+  options+=("$zsh" "")
+  options+=("$grub" "")
+  options+=("$swap" "")
+  options+=("$hibernation" "")
   options+=("$keyboard" "")
   options+=("$locale" "")
   options+=("$hostname" "")
@@ -51,7 +55,7 @@ configurationMenu() {
   options+=("$add_user" "")
   sel=$(whiptail --backtitle "$TITLE" --title "Configuration Menu" --menu "" --cancel-button "Exit" 0 0 0 "${options[@]}" --default-item "$nextItem" 3>&1 1>&2 2>&3)
   if [ ! "$?" = "0" ]; then
-    exit
+    return 0
   fi
   case ${sel} in
     "$zsh")
@@ -60,7 +64,17 @@ configurationMenu() {
       ;;
     "$grub")
       "$SCRIPT_DIR/functions/grub.sh"
+      nextItem="$swap"
+      ;;
+    "$swap")
+      nextItem="$swap"
+      setupSwapOrHibernation swap || return 3
       nextItem="$keyboard"
+      ;;
+    "$hibernation")
+      nextItem="$hibernation"
+      setupSwapOrHibernation hibernation || return 3
+      nextItem="$keyboard" 
       ;;
     "$keyboard")
       "$SCRIPT_DIR/functions/keyboard-layout.sh"
@@ -92,7 +106,8 @@ configurationMenu() {
       nextItem="$base_packages"
       ;;
     "$base_packages")
-      setInstallType || return 0
+      nextItem="$base_packages"
+      setInstallType || return 3
       "$SCRIPT_DIR/functions/install/install-packages.sh" pacman || return 1
       "$SCRIPT_DIR/functions/install/install-packages.sh" pacman-gaming || return 1
       if ! pacman -Qi yay &>/dev/null; then
@@ -102,7 +117,8 @@ configurationMenu() {
       nextItem="$desktop_environment"
       ;;
     "$desktop_environment")
-      menuFlow setDesktopEnvironment setInstallType || return 0
+      nextItem="$desktop_environment"
+      menuFlow setDesktopEnvironment setInstallType || return 3
       source "$SCRIPT_DIR/install.conf" &>/dev/null
       if [ -f "$SCRIPT_DIR/packages/desktop-environments/$DESKTOP_ENV.txt" ]; then
         $SCRIPT_DIR/functions/install/install-packages.sh desktop-environments/$DESKTOP_ENV || return 1
@@ -126,5 +142,23 @@ configurationMenu() {
       nextItem="$zsh"
       ;;
   esac
+  return 3
+}
+setupSwapOrHibernation() {
+  if [ "$1" == "hibernation" ]; then
+    menu selectSwapPartitionMenu swapOnly || return 1
+    HIBERNATE_TYPE="hibernate"
+  else
+    menu selectSwapPartitionMenu || return 1
+  fi
+  ROOT_PARTITION=$(df --output=source / | sed -e /^Filesystem/d)
+  [[ -z "$SWAP_TYPE" || "$SWAP_TYPE" == "none" || -z "$ROOT_PARTITION" ]] && return 1
+  echo "SWAP_TYPE=$SWAP_TYPE" >> "$SCRIPT_DIR/install.conf"
+  echo "HIBERNATE_TYPE=$HIBERNATE_TYPE" >> "$SCRIPT_DIR/install.conf"
+  echo "SWAP_PARTITION=$SWAP_PARTITION" >> "$SCRIPT_DIR/install.conf"
+  echo "ROOT_PARTITION=$ROOT_PARTITION" >> "$SCRIPT_DIR/install.conf"
+
+  [ "$1" == "swap" ] && "$SCRIPT_DIR/functions/swap.sh"
+  [ "$HIBERNATE_TYPE" == "hibernate" ] && "$SCRIPT_DIR/functions/hibernation.sh"
 }
 menu configurationMenu
