@@ -38,7 +38,7 @@ $SCRIPT_DIR/functions/xdg-portal.sh
 
 source "$SCRIPT_DIR/install.conf"
 
-cp -R "$SCRIPT_DIR" "/home/$USERNAME/$BASENAME"
+cp -R "$SCRIPT_DIR" "/home/$USERNAME/"
 cp "$SCRIPT_DIR/install.conf" "/home/$USERNAME/$BASENAME"
 chown -R $USERNAME: "/home/$USERNAME/$BASENAME"
 echo -ne "
