@@ -61,31 +61,10 @@ echo -ne "
 --------------------------------------------------------------------
 "
 pacstrap /mnt --noconfirm --needed base base-devel linux linux-firmware vim nano sudo archlinux-keyring wget git libnewt fprintd grub
-if [[ "$SWAP_TYPE" == "file" ]]; then
-    swapSize=$(getSwapSpace)
-    if [[ "$swapSize" -gt 0 ]]; then
-        if [ ! -f /mnt/swapfile ]; then
-            echo
-            echo "--------------------------------------------------------------------"
-            echo "                         Creating Swap File                         "
-            echo "--------------------------------------------------------------------"
-            if [ "$(lsblk -plnf -o FSTYPE "$ROOT_PARTITION")" == 'btrfs' ]; then
-                truncate -s 0 /mnt/swapfile
-                chattr +C /mnt/swapfile
-                btrfs property set /mnt/swapfile compression none
-            fi
-            dd if=/dev/zero of=/mnt/swapfile bs=1M count="$swapSize" status=progress
-            chmod 600 /mnt/swapfile
-            mkswap /mnt/swapfile
-        fi
-    fi
-    swapon /mnt/swapfile
-elif [[ -n "$SWAP_PARTITION" && "$SWAP_PARTITION" != "none" ]]; then
-    swapon "$SWAP_PARTITION"
-fi
+$SCRIPT_DIR/functions/swap.sh /mnt
 echo "# <file system> <dir> <type> <options> <dump> <pass>" > /mnt/etc/fstab
 genfstab -U /mnt >> /mnt/etc/fstab
-echo "keyserver hkp://keyserver.ubuntu.com" >> /mnt/etc/pacman.d/gnupg/gpg.conf
+! grep -q "keyserver.ubuntu.com" /mnt/etc/pacman.d/gnupg/gpg.conf && echo "keyserver hkp://keyserver.ubuntu.com" >> /mnt/etc/pacman.d/gnupg/gpg.conf
 cp -R "${SCRIPT_DIR}" /mnt/root
 cp /etc/pacman.d/mirrorlist /mnt/etc/pacman.d/mirrorlist
 echo -ne "
