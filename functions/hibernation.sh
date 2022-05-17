@@ -13,9 +13,6 @@ CURRENT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd 
 
 source "$CURRENT_DIR/../install.conf" &> /dev/null
 if [ "$HIBERNATE_TYPE" == "hibernate" ]; then
-  echo "--------------------------------------------------------------------"
-  echo "                        Enabling Hibernation                        "
-  echo "--------------------------------------------------------------------"
   configured="false"
   if [[ "$SWAP_TYPE" == "partition" && -n "$SWAP_PARTITION" ]]; then
     swap_uuid=$(blkid -s UUID -o value "$SWAP_PARTITION")
@@ -33,9 +30,15 @@ if [ "$HIBERNATE_TYPE" == "hibernate" ]; then
   fi
 
   if [ "$configured" == "true" ]; then
+    echo "--------------------------------------------------------------------"
+    echo "                        Enabling Hibernation                        "
+    echo "--------------------------------------------------------------------"
     if ! grep ^HOOKS /etc/mkinitcpio.conf | grep -q resume; then
       sed -i '/^HOOKS/s/filesystems/filesystems resume/' /etc/mkinitcpio.conf
       mkinitcpio -P
+    fi
+    if [ -f /boot/grub/grub.cfg ]; then
+      grub-mkconfig -o /boot/grub/grub.cfg
     fi
 
     sed -i 's/HibernateDelaySec=.*/HibernateDelaySec=30min/' /etc/systemd/sleep.conf
