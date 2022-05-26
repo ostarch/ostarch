@@ -16,5 +16,5 @@ if type "fprintd-list" &> /dev/null && fprintd-list root 2>/dev/null | grep -vq 
   sed -i.old "1s;^;$sufficient_fprintd\n;" /etc/pam.d/{system-local-login,login,su,sudo,lightdm,kde}
   sed -i.old "1s;^;$try_first_pass\n;" /etc/pam.d/kde
 fi
-systemctl disable fingerprint-pam-post-startup.service
+systemctl disable fingerprint-pam-post-startup.service &>/dev/null
 rm /etc/systemd/system/fingerprint-pam-post-startup.service &>/dev/null
