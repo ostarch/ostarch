@@ -72,5 +72,5 @@ Make sure the domains `ipapi.co` and `ifconfig.co` don't get blocked by your fir
 ## Credits
 - Forked from ChrisTitusTech
 - Original packages script was a post install cleanup script called ArchMatic located here:\
-https://github.com/rickellis/ArchMatic\
+https://github.com/rickellis/ArchMatic \
 https://github.com/rickellis/Arch-Linux-Install-Guide
