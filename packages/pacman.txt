@@ -23,6 +23,7 @@ mesa
 mesa-vdpau
 noto-fonts-emoji
 os-prober
+packagekit-qt5
 pipewire
 pipewire-alsa
 pipewire-jack
