@@ -38,6 +38,7 @@ fi
 
 
 if [ "$(lsblk -plnf -o FSTYPE "$ROOT_PARTITION")" == "btrfs" ]; then
+  MOUNT_OPTIONS="defaults,noatime,compress=zstd,commit=120"
   mount "${ROOT_PARTITION}" /mnt
   btrfs subvolume create /mnt/@
   btrfs subvolume create /mnt/@home
@@ -51,7 +52,6 @@ if [ "$(lsblk -plnf -o FSTYPE "$ROOT_PARTITION")" == "btrfs" ]; then
   mount -o $MOUNT_OPTIONS,subvol=@ $ROOT_PARTITION /mnt
 
   mkdir -p /mnt/{home,swap,opt,tmp,var,.snapshots}
-  MOUNT_OPTIONS="defaults,noatime,compress=zstd,commit=120"
 
   mount -o $MOUNT_OPTIONS,subvol=@home $ROOT_PARTITION /mnt/home
   mount -o defaults,subvol=@swap $ROOT_PARTITION /mnt/swap

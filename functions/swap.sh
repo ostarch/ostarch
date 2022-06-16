@@ -36,10 +36,6 @@ if [[ "$SWAP_TYPE" == "file" ]]; then
       echo "--------------------------------------------------------------------"
       echo "                         Creating Swap File                         "
       echo "--------------------------------------------------------------------"
-      if [ "$(lsblk -plnf -o FSTYPE "$ROOT_PARTITION")" == "btrfs" ]; then
-        truncate -s 0 "$swapFile"
-        btrfs property set "$swapFile" compression none
-      fi
       dd if=/dev/zero of="$swapFile" bs=1M count="$swapSize" status=progress
       chmod 600 "$swapFile"
       mkswap "$swapFile"
