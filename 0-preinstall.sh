@@ -46,7 +46,7 @@ if [ "$(lsblk -plnf -o FSTYPE "$ROOT_PARTITION")" == "btrfs" ]; then
   btrfs subvolume create /mnt/@var
   btrfs subvolume create /mnt/@tmp
   btrfs subvolume create /mnt/@.snapshots
-  btrfs subvolume set-default /mnt/@
+  btrfs subvolume set-default 5 /mnt
   umount /mnt
   mount -o $MOUNT_OPTIONS,subvol=@ $ROOT_PARTITION /mnt
 
