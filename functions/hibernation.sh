@@ -12,6 +12,8 @@ CURRENT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd 
 
 
 source "$CURRENT_DIR/../install.conf" &> /dev/null
+swapFile="/swapfile"
+[ "$(lsblk -plnf -o FSTYPE "$ROOT_PARTITION")" == "btrfs" ] && swapFile="/swap/swapfile"
 if [ "$HIBERNATE_TYPE" == "hibernate" ]; then
   configured="false"
   if [[ "$SWAP_TYPE" == "partition" && -n "$SWAP_PARTITION" ]]; then
@@ -22,9 +24,9 @@ if [ "$HIBERNATE_TYPE" == "hibernate" ]; then
       sed -i -E "s/GRUB_CMDLINE_LINUX_DEFAULT=\"(.*)\"/GRUB_CMDLINE_LINUX_DEFAULT=\"\1 resume=UUID=$swap_uuid\"/" /etc/default/grub
       configured="true"
     fi
-  elif [[ "$SWAP_TYPE" == "file" && -f /swapfile ]]; then
+  elif [[ "$SWAP_TYPE" == "file" && -f "$swapFile" ]]; then
     root_uuid=$(blkid -s UUID -o value "$ROOT_PARTITION")
-    swap_file_offset=$(filefrag -v /swapfile | awk '$1=="0:" {print substr($4, 1, length($4)-2)}')
+    swap_file_offset=$(filefrag -v "$swapFile" | awk '$1=="0:" {print substr($4, 1, length($4)-2)}')
     if [[ -n "$root_uuid" && -n "$swap_file_offset" ]]; then
       sed -i -E 's/resume=UUID=.* //' /etc/default/grub
       sed -i -E 's/ resume=UUID=.*"/"/' /etc/default/grub
