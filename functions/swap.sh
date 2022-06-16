@@ -13,11 +13,20 @@ CURRENT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd 
 
 source "$CURRENT_DIR/../install.conf" &> /dev/null
 source "$CURRENT_DIR/../dialogs/menu.sh" &> /dev/null
-swapFile="/swapfile"
-fstabFile="/etc/fstab"
+root="/"
 if [ -n "$1" ]; then
-  swapFile="$1$swapFile"
-  fstabFile="$1$fstabFile"
+  root="$1/"
+fi
+swapFile="${root}swapfile"
+fstabFile="${root}etc/fstab"
+if [ "$(lsblk -plnf -o FSTYPE "$ROOT_PARTITION")" == "btrfs" ]; then
+  if [ ! -d "${root}swap" ]; then
+    mkdir "${root}swap"
+    btrfs subvolume create "${root}@swap"
+    mount -o subvol=@swap $ROOT_PARTITION /mnt/swap
+  fi
+  swapFile="${root}swap/swapfile"
+  chattr +C "${root}swap"
 fi
 if [[ "$SWAP_TYPE" == "file" ]]; then
   swapSize=$(getSwapSpace)
@@ -29,7 +38,6 @@ if [[ "$SWAP_TYPE" == "file" ]]; then
       echo "--------------------------------------------------------------------"
       if [ "$(lsblk -plnf -o FSTYPE "$ROOT_PARTITION")" == "btrfs" ]; then
         truncate -s 0 "$swapFile"
-        chattr +C "$swapFile"
         btrfs property set "$swapFile" compression none
       fi
       dd if=/dev/zero of="$swapFile" bs=1M count="$swapSize" status=progress

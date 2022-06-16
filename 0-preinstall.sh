@@ -33,11 +33,35 @@ unset HIBERNATE_TYPE
 source "$SCRIPT_DIR/dialogs/mainmenu.sh"
 
 if [[ -z "$BOOT_PARTITION" ]] || [[ -z "$ROOT_PARTITION" ]]; then
-    source $SCRIPT_DIR/functions/exit.sh
+  source $SCRIPT_DIR/functions/exit.sh
 fi
 
 
-mount "$ROOT_PARTITION" /mnt
+if [ "$(lsblk -plnf -o FSTYPE "$ROOT_PARTITION")" == "btrfs" ]; then
+  mount "${ROOT_PARTITION}" /mnt
+  btrfs subvolume create /mnt/@
+  btrfs subvolume create /mnt/@home
+  btrfs subvolume create /mnt/@swap
+  btrfs subvolume create /mnt/@opt
+  btrfs subvolume create /mnt/@var
+  btrfs subvolume create /mnt/@tmp
+  btrfs subvolume create /mnt/@.snapshots
+  btrfs subvolume set-default /mnt/@
+  umount /mnt
+  mount -o $MOUNT_OPTIONS,subvol=@ $ROOT_PARTITION /mnt
+
+  mkdir -p /mnt/{home,swap,opt,tmp,var,.snapshots}
+  MOUNT_OPTIONS="defaults,noatime,compress=zstd,commit=120"
+
+  mount -o $MOUNT_OPTIONS,subvol=@home $ROOT_PARTITION /mnt/home
+  mount -o defaults,subvol=@swap $ROOT_PARTITION /mnt/swap
+  mount -o $MOUNT_OPTIONS,subvol=@opt $ROOT_PARTITION /mnt/opt
+  mount -o $MOUNT_OPTIONS,subvol=@tmp $ROOT_PARTITION /mnt/tmp
+  mount -o $MOUNT_OPTIONS,subvol=@var $ROOT_PARTITION /mnt/var
+  mount -o $MOUNT_OPTIONS,subvol=@.snapshots $ROOT_PARTITION /mnt/.snapshots
+else
+  mount "$ROOT_PARTITION" /mnt
+fi
 mkdir /mnt/boot &>/dev/null
 mount "$BOOT_PARTITION" /mnt/boot/
 

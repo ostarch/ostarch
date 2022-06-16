@@ -90,10 +90,6 @@ setupRootPartition() {
       ;;
     "btrfs")
       mkfs.btrfs -L "ROOT" -f "${ROOT_PARTITION}"
-      mount "${ROOT_PARTITION}" /mnt
-      btrfs subvolume create /mnt/@
-      btrfs subvolume set-default /mnt/@
-      umount /mnt
       ;;
     "xfs")
       mkfs.xfs -L "ROOT" -f "${ROOT_PARTITION}"
