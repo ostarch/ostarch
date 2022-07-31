@@ -9,7 +9,7 @@ for f in $(find "${CURRENT_DIR}/" -type f ! -name "mainmenu.sh" ! -name "menu.sh
 # 3 - show menu again
 menu() {
 	$@
-	exitcode="$?"
+	local exitcode="$?"
 	if [ "$exitcode" = "3" ]; then
     menu $@
 		exitcode="$?"
@@ -22,15 +22,16 @@ menu() {
 # 1 - one menu back
 # 2 - exit
 menuFlow() {
-	i=1
+	local i=1
 	while [ "$i" -le "$#" ]; do
 		eval "\${$i}"
-		if [ "$?" = "0" ]; then
+		local exitcode="$?"
+		if [ "$exitcode" = "0" ]; then
 		  if [ "$i" -eq "$#" ]; then
 		    return 0
 		  fi
 			i=$((i + 1))
-		elif [ "$?" = "2" ]; then
+		elif [ "$exitcode" = "2" ]; then
 			return 0
 		else
 			if [ "$i" -eq "1" ]; then
