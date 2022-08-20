@@ -1,9 +1,11 @@
 binutils
 btrfs-progs
+cmake
 dosfstools
 easyeffects
 efibootmgr # EFI boot
 ethtool
+gdb
 grub
 gst-plugin-pipewire
 hdparm
@@ -74,6 +76,7 @@ edk2-ovmf # UEFI Support for Virt-Manager
 egl-wayland
 evolution
 exfatprogs
+filezilla
 firefox
 flameshot
 flex # recognize lexical patterns in text
@@ -170,6 +173,7 @@ tesseract
 tesseract-data-deu
 tesseract-data-eng
 texinfo
+texmaker
 thunderbird
 thunderbird-i18n-de
 thunderbird-i18n-en-us
@@ -185,6 +189,7 @@ usbutils
 vde2
 vi
 vim
+vim-gitgutter
 virt-manager
 virt-viewer
 wget

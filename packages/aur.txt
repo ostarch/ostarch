@@ -1,19 +1,23 @@
-arc-kde-git
+arc-kde
 brave-bin # Brave Browser
 system-monitoring-center
 --END OF MINIMAL INSTALL--
+clion
+clion-jre
+cobang
 cups-bjnp
 etcher-bin
-mangohud
-minecraft-launcher
+ferdium-bin
 intellij-idea-ultimate-edition
 intellij-idea-ultimate-edition-jre
 lib32-mangohud
+mangohud
+minecraft-launcher
 ocs-url # install packages from websites
 phpstorm
 phpstorm-jre
 pycharm-professional
-rambox-bin
+qrcp-bin
 #rtl88x2bu-dkms-git # for WiFi USB adapters
 timeshift
 ttf-meslo # Nerdfont package
