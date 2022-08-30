@@ -16,19 +16,20 @@ sddm
 audiocd-kio # CD/DVD Audio
 extra-cmake-modules
 filelight
-kdeconnect
 kcalc
 kcharselect
 kcodecs
 kcoreaddons
 kcrash
 kcron
+kdeconnect
 kdenetwork-filesharing
 kdenlive
 kdialog
 keychain
 kfind
 kgpg
+kio-zeroconf
 kmenuedit
 kompare
 krdc
@@ -40,4 +41,3 @@ kwalletmanager
 layer-shell-qt
 milou # alternative to KRunner
 print-manager
-zeroconf-ioslave
