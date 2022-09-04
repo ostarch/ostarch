@@ -14,7 +14,7 @@ fi
 SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 source "$SCRIPT_DIR/dialogs/menu.sh"
 
-zsh="Zsh Configuration + dotfiles"
+zsh="My dotfiles + KDE configuration"
 grub="Grub Customization"
 swap="Configure Swap"
 hibernation="Enable Hibernation"
@@ -127,14 +127,6 @@ configurationMenu() {
       ;;
     "$xdg")
       "$SCRIPT_DIR/functions/xdg-portal.sh"
-      nextItem="$kde_import"
-      ;;
-    "$kde_import")
-      "$SCRIPT_DIR/functions/kde-import.sh"
-      nextItem="$kde_export"
-      ;;
-    "$kde_export")
-      "$SCRIPT_DIR/functions/kde-export.sh"
       nextItem="$add_user"
       ;;
     "$add_user")

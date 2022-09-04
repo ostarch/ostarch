@@ -19,3 +19,4 @@ if [ ! "$?" = "0" ]; then
   cd ~/.dotfiles && git pull
 fi
 ~/.dotfiles/install.sh minimal
+~/.dotfiles/functions/kde.sh

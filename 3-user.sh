@@ -30,7 +30,6 @@ echo -ne "
 
 $SCRIPT_DIR/functions/install/install-packages.sh --aur aur
 
-$SCRIPT_DIR/functions/kde-import.sh
 mkdir -p ~/.config/autostart
 cat <<EOF > ~/.config/autostart/wallpaper-post-startup.desktop
 [Desktop Entry]
