@@ -24,6 +24,7 @@ libvdpau-va-gl
 linux-headers
 mesa
 mesa-vdpau
+ncdu
 noto-fonts-emoji
 os-prober
 packagekit-qt5

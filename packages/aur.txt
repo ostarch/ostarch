@@ -8,6 +8,7 @@ cobang
 cups-bjnp
 etcher-bin
 ferdium-bin
+imgcat
 intellij-idea-ultimate-edition
 intellij-idea-ultimate-edition-jre
 lib32-mangohud
