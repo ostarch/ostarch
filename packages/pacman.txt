@@ -62,7 +62,6 @@ bluez
 bluez-libs
 bluez-utils
 bridge-utils
-celluloid # video players
 cmatrix
 cronie
 cups
