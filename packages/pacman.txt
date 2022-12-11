@@ -26,6 +26,7 @@ mesa
 mesa-vdpau
 ncdu
 noto-fonts-emoji
+noise-suppression-for-voice
 os-prober
 packagekit-qt5
 pipewire
