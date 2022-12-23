@@ -17,7 +17,6 @@ lib32-mesa-vdpau
 lib32-pipewire
 lib32-pipewire-jack
 lib32-pipewire-v4l2
-libpipewire02
 libva-mesa-driver
 libva-vdpau-driver
 libvdpau-va-gl
