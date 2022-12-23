@@ -10,6 +10,7 @@ grub
 gst-plugin-pipewire
 hdparm
 htop
+jq
 lib32-libva-mesa-driver
 lib32-libva-vdpau-driver
 lib32-mesa
