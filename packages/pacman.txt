@@ -145,10 +145,10 @@ partitionmanager
 patch
 pavucontrol
 php-cgi
-php7
-php7-apache
-php7-cgi
-php7-gd
+php
+php-apache
+php-cgi
+php-gd
 picom
 pkgconf
 powerline-fonts
