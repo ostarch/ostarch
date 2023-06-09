@@ -7,9 +7,15 @@ echo "*******************************************************"
 
 # Skip Pacstrap (Base Install), if Done Earlier:
     set -e
-    if [ "$part" -eq 1 ] && [ "$pa" -eq 1 ] #then
-        echo "Cond 1"
- #   elif [ "$part" -eq 1 ] && [ "$pa" -eq 2 ] then
-  #      echo "Cond 2"
+    if [ $part -eq 1 ]; then
+        if [ $pa -eq 1 ]; then
+            echo "Cond 1"
+        fi
     fi
-        echo "Crossed"
+    set -e
+    if [ $part -eq 1 ]; then
+        if [ $pa -eq 2 ]; then
+            echo "Cond 1"
+        fi
+    fi
+    echo @Crossed
