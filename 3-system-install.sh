@@ -5,10 +5,6 @@ echo "*                   System-Install                    *"
 echo "*                                                     *"
 echo "*******************************************************"
 
-part=1
-pa=2
-
-
 # Skip Pacstrap (Base Install), if Done Earlier:
     set -e
     if [[ $part -eq 1 ]] && [[ $pa -eq 1 ]]; then
