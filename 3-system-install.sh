@@ -6,7 +6,7 @@ echo "*                                                     *"
 echo "*******************************************************"
 
 part=1
-pa=1
+pa=2
 
 
 # Skip Pacstrap (Base Install), if Done Earlier:
