@@ -7,7 +7,7 @@ echo "*******************************************************"
 echo "*******************************************************"
 echo "* 2                Disk Partition                     *"
 echo "*******************************************************"
-    PS4='Please Choose The Options Carefully: '
+    PS3='Please Choose The Options Carefully: '
     options=("Run Partitioning Script Now" "Already Done Partitioning Earlier With THIS Script (Skip Partitioning)" "Quit / Next Step")
     select opt in "${options[@]}"
     do
