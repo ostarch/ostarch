@@ -23,22 +23,22 @@ echo "*******************************************************"
     echo "*******************************************************"
     echo "* 1    Select how you want to configure Mirrorlist    *"
     echo "*******************************************************"
-    iso=$(curl -4 ifconfig.co/country-iso) 
+    export iso=$(curl -4 ifconfig.co/country-iso) 
     PS3='Please Select How you want to generate mirrorlist: '
         options=("Fast 5 for $iso" "General" "Next-Step / Quit")
         select opt in "${options[@]}"
         do
             case $opt in
                 "Fast 5 for $iso")
-                    isoc=1
+                    export isoc=1
                     break
                     ;;
                 "General")
-                    isoc=2
+                    export isoc=2
                     break
                     ;;
                 "Continue"|"Q"|"Quit"|*)
-                    isoc=3
+                    export isoc=3
                     break
                     ;;
                 *) echo "invalid option $REPLY";;
