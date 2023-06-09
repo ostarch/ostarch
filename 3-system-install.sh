@@ -12,3 +12,4 @@ echo "*******************************************************"
     elif [ "$part" -eq 1 ] && [ "$pa" -eq 2 ] then
         echo "Cond 2"
     fi
+        echo "Crossed"
