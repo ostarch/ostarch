@@ -115,7 +115,6 @@ echo "*******************************************************"
                                         mount "${EFI}${EFIn}" /mnt/boot/
                                     part=1
                                     pa=1
-                                    BsInst=1
                                     break
                                     ;;
                                 "Erase Entire HDD/SSD and Create New Partitions (Auto)")
@@ -190,7 +189,6 @@ echo "*******************************************************"
                                         mount "${EFI}${EFIn}" /mnt/boot/
                                     part=1
                                     pa=1
-                                    BsInst=1
                                     break
                                     ;;
                                 "Continue"|"Q"|"Quit"|*)
