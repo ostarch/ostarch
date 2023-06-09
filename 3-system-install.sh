@@ -9,13 +9,13 @@ echo "*******************************************************"
     set -e
     if [[ $part -eq 1 ]]; then
         if [[ $pa -eq 1 ]]; then
-            echo Cond 1
+            pacman -Sy git
         fi
     fi
     set -e
     if [[ $part -eq 1 ]]; then
         if [[ $pa -eq 2 ]]; then
-            echo Cond 2
+            pacman -Sy neovim
         fi
     fi
     echo @Crossed
