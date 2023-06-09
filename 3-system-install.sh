@@ -9,13 +9,13 @@ echo "*******************************************************"
     set -e
     if [[ $part -eq 1 ]]; then
         if [[ $pa -eq 1 ]]; then
-            echo "Cond 1"
+            echo Cond 1
         fi
     fi
     set -e
     if [[ $part -eq 1 ]]; then
         if [[ $pa -eq 2 ]]; then
-            echo "Cond 2"
+            echo Cond 2
         fi
     fi
     echo @Crossed
