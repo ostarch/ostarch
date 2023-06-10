@@ -354,20 +354,34 @@ echo "*******************************************************"
         genfstab -U -p /mnt >> /mnt/etc/fstab
         echo "keyserver hkp://keyserver.ubuntu.com" >> /mnt/etc/pacman.d/gnupg/gpg.conf
     fi
+
     set -e
     if [[ $part -eq 1 ]] && [[ $pa -eq 2 ]]; then
         echo "*******************************************************"
-        echo "* 3               Run pacstrap again?                 *"
-        echo "*     Choose "Y" "y" Only if not done earlier.        *"
-        echo "*_____________________________________________________*"
+        echo "* 3    Choose if you want to run Pacstrap again       *"
         echo "*******************************************************"
-        read INST
-        if [[ $INST == "Y" || $INST == "y" ]]; then
-            #Microcode 1.17
-            pacstrap /mnt base base-devel btrfs-progs linux linux-firmware bash-completion cryptsetup htop man-db mlocate neovim networkmanager pacman-contrib sudo terminus-font tmux --noconfirm --needed
-            genfstab -U -p /mnt >> /mnt/etc/fstab
-            echo "keyserver hkp://keyserver.ubuntu.com" >> /mnt/etc/pacman.d/gnupg/gpg.conf
-        fi
+        PS2='Please Choose The Appropriate Option: '
+        option=("Skip Pacstrap, Already done earlier" "Do Pacstrap Now, Not done earlier")
+            select opt in "${option[@]}"
+            do
+            case $opt in
+                "Skip Pacstrap, Already done earlier")
+                    echo "Skipping Pacstrap"
+                    break
+                    ;;
+                "Do Pacstrap Now, Not done earlier")
+                    echo "*******************************************************"
+                    echo "* 3     Arch Linux Installation on Main Drive         *"
+                    echo "*_____________________________________________________*"
+                    echo "*******************************************************"
+                        #Microcode 1.17
+                        pacstrap /mnt base base-devel btrfs-progs linux linux-firmware bash-completion cryptsetup htop man-db mlocate neovim networkmanager pacman-contrib sudo terminus-font tmux --noconfirm --needed
+                        genfstab -U -p /mnt >> /mnt/etc/fstab
+                        echo "keyserver hkp://keyserver.ubuntu.com" >> /mnt/etc/pacman.d/gnupg/gpg.conf
+                    break
+                    ;;
+            esac
+            done
     fi
 
     cp -R ${SCRIPT_DIR} /mnt/root/                                                          # Copy Script to /root/ostarch/
