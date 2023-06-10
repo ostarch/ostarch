@@ -14,9 +14,10 @@ echo "*       Arch Linux Pre-Install Setup and Config       *"
 echo "*                                                     *"
 echo "*******************************************************"
 
+    SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )" # Get the value of Present Directory
     timedatectl set-ntp true
-    sed -i 's/^#Parallel/Parallel/' /etc/pacman.conf                            # Enable Parallel Downloads
-    sed -i 's/^#Color/Color\nILoveCandy/' /etc/pacman.conf                      # Enable Color & ILoveCandy
+    sed -i 's/^#Parallel/Parallel/' /etc/pacman.conf                                  # Enable Parallel Downloads
+    sed -i 's/^#Color/Color\nILoveCandy/' /etc/pacman.conf                            # Enable Color & ILoveCandy
     clear
 
 # Mirrorlist Based on Country:
