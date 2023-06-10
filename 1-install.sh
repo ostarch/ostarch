@@ -385,5 +385,48 @@ echo "*******************************************************"
             done
     fi
 
+# Swap File:
+    # echo "-----------------------------------------------------"
+    # echo "---------- Swap for systems with <8G RAM ------------"
+    # echo "-----------------------------------------------------"
+    TOTALMEM=$(cat /proc/meminfo | grep -i 'memtotal' | grep -o '[[:digit:]]*')
+    if [[  $TOTALMEM -lt 8000000 ]]; then
+        echo "*******************************************************"
+        echo "* 3       Do you want to create swap file?            *"
+        echo "*******************************************************"
+        PS2='Do you want to create Swap File: '
+            option=("Yes, Create Swap File" "No, Skip Creating Swap file")
+            select opt in "${option[@]}"
+            do
+                case $opt in
+                    "Yes, Create Swap File")
+                        echo "*******************************************************"
+                        echo "* 3                Making Swap File                   *"
+                        echo "*******************************************************"
+                        #Put swap into the actual system, not into RAM disk, otherwise there is no point in it, it'll cache RAM into RAM. So, /mnt/ everything.
+                        mkdir /mnt/opt/swap #make a dir that we can apply NOCOW to to make it btrfs-friendly.
+                        chattr +C /mnt/opt/swap #apply NOCOW, btrfs needs that.
+                        dd if=/dev/zero of=/mnt/opt/swap/swapfile bs=1M count=2048 status=progress
+                        chmod 600 /mnt/opt/swap/swapfile #set permissions.
+                        chown root /mnt/opt/swap/swapfile
+                        mkswap /mnt/opt/swap/swapfile
+                        swapon /mnt/opt/swap/swapfile
+                        #The line below is written to /mnt/ but doesn't contain /mnt/, since it's just / for the sysytem itself.
+                        echo "/opt/swap/swapfile	none	swap	sw	0	0" >> /mnt/etc/fstab #Add swap to fstab, so it KEEPS working after installation.
+                        echo "*******************************************************"
+                        echo "* 3                   Swap Done.                      *"
+                        echo "*******************************************************"
+                        break
+                        ;;
+                    "No, Skip Creating Swap file")
+                        echo "*******************************************************"
+                        echo "* 3              Skipping Swap File                   *"
+                        echo "*******************************************************"
+                        break
+                        ;;
+                esac
+            done
+    fi
+
     cp -R ${SCRIPT_DIR} /mnt/root/                                                          # Copy Script to /root/ostarch/
     cp -R /etc/pacman.d/mirrorlist /mnt/etc/pacman.d/mirrorlist                             # Mirrorlist to New Install
