@@ -360,7 +360,7 @@ echo "*******************************************************"
         clear
         echo "*******************************************************"
         echo "* 3           Do you want to run Pacstrap?            *"
-        echo "*        Choose "Yes" Only if not done Earlier        *"
+        echo "*        Choose {Yes} Only if not done Earlier        *"
         echo "*       Otherwise it will mess with /etc/fstab        *"
         echo "*******************************************************"
         PS2='Please Choose The Appropriate Option: '
