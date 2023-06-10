@@ -350,7 +350,7 @@ echo "*******************************************************"
     echo "*_____________________________________________________*"
     echo "*******************************************************"
         #Microcode 1.17
-        pacstrap /mnt base base-devel btrfs-progs linux linux-firmware bash-completion cryptsetup htop man-db mlocate neovim networkmanager pacman-contrib sudo terminus-font tmux --noconfirm --needed
+        pacstrap /mnt base base-devel btrfs-progs linux linux-firmware bash-completion cryptsetup htop man-db mlocate nano neovim networkmanager pacman-contrib sudo terminus-font tmux --noconfirm --needed
         genfstab -U -p /mnt >> /mnt/etc/fstab
         echo "keyserver hkp://keyserver.ubuntu.com" >> /mnt/etc/pacman.d/gnupg/gpg.conf
     fi
@@ -378,7 +378,7 @@ echo "*******************************************************"
                     echo "*_____________________________________________________*"
                     echo "*******************************************************"
                         #Microcode 1.17
-                        pacstrap /mnt base base-devel btrfs-progs linux linux-firmware bash-completion cryptsetup htop man-db mlocate neovim networkmanager pacman-contrib sudo terminus-font tmux --noconfirm --needed
+                        pacstrap /mnt base base-devel btrfs-progs linux linux-firmware bash-completion cryptsetup htop man-db mlocate nano neovim networkmanager pacman-contrib sudo terminus-font tmux --noconfirm --needed
                         genfstab -U -p /mnt >> /mnt/etc/fstab
                         echo "keyserver hkp://keyserver.ubuntu.com" >> /mnt/etc/pacman.d/gnupg/gpg.conf
                     break
