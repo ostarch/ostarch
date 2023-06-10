@@ -342,12 +342,17 @@ echo "* 3                                                   *"
 echo "*                   System-Install                    *"
 echo "*                                                     *"
 echo "*******************************************************"
-# Skip Pacstrap (Base Install), if Done Earlier:
+# Main Install (Pacstrap). Skip, if Done Earlier:
     set -e
     if [[ $part -eq 1 ]] && [[ $pa -eq 1 ]]; then
-        echo "Condition 1"
-        echo $part
-        echo $pa
+    echo "*******************************************************"
+    echo "* 3     Arch Linux Installation on Main Drive         *"
+    echo "*_____________________________________________________*"
+    echo "*******************************************************"
+        #Microcode 1.17
+        pacstrap /mnt base base-devel btrfs-progs linux linux-firmware bash-completion cryptsetup htop man-db mlocate neovim networkmanager pacman-contrib sudo terminus-font tmux --noconfirm --needed
+        genfstab -U -p /mnt >> /mnt/etc/fstab
+        echo "keyserver hkp://keyserver.ubuntu.com" >> /mnt/etc/pacman.d/gnupg/gpg.conf
     fi
     set -e
     if [[ $part -eq 1 ]] && [[ $pa -eq 2 ]]; then
@@ -355,3 +360,6 @@ echo "*******************************************************"
         echo $part
         echo $pa
     fi
+
+    cp -R ${SCRIPT_DIR} /mnt/root/                                                          # Copy Script to /root/ostarch/
+    cp -R /etc/pacman.d/mirrorlist /mnt/etc/pacman.d/mirrorlist                             # Mirrorlist to New Install
