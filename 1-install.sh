@@ -359,7 +359,9 @@ echo "*******************************************************"
     if [[ $part -eq 1 ]] && [[ $pa -eq 2 ]]; then
         clear
         echo "*******************************************************"
-        echo "* 3    Choose if you want to run Pacstrap again       *"
+        echo "* 3           Do you want to run Pacstrap?            *"
+        echo "*        Choose "Yes" Only if not done Earlier        *"
+        echo "*       Otherwise it will mess with /etc/fstab        *"
         echo "*******************************************************"
         PS2='Please Choose The Appropriate Option: '
         option=("Skip Pacstrap, Already done earlier" "Do Pacstrap Now, Not done earlier")
