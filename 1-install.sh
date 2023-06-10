@@ -401,7 +401,7 @@ echo "*******************************************************"
             do
                 case $opt in
                     "Yes, Create Swap File")
-                        if [[ ! -d "/mnt/opt/swap" ]]; then
+                        if [[ ! -f "/mnt/opt/swap/swapfile" ]]; then
                             echo "*******************************************************"
                             echo "* 3                Making Swap File                   *"
                             echo "*******************************************************"
