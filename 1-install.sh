@@ -356,10 +356,20 @@ echo "*******************************************************"
     fi
     set -e
     if [[ $part -eq 1 ]] && [[ $pa -eq 2 ]]; then
-        echo "Condition 2"
-        echo $part
-        echo $pa
+        echo "*******************************************************"
+        echo "* 3               Run pacstrap again?                 *"
+        echo "*     Choose "Y" "y" Only if not done earlier.        *"
+        echo "*_____________________________________________________*"
+        echo "*******************************************************"
+        read INST
+        if [[ $INST == "Y" || $INST == "y" ]]; then
+            #Microcode 1.17
+            pacstrap /mnt base base-devel btrfs-progs linux linux-firmware bash-completion cryptsetup htop man-db mlocate neovim networkmanager pacman-contrib sudo terminus-font tmux --noconfirm --needed
+            genfstab -U -p /mnt >> /mnt/etc/fstab
+            echo "keyserver hkp://keyserver.ubuntu.com" >> /mnt/etc/pacman.d/gnupg/gpg.conf
+        fi
     fi
 
     cp -R ${SCRIPT_DIR} /mnt/root/                                                          # Copy Script to /root/ostarch/
     cp -R /etc/pacman.d/mirrorlist /mnt/etc/pacman.d/mirrorlist                             # Mirrorlist to New Install
+    clear
