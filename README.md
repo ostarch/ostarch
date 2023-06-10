@@ -1,16 +1,15 @@
-### Hi there 👋
-
-<!--
-**ostarch/ostarch** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
-
-Here are some ideas to get you started:
-
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+# This Script is in (WIP) stage
+### About this Script:
+- Will do some basic setups upto **Pacstrap** in simple steps, by choosing between options:
+- will cover:
+	- Generating Mirrorlist
+	- Partition Disk:
+		- btrfs, Luks encryption, SubVols, etc.
+	- Mount Partitions 
+	- And Pacstrap
+### How to run:
+- Boot into live mode:
+- `pacman -Sy git`
+- `git clone https://www.github.com/ostarch/ostarch`
+- `cd ostarch/`
+- `./ostarch.sh`
