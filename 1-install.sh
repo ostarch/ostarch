@@ -357,6 +357,7 @@ echo "*******************************************************"
 
     set -e
     if [[ $part -eq 1 ]] && [[ $pa -eq 2 ]]; then
+        clear
         echo "*******************************************************"
         echo "* 3    Choose if you want to run Pacstrap again       *"
         echo "*******************************************************"
@@ -386,4 +387,3 @@ echo "*******************************************************"
 
     cp -R ${SCRIPT_DIR} /mnt/root/                                                          # Copy Script to /root/ostarch/
     cp -R /etc/pacman.d/mirrorlist /mnt/etc/pacman.d/mirrorlist                             # Mirrorlist to New Install
-    clear
