@@ -23,11 +23,11 @@ echo "*******************************************************"
                             do
                                 case $opt in
                                     "Choose, If you are using Hard Disk (HDD)")
-                                        hd=1
+                                        export hd=1
                                         break
                                         ;;
                                     "Choose, If you are using Nvme Drive (SSD)")
-                                        hd=2
+                                        export hd=2
                                         break
                                         ;;
                                 esac
@@ -113,8 +113,8 @@ echo "*******************************************************"
                                         mount -o ${sv_opts},subvol=@tmp /dev/mapper/cryptdev /mnt/var/tmp
                                         mkdir -p /mnt/boot/efi
                                         mount "${EFI}${EFIn}" /mnt/boot/
-                                    part=1
-                                    pa=1
+                                    export part=1
+                                    export pa=1
                                     break
                                     ;;
                                 "Erase Entire HDD/SSD and Create New Partitions (Auto)")
@@ -187,13 +187,13 @@ echo "*******************************************************"
                                         mount -o ${sv_opts},subvol=@tmp /dev/mapper/cryptdev /mnt/var/tmp
                                         mkdir -p /mnt/boot/efi
                                         mount "${EFI}${EFIn}" /mnt/boot/
-                                    part=1
-                                    pa=1
+                                    export part=1
+                                    export pa=1
                                     break
                                     ;;
                                 "Continue"|"Q"|"Quit"|*)
-                                    part=2
-                                    pa=1
+                                    export part=2
+                                    export pa=1
                                     break
                                     ;;
                             esac                           
@@ -222,13 +222,13 @@ echo "*******************************************************"
                 echo "Please Enter Your *ROOT* Partition Number {example (2) / (p2) -> Partition Number Only}"
                 read ROOTn
                 clear
-                part=1
-                pa=2
+                export part=1
+                export pa=2
                 break
                 ;;
             "Continue"|"Q"|"Quit"|*)
-                part=2
-                pa=1
+                export part=2
+                export pa=1
                 break
                 ;;
         esac
