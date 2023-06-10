@@ -387,7 +387,5 @@ echo "*******************************************************"
             done
     fi
 
-# Pending Swap File:
-
     cp -R ${SCRIPT_DIR} /mnt/root/                                                          # Copy Script to /root/ostarch/
     cp -R /etc/pacman.d/mirrorlist /mnt/etc/pacman.d/mirrorlist                             # Mirrorlist to New Install
