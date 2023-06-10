@@ -415,12 +415,9 @@ echo "*******************************************************"
                             swapon /mnt/opt/swap/swapfile
                             #The line below is written to /mnt/ but doesn't contain /mnt/, since it's just / for the sysytem itself.
                             echo "/opt/swap/swapfile	none	swap	sw	0	0" >> /mnt/etc/fstab #Add swap to fstab, so it KEEPS working after installation.
-                            echo "*******************************************************"
-                            echo "* 3                   Swap Done.                      *"
-                            echo "*******************************************************"
                         fi
                             echo "*******************************************************"
-                            echo "* 3                  Swap Exist                       *"
+                            echo "* 3           Swap Done / Swap Exist                  *"
                             echo "*******************************************************"
                         break
                         ;;
