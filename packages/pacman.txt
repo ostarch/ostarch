@@ -164,7 +164,6 @@ screen
 scrot
 shellcheck
 simple-scan
-simplescreenrecorder
 #snapper
 speedtest-cli
 steam
