@@ -156,8 +156,7 @@ powertop
 python-notify2
 python-psutil
 python-pyqt5
-qemu
-qemu-arch-extra
+qemu-full
 remmina
 rsync
 screen
