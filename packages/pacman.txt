@@ -99,6 +99,7 @@ haveged
 hunspell
 hunspell-en_us
 hunspell-de
+imagemagick
 #iptables-nft
 jdk-openjdk # Java 17
 libappindicator-gtk3

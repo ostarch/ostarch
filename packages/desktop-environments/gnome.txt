@@ -1,4 +1,3 @@
 gnome
-gnome-software-packagekit-plugin
 --END OF MINIMAL INSTALL--
 gnome-extra

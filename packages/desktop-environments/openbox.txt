@@ -5,11 +5,6 @@ thunar
 lxsession
 rxvt-unicode
 --END OF MINIMAL INSTALL--
-alsa-utils
-pulseaudio
-pulseaudio-alsa
-wireless_tools
-zsh
 dunst
 tint2
 rofi
@@ -21,24 +16,16 @@ qt5ct
 gsimplecal
 xautolock
 xclip
-scrot
 thunar-archive-plugin
 thunar-volman
 thunar-media-tags-plugin
 tumbler
-jq
 w3m
 geany
-nano
 viewnior
-pavucontrol
 parcellite
-neofetch
-htop
-picom
 gtk2-perl
 xfce4-power-manager
-imagemagick
 playerctl
 xsettingsd
 obconf
