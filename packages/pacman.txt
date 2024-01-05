@@ -75,7 +75,6 @@ dosfstools
 dtc
 edk2-ovmf # UEFI Support for Virt-Manager
 egl-wayland
-evolution
 exfatprogs
 filezilla
 firefox

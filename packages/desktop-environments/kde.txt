@@ -18,9 +18,6 @@ extra-cmake-modules
 filelight
 kcalc
 kcharselect
-kcodecs
-kcoreaddons
-kcrash
 kcron
 kdeconnect
 kdenetwork-filesharing
@@ -36,7 +33,7 @@ krdc
 ksystemlog
 ksysguard
 ktorrent
-kwallet
+kwallet5
 kwalletmanager
 layer-shell-qt
 milou # alternative to KRunner
