@@ -17,7 +17,7 @@ selectSwapOption() {
   sed -i '/^SWAP_TYPE=/d' "$PARTITION_DIR/../../install.conf" &>/dev/null
   options=()
   options+=("none" "")
-  options+=("Swap File" "")
+  options+=("Swap File" "(recommended)")
   options+=("Swap Partition" "")
   result=$(whiptail --backtitle "${TITLE}" --title "Select Swap Option" --menu "" --default-item "Swap File" 0 0 0 "${options[@]}" 3>&1 1>&2 2>&3)
   if [ ! "$?" = "0" ]; then

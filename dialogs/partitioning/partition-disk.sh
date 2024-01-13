@@ -19,8 +19,8 @@ partitionDiskMenu() {
   else
     options+=("Auto Partitions (gpt,efi)" "")
   fi
-  options+=("Edit Partitions (cfdisk)" "")
-  options+=("Edit Partitions (cgdisk)" "")
+  options+=("Edit Partitions manually (cfdisk)" "")
+  options+=("Edit Partitions manually (cgdisk)" "")
 
   partitionOption=$(whiptail --backtitle "$TITLE" --title "Disk Partitions" --cancel-button "Back" --menu "" 0 0 0 "${options[@]}" 3>&1 1>&2 2>&3)
   if [ ! "$?" = "0" ]; then
@@ -49,12 +49,12 @@ partitionDiskMenu() {
         partitionDisks efi
       fi
     ;;
-    "Edit Partitions (cfdisk)")
+    "Edit Partitions manually (cfdisk)")
       cfdisk ${DISK}
       menu selectPartitionMenu "$DISK"
       return "$?"
     ;;
-    "Edit Partitions (cgdisk)")
+    "Edit Partitions manually (cgdisk)")
       cgdisk ${DISK}
       menu selectPartitionMenu "$DISK"
       return "$?"
