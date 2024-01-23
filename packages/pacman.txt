@@ -20,6 +20,7 @@ lib32-pipewire
 lib32-pipewire-jack
 lib32-pipewire-v4l2
 libva-mesa-driver
+libva-utils
 libva-vdpau-driver
 libvdpau-va-gl
 linux-headers
@@ -36,8 +37,7 @@ pipewire-jack
 pipewire-pulse
 pipewire-v4l2
 python-pip
-python-pynput
-python-tesseract
+python-pytesseract
 qpwgraph
 stow
 usbutils
@@ -104,6 +104,7 @@ hunspell
 hunspell-en_us
 hunspell-de
 imagemagick
+inetutils
 inkscape
 #iptables-nft
 jdk-openjdk # Java 17
@@ -163,7 +164,6 @@ python-psutil
 python-pyqt5
 qemu-full
 remmina
-rpi-imager
 rsync
 screen
 scrot
@@ -185,6 +185,8 @@ texmaker
 thunderbird
 thunderbird-i18n-de
 thunderbird-i18n-en-us
+timeshift
+tldr
 traceroute
 tree
 ttf-droid

@@ -2,6 +2,8 @@ arc-kde
 brave-bin # Brave Browser
 system-monitoring-center
 --END OF MINIMAL INSTALL--
+birdtray
+ccat
 clion
 clion-jre
 cobang
@@ -11,16 +13,15 @@ ferdium-bin
 imgcat
 intellij-idea-ultimate-edition
 intellij-idea-ultimate-edition-jre
-lib32-mangohud
-mangohud
 minecraft-launcher
 ocs-url # install packages from websites
 phpstorm
 phpstorm-jre
 pycharm-professional
+python-pynput
 qrcp-bin
+rpi-imager-bin
 #rtl88x2bu-dkms-git # for WiFi USB adapters
-timeshift
 ttf-meslo # Nerdfont package
 ttf-ms-fonts
 typora
