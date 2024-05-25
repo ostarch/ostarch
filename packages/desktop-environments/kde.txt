@@ -31,7 +31,6 @@ kmenuedit
 kompare
 krdc
 ksystemlog
-ksysguard
 ktorrent
 kwallet5
 kwalletmanager
