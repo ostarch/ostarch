@@ -76,7 +76,7 @@ EOF
 systemctl enable fingerprint-pam-post-startup.service
 
 systemctl enable cups.service
-systemctl disable dhcpcd.service
+systemctl disable dhcpcd.service 2>/dev/null
 systemctl enable NetworkManager.service
 systemctl enable bluetooth.service
 if ! systemd-detect-virt &>/dev/null && [ ! "$INSTALL_TYPE" = "minimal" ]; then
