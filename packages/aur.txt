@@ -17,6 +17,7 @@ minecraft-launcher
 ocs-url # install packages from websites
 phpstorm
 phpstorm-jre
+postman-bin
 pycharm-professional
 python-pynput
 qrcp-bin

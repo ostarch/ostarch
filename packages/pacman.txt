@@ -12,16 +12,12 @@ gst-plugin-pipewire
 hdparm
 htop
 jq
-lib32-libva-mesa-driver
-lib32-libva-vdpau-driver
 lib32-mesa
-lib32-mesa-vdpau
 lib32-pipewire
 lib32-pipewire-jack
 lib32-pipewire-v4l2
 libva-mesa-driver
 libva-utils
-libva-vdpau-driver
 libvdpau-va-gl
 linux-headers
 mesa
