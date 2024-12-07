@@ -1,6 +1,4 @@
-arc-kde
 brave-bin # Brave Browser
-system-monitoring-center
 --END OF MINIMAL INSTALL--
 birdtray
 ccat
