@@ -32,7 +32,7 @@ kompare
 krdc
 ksystemlog
 ktorrent
-kwallet5
+kwallet
 kwalletmanager
 layer-shell-qt
 milou # alternative to KRunner

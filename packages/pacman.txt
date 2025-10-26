@@ -26,7 +26,7 @@ ncdu
 noto-fonts-emoji
 noise-suppression-for-voice
 os-prober
-packagekit-qt5
+packagekit-qt6
 pipewire
 pipewire-alsa
 pipewire-jack
@@ -52,7 +52,6 @@ alsa-utils # audio utils
 autoconf # build
 automake # build
 awesome-terminal-fonts
-barrier
 base
 bash-completion
 bind
@@ -75,6 +74,7 @@ dtc
 edk2-ovmf # UEFI Support for Virt-Manager
 egl-wayland
 exfatprogs
+fastfetch
 filezilla
 firefox
 flameshot
@@ -89,7 +89,6 @@ gimp # Photo editing
 git
 gptfdisk
 gradle
-grub-customizer
 gst-libav
 gst-plugins-good
 gst-plugins-ugly
@@ -127,7 +126,6 @@ man-db
 man-pages
 mpv
 nano
-neofetch
 neovim
 net-tools
 networkmanager

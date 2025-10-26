@@ -8,6 +8,7 @@ cobang
 cups-bjnp
 etcher-bin
 ferdium-bin
+grub-customizer
 imgcat
 intellij-idea-ultimate-edition
 intellij-idea-ultimate-edition-jre
