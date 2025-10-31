@@ -93,10 +93,10 @@ if hdparm -I "$DISK" | grep TRIM &>/dev/null; then
 fi
 
 if [ "$HIBERNATE_TYPE" != "hibernate" ]; then
-  sed -i '/suspendThenHibernate/d' /home/$USERNAME/.config/powermanagementprofilesrc
-  sed -i '/suspendType=2/d' /home/$USERNAME/.config/powermanagementprofilesrc
+  sed -i '/suspendThenHibernate/d' /home/$USERNAME/.config/powermanagementprofilesrc 2>/dev/null
+  sed -i '/suspendType=2/d' /home/$USERNAME/.config/powermanagementprofilesrc 2>/dev/null
 fi
-sed -i '/ScaleFactor/d' /home/$USERNAME/.config/kdeglobals
+sed -i '/ScaleFactor/d' /home/$USERNAME/.config/kdeglobals 2>/dev/null
 echo -ne "
 --------------------------------------------------------------------
                               Cleaning 

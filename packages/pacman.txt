@@ -103,10 +103,9 @@ inetutils
 inkscape
 #iptables-nft
 jdk-openjdk # Java 17
-libappindicator-gtk3
+libappindicator
 libdvdcss
-libindicator-gtk2
-libindicator-gtk3
+libindicator
 libnewt
 libreoffice-still
 libreoffice-still-de
