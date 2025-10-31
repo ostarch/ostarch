@@ -13,7 +13,7 @@ echo -ne "
 --------------------------------------------------------------------
 "
 pacman -S --noconfirm --needed terminus-font
-setfont ter-v22b
+setfont ter-v20b
 
 echo -ne "
 --------------------------------------------------------------------
@@ -85,7 +85,7 @@ echo -ne "
                      Arch Install on Main Drive
 --------------------------------------------------------------------
 "
-pacstrap /mnt --noconfirm --needed base base-devel linux linux-firmware vim nano sudo archlinux-keyring wget git libnewt fprintd grub
+pacstrap /mnt --noconfirm --needed base base-devel linux linux-firmware vim nano sudo bash-completion archlinux-keyring wget git libnewt fprintd grub
 $SCRIPT_DIR/functions/swap.sh /mnt
 echo "# <file system> <dir> <type> <options> <dump> <pass>" > /mnt/etc/fstab
 genfstab -U /mnt >> /mnt/etc/fstab
