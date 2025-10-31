@@ -1,214 +1,199 @@
-binutils
-btop
-btrfs-progs
-cmake
-dosfstools
-easyeffects
-efibootmgr # EFI boot
-ethtool
-gdb
-grub
-gst-plugin-pipewire
-hdparm
-htop
-jq
-lib32-mesa
-lib32-pipewire
-lib32-pipewire-jack
-lib32-pipewire-v4l2
-libva-mesa-driver
-libva-utils
-libvdpau-va-gl
-linux-headers
-mesa
-mesa-vdpau
-ncdu
-noto-fonts-emoji
-noise-suppression-for-voice
-os-prober
-packagekit-qt6
-pipewire
-pipewire-alsa
-pipewire-jack
-pipewire-pulse
-pipewire-v4l2
-python-pip
-python-pytesseract
-qpwgraph
-stow
-usbutils
-vulkan-tools
-wireplumber
-xdg-user-dirs
-xorg-server
-xorg-xkill
-xorg-xinit
-xorg-xinput
-xterm
-zsh
+binutils				#A set of programs to assemble and manipulate binary and object files
+bluez					#Daemons for the bluetooth protocol stack
+bluez-libs				#Deprecated libraries for the bluetooth protocol stack
+bluez-utils				#Development and debugging utilities for the bluetooth protocol stack
+#btop					#A monitor of system resources, bpytop ported to C++
+btrfs-progs				#Btrfs filesystem utilities
+#cmake					#A cross-platform open-source make system
+cups					#OpenPrinting CUPS - daemon package
+cups-pdf				#PDF printer for cups
+dosfstools				#DOS filesystem utilities
+easyeffects				#Audio Effects for Pipewire applications
+efibootmgr				#Linux user-space application to modify the EFI Boot Manager
+efivar					#Tools and libraries to work with EFI variables
+#ethtool				#Utility for controlling network drivers and hardware
+fastfetch				#A feature-rich and performance oriented neofetch like system information tool
+firefox					#Fast, Private & Safe Web Browser
+gdb					#The GNU Debugger
+git					#the fast distributed version control system
+gparted					#A Partition Magic clone, frontend to GNU Parted
+grub					#GNU GRand Unified Bootloader (2)
+gst-plugin-pipewire			#Multimedia graph framework - pipewire plugin
+gtk3					#GObject-based multi-platform GUI toolkit
+hdparm					#A shell utility for manipulating Linux IDE drive/driver parameters
+htop					#Interactive process viewer
+#jq					#Command-line JSON processor
+kitty					#A modern, hackable, featureful, OpenGL-based terminal emulator
+lib32-mesa				#Open-source OpenGL drivers - 32-bit
+lib32-pipewire				#Low-latency audio/video router and processor - 32-bit
+lib32-pipewire-jack			#Low-latency audio/video router and processor - 32-bit - JACK support
+lib32-pipewire-v4l2			#Low-latency audio/video router and processor - 32-bit - V4L2 interceptor
+libva-utils				#Intel VA-API Media Applications and Scripts for libva
+libvdpau-va-gl				#VDPAU driver with OpenGL/VAAPI backend
+linux-headers				#Headers and scripts for building modules for the Linux kernel
+mesa					#Open-source OpenGL drivers
+noto-fonts-emoji			#Google Noto Color Emoji font
+noise-suppression-for-voice		#A real-time noise suppression plugin for voice
+ntfs-3g					#NTFS filesystem driver and utilities
+os-prober				#Utility to detect other OSes on a set of drives
+packagekit-qt6				#Qt bindings for PackageKit
+pipewire				#Low-latency audio/video router and processor
+pipewire-alsa				#Low-latency audio/video router and processor - ALSA configuration
+pipewire-jack				#Low-latency audio/video router and processor - JACK replacement
+pipewire-pulse				#Low-latency audio/video router and processor - PulseAudio replacement
+pipewire-v4l2				#Low-latency audio/video router and processor - V4L2 interceptor
+#python-pip				#The PyPA recommended tool for installing Python packages
+#python-pytesseract			#Python wrapper for Google Tesseract
+qpwgraph				#PipeWire Graph Qt GUI Interface
+stow					#Manage installation of multiple softwares in the same directory tree
+telegram-desktop			#Official Telegram Desktop client
+timeshift				#A system restore utility for Linux
+usbutils				#A collection of USB tools to query connected USB devices
+vulkan-tools				#Vulkan tools and utilities
+wireplumber				#Session / policy manager implementation for PipeWire
+xdg-user-dirs				#Manage user directories like ~/Desktop and ~/Music
+xorg-server				#Xorg X server
+xorg-xkill				#Kill a client by its X resource
+xorg-xinit				#X.Org initialisation program
+xorg-xinput				#Small commandline tool to configure devices
+#xterm					#X Terminal Emulator
+zsh					#A very advanced and programmable command interpreter (shell) for UNIX
 --END OF MINIMAL INSTALL--
-alsa-plugins # audio plugins
-alsa-utils # audio utils
-autoconf # build
-automake # build
-awesome-terminal-fonts
-base
-bash-completion
-bind
-binutils
-bison
-bluez
-bluez-libs
-bluez-utils
-bridge-utils
-cmatrix
-cronie
-cups
-cups-pdf
-dialog
-discord
-dmidecode
-dnsmasq
-dosfstools
-dtc
-edk2-ovmf # UEFI Support for Virt-Manager
-egl-wayland
-exfatprogs
-fastfetch
-filezilla
-firefox
-flameshot
-flex # recognize lexical patterns in text
-freerdp
-fuse2
-fuse3
-fuseiso
-gamemode
-gcc
-gimp # Photo editing
-git
-gptfdisk
-gradle
-gst-libav
-gst-plugins-good
-gst-plugins-ugly
-gutenprint
-handbrake
-haveged
-hunspell
-hunspell-en_us
-hunspell-de
-imagemagick
-inetutils
-inkscape
-#iptables-nft
-jdk-openjdk # Java 17
-libappindicator
-libdvdcss
-libindicator
-libnewt
-libreoffice-still
-libreoffice-still-de
-libtool
-libvncserver
-linux
-linux-firmware
-linux-headers
-linux-lts
-linux-lts-headers
-lsof
-lutris
-lzop
-m4
-make
-man-db
-man-pages
-mpv
-nano
-neovim
-net-tools
-networkmanager
-networkmanager-openconnect
-networkmanager-openvpn
-networkmanager-vpnc
-nfs-utils
-nmap
-npm
-ntfs-3g
-obs-studio
-openbsd-netcat
-openssh
-p7zip
-pacman-contrib
-partitionmanager
-patch
-pavucontrol
-php-cgi
-php
-php-apache
-php-cgi
-php-gd
-picom
-pkgconf
-powerline-fonts
-powertop
-python-notify2
-python-psutil
-python-pyqt5
-qemu-full
-remmina
-rsync
-screen
-scrot
-shellcheck
-signal-desktop
-simple-scan
-#snapper
-solaar
-speedtest-cli
-steam
-swtpm
-telegram-desktop
-terminus-font
-tesseract
-tesseract-data-deu
-tesseract-data-eng
-texinfo
-texmaker
-thunderbird
-thunderbird-i18n-de
-thunderbird-i18n-en-us
-timeshift
-tldr
-traceroute
-tree
-ttf-droid
-ttf-hack
-ttf-roboto
-ufw
-unrar
-unzip
-usbutils
-vde2
-vi
-vim
-vim-gitgutter
-virt-manager
-virt-viewer
-v4l2loopback-dkms
-wget
-which
-wine
-wine-gecko
-wine-mono
-winetricks
-wireguard-tools
-wireless_tools
-wireshark-qt
-xdg-desktop-portal
-xdotool
-xfsprogs
-xsel
-zip
-zsh-syntax-highlighting
-zsh-autosuggestions
+#alsa-plugins				#Additional ALSA plugins
+#alsa-utils				#Advanced Linux Sound Architecture - Utilities
+ario					#A GTK client for MPD inspired by Rhythmbox but much lighter and faster
+audacity				#A program that lets you manipulate digital audio waveforms
+autoconf				#A GNU tool for automatically configuring source code
+automake				#A GNU tool for automatically creating Makefiles
+awesome-terminal-fonts			#fonts/icons for powerlines
+#bind					#A complete, highly portable implementation of the DNS protocol
+binutils				#A set of programs to assemble and manipulate binary and object files
+#bison					#The GNU general-purpose parser generator
+#bridge-utils				#Utilities for configuring the Linux ethernet bridge
+chromium				#A web browser built for speed, simplicity, and security
+cmatrix					#A curses-based scrolling 'Matrix'-like screen
+cronie					#Daemon that runs specified programs at scheduled times and related tools
+#darktable				#Utility to organize and develop raw images
+#dialog					#A tool to display dialog boxes from shell scripts
+#discord				#All-in-one voice and text chat for gamers
+dmidecode				#Desktop Management Interface table related utilities
+dnsmasq					#Lightweight, easy to configure DNS forwarder and DHCP server
+dosfstools				#DOS filesystem utilities
+#dtc					#Device Tree Compiler
+edk2-ovmf				#Firmware for Virtual Machines (x86_64, i686) / UEFI Support for Virt-Manager
+egl-wayland				#EGLStream-based Wayland external platform
+exfatprogs				#exFAT filesystem userspace utilities for the Linux Kernel exfat driver
+#filezilla				#Fast and reliable FTP, FTPS and SFTP client
+#flameshot				#Powerful yet simple to use screenshot software
+#flex					#A tool for generating text-scanning programs / recognize lexical patterns in text
+#freerdp				#Free implementation of the Remote Desktop Protocol (RDP)
+fuse3					#Interface for userspace programs to export a filesystem to the Linux kernel
+fuseiso					#FUSE module to mount ISO filesystem images
+#gamemode				#A daemon/lib combo that allows games to request a set of optimisations be temporarily applied to the host OS
+#gcc					#The GNU Compiler Collection - C and C++ frontends
+#gimp					#GNU Image Manipulation Program
+gnome-calculator			#GNOME Scientific calculator
+gptfdisk				#A text-mode partitioning tool that works on GUID Partition Table (GPT) disks
+#gradle					#Powerful build system for the JVM
+gst-libav				#Multimedia graph framework - libav plugin
+gst-plugins-good			#Multimedia graph framework - good plugins
+gst-plugins-ugly			#Multimedia graph framework - ugly plugins
+#gutenprint				#Top quality printer drivers for POSIX systems
+#handbrake				#Multithreaded video transcoder
+#haveged				#Entropy harvesting daemon using CPU timings
+hunspell				#Spell checker and morphological analyzer library and program
+hunspell-en_us				#US English hunspell dictionaries
+#imagemagick				#An image viewing/manipulation program
+#inetutils				#A collection of common network programs
+#inkscape				#Professional vector graphics editor
+jdk-openjdk				#OpenJDK Java 25 development kit
+libappindicator				#Allow applications to extend a menu via Ayatana indicators in Unity, KDE or Systray
+#libdvdcss				#Portable abstraction library for DVD decryption
+libindicator				#Set of symbols and convenience functions for Ayatana indicators
+libnewt					#Not Erik's Windowing Toolkit - text mode windowing with slang
+libtool					#A generic library support script
+libvncserver				#Cross-platform C libraries that allow you to easily implement VNC server or client functionality
+linux					#The Linux kernel and modules
+linux-firmware				#Firmware files for Linux - Default set
+linux-headers				#Headers and scripts for building modules for the Linux kernel
+linux-lts				#The LTS Linux kernel and modules
+linux-lts-headers			#Headers and scripts for building modules for the LTS Linux kernel
+linux-zen				#The Linux ZEN kernel and modules
+linux-zen-headers			#Headers and scripts for building modules for the Linux ZEN kernel
+#lsof					#Lists open files for running Unix processes
+#lutris					#Open Gaming Platform
+#lzop					#File compressor using lzo lib
+make					#GNU make utility to maintain groups of programs
+man-db					#A utility for reading man pages
+#man-pages				#Linux man pages
+mpv					#a free, open source, and cross-platform media player
+nano					#Pico editor clone with enhancements
+#neovim					#Fork of Vim aiming to improve user experience, plugins, and GUIs
+#net-tools				#Configuration tools for Linux networking
+networkmanager				#Network connection manager and user applications
+networkmanager-openconnect		#NetworkManager VPN plugin for OpenConnect (with GUI)
+networkmanager-openvpn			#NetworkManager VPN plugin for OpenVPN (with GUI)
+networkmanager-vpnc			#NetworkManager VPN plugin for VPNC (with GUI)
+nfs-utils				#Support programs for Network File Systems
+#nmap					#Utility for network discovery and security auditing
+#npm					#JavaScript package manager
+#obs-studio				#Free, open source software for live streaming and recording
+#openbsd-netcat				#TCP/IP swiss army knife. OpenBSD variant.
+openssh					#SSH protocol implementation for remote login, command execution and file transfer
+#p7zip					#File archiver for extremely high compression
+pacman-contrib				#Contributed scripts and tools for pacman systems
+#partitionmanager			#A KDE utility that allows you to manage disks, partitions, and file systems
+patch					#A utility to apply patch files to original sources
+pavucontrol				#PulseAudio Volume Control
+picom					#Lightweight compositor for X11
+pkgconf					#Package compiler and linker metadata toolkit
+powerline-fonts				#Patched fonts for powerline
+powertop				#A tool to diagnose issues with power consumption and power management
+proton-vpn-gtk-app			#ProtonVPN GTK app, Maintained by Community
+python-notify2				#Python interface to DBus notifications
+python-psutil				#A cross-platform process and system utilities module for Python
+python-pyqt5				#A set of Python bindings for the Qt5 toolkit
+qemu-full				#A full QEMU setup
+#remmina				#Remote desktop client written in GTK+
+rsync					#A fast and versatile file copying tool for remote and local files
+#screen					#Full-screen window manager that multiplexes a physical terminal
+#scrot					#Simple command-line screenshot utility for X
+shellcheck				#Shell script analysis tool
+#signal-desktop				#Signal Private Messenger for Linux
+#simple-scan				#Simple scanning utility
+solaar					#Linux device manager for a wide range of Logitech devices
+speedtest-cli				#Command line interface for testing internet bandwidth using speedtest.net
+#steam					#Valve's digital software delivery system
+#swtpm					#Libtpms-based TPM emulator with socket, character device, and Linux CUSE interface
+terminus-font				#Monospace bitmap font (for X11 and console)
+#texinfo				#GNU documentation system for on-line information and printed output
+tlp					#Linux Advanced Power Management
+tlp-rdw					#Linux Advanced Power Management - Radio Device Wizard
+tree					#A directory listing program displaying a depth indented list of files
+ttf-droid				#General-purpose fonts released by Google as part of Android
+ttf-hack				#A hand groomed and optically balanced typeface based on Bitstream Vera Mono
+ttf-roboto				#Google's signature family of fonts
+ufw					#Uncomplicated and easy to use CLI tool for managing a netfilter firewall
+#unrar					#The RAR uncompression program
+#unzip					#For extracting and viewing files in .zip archives
+usbutils				#A collection of USB tools to query connected USB devices
+vde2					#Virtual Distributed Ethernet for emulators like qemu
+vim					#Vi Improved, a highly configurable, improved version of the vi text editor
+vim-gitgutter				#Vim plugin which shows a git diff in the gutter (sign column)
+virt-manager				#Desktop user interface for managing virtual machines
+virt-viewer				#A lightweight interface for interacting with the graphical display of virtualized guest OS.
+vlc					#Free and open source cross-platform multimedia player and framework
+vlc-plugin-ffmpeg			#Free and open source cross-platform multimedia player and framework - FFMPEG plugins
+wget					#Network utility to retrieve files from the web
+which					#A utility to show the full path of commands
+#wine					#A compatibility layer for running Windows programs
+#wine-gecko				#Wine's built-in replacement for Microsoft's Internet Explorer
+#wine-mono				#Wine's built-in replacement for Microsoft's .NET Framework
+#winetricks				#Script to install various redistributable runtime libraries in Wine.
+#wireshark-qt				#Network traffic and protocol analyzer/sniffer - Qt GUI
+#xdg-desktop-portal			#Desktop integration portals for sandboxed apps
+#xdotool				#Command-line X11 automation tool
+#xfsprogs				#XFS filesystem utilities
+#zip					#Compressor/archiver for creating and modifying zipfiles
+zsh-syntax-highlighting			#Fish shell like syntax highlighting for Zsh
+zsh-autosuggestions			#Fish-like autosuggestions for zsh

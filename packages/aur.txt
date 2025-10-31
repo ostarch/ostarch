@@ -1,30 +1,21 @@
-brave-bin # Brave Browser
+github-desktop-bin			#GUI for managing Git and GitHub.
+joplin-appimage				#The latest stable AppImage of Joplin - a cross-platform note taking and to-do app
+visual-studio-code-bin			#Visual Studio Code (vscode)
 --END OF MINIMAL INSTALL--
-birdtray
-ccat
-clion
-clion-jre
-cobang
-cups-bjnp
-etcher-bin
-ferdium-bin
-grub-customizer
-imgcat
-intellij-idea-ultimate-edition
-intellij-idea-ultimate-edition-jre
-minecraft-launcher
-ocs-url # install packages from websites
-phpstorm
-phpstorm-jre
-postman-bin
-pycharm-professional
-python-pynput
-qrcp-bin
-rpi-imager-bin
-#rtl88x2bu-dkms-git # for WiFi USB adapters
-ttf-meslo # Nerdfont package
-ttf-ms-fonts
-typora
-ventoy-bin
-visual-studio-code-bin
-zoom # video conferences
+#brave-bin				#Web browser that blocks ads and trackers by default (binary release)
+cobang					#A QR code scanner desktop app for Linux
+#cups-bjnp				#CUPS back-end for the canon printers using the proprietary USB over IP BJNP protocol
+#etcher-bin				#Flash OS images to SD cards & USB drives, safely and easily
+ferdium-bin				#A messaging browser that allows you to combine your favorite messaging services into one application (binary release)
+grub-customizer				#A graphical grub2 settings manager
+imgcat					#Output images as RGB ANSI graphics on the terminal
+p7zip-gui				#Graphic user interface (alpha quality) for the p7zip file archiver
+#python-pynput				#Python library to monitor and control user input devices
+spotify					#A proprietary music streaming service
+teamviewer				#All-In-One Software for Remote Support and Online Meetings
+ttf-meslo				#Meslo LG is a customized version of Apple's Menlo font with various line gap and dotted zero
+ttf-ms-fonts				#Core TTF Fonts from Microsoft
+typora					#A minimal markdown editor and reader.
+ventoy-bin				#A new bootable USB solution
+zenity-gtk3				#Display graphical dialog boxes from shell scripts. GTK3 version.
+#zoom					#Video Conferencing and Web Conferencing Service

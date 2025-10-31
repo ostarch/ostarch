@@ -80,6 +80,9 @@ systemctl enable cups.service
 systemctl disable dhcpcd.service 2>/dev/null
 systemctl enable NetworkManager.service
 systemctl enable bluetooth.service
+systemctl enable ufw.service
+systemctl enable tlp.service
+systemctl enable paccache.service
 if ! systemd-detect-virt &>/dev/null && [ ! "$INSTALL_TYPE" = "minimal" ]; then
   systemctl enable libvirtd.service
   usermod -aG libvirt "$USERNAME" &>/dev/null
