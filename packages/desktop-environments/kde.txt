@@ -1,39 +1,39 @@
-ark				#Archiving Tool
-breeze				#Artwork, styles and assets for the Breeze visual style for the Plasma Desktop
-breeze-gtk			#Breeze widget theme for GTK 2 and 3
-dolphin				#KDE File Manager
-dolphin-plugins			#Extra Dolphin plugins
-ffmpegthumbs			#FFmpeg-based thumbnail creator for video files
-gwenview			#A fast and easy to use image viewer
-kate				#Advanced text editor
-kdegraphics-thumbnailers	#Thumbnailers for various graphics file formats
-kdialog				#A utility for displaying dialog boxes from shell scripts
-konsole				#KDE terminal emulator
-okular				#Document Viewer
-plasma-desktop			#KDE Plasma Desktop
-sddm				#QML based X11 and Wayland display manager
+ark                 #Archiving Tool
+breeze              #Artwork, styles and assets for the Breeze visual style for the Plasma Desktop
+breeze-gtk          #Breeze widget theme for GTK 2 and 3
+dolphin             #KDE File Manager
+dolphin-plugins     #Extra Dolphin plugins
+ffmpegthumbs        #FFmpeg-based thumbnail creator for video files
+gwenview            #A fast and easy to use image viewer
+kate                #Advanced text editor
+kdegraphics-thumbnailers #Thumbnailers for various graphics file formats
+kdialog             #A utility for displaying dialog boxes from shell scripts
+konsole             #KDE terminal emulator
+okular              #Document Viewer
+plasma-desktop      #KDE Plasma Desktop
+sddm                #QML based X11 and Wayland display manager
 --END OF MINIMAL INSTALL--
-plasma-meta			#Meta package to install KDE Plasma
-#audiocd-kio			#Kioslave for accessing audio CDs
-#extra-cmake-modules		#Extra modules and scripts for CMake
-filelight			#View disk usage information
-#kcalc				#Scientific Calculator
-#kcharselect			#Character Selector
-#kdeconnect			#Adds communication between KDE and your smartphone
-#kdenetwork-filesharing		#Properties dialog plugin to share a directory with the local network
-#kdenlive			#A non-linear video editor for Linux using the MLT video framework
-keychain			#A front-end to ssh-agent, allowing one long-running ssh-agent process per system, rather than per login
-kfind				#Find Files/Folders
-kgpg				#A GnuPG frontend
-#kio-zeroconf			#Network Monitor for DNS-SD services (Zeroconf)
-kmenuedit			#KDE menu editor
-kompare				#Graphical file differences tool
-#krdc				#Remote Desktop Client
-ksystemlog			#System log viewer tool
-ktorrent			#A powerful BitTorrent client for KDE
-#kwallet			#Secure and unified container for user passwords
-#kwalletmanager			#Wallet management tool
-layer-shell-qt			#Qt component to allow applications to make use of the Wayland wl-layer-shell protocol
-milou				#A dedicated search application built on top of Baloo #Alternative to KRunner
-print-manager			#A tool for managing print jobs and printers
-spectacle			#KDE screenshot capture utility
+plasma-meta         #Meta package to install KDE Plasma
+#audiocd-kio        #Kioslave for accessing audio CDs
+#extra-cmake-modules #Extra modules and scripts for CMake
+filelight           #View disk usage information
+#kcalc              #Scientific Calculator
+#kcharselect        #Character Selector
+#kdeconnect         #Adds communication between KDE and your smartphone
+#kdenetwork-filesharing #Properties dialog plugin to share a directory with the local network
+#kdenlive           #A non-linear video editor for Linux using the MLT video framework
+keychain            #A front-end to ssh-agent, allowing one long-running ssh-agent process per system, rather than per login
+kfind               #Find Files/Folders
+kgpg                #A GnuPG frontend
+#kio-zeroconf       #Network Monitor for DNS-SD services (Zeroconf)
+kmenuedit           #KDE menu editor
+kompare             #Graphical file differences tool
+#krdc               #Remote Desktop Client
+ksystemlog          #System log viewer tool
+ktorrent            #A powerful BitTorrent client for KDE
+#kwallet            #Secure and unified container for user passwords
+#kwalletmanager     #Wallet management tool
+layer-shell-qt      #Qt component to allow applications to make use of the Wayland wl-layer-shell protocol
+milou               #A dedicated search application built on top of Baloo #Alternative to KRunner
+print-manager       #A tool for managing print jobs and printers
+spectacle           #KDE screenshot capture utility
