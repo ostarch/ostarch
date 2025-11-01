@@ -145,7 +145,7 @@ pacman-contrib           #Contributed scripts and tools for pacman systems
 #partitionmanager        #A KDE utility that allows you to manage disks, partitions, and file systems
 patch                    #A utility to apply patch files to original sources
 pavucontrol              #PulseAudio Volume Control
-picon                    #Lightweight compositor for X11
+picom                    #Lightweight compositor for X11
 pkgconf                  #Package compiler and linker metadata toolkit
 powerline-fonts          #Patched fonts for powerline
 powertop                 #A tool to diagnose issues with power consumption and power management
